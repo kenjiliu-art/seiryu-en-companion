@@ -439,9 +439,12 @@ function RefsSection({
               >
                 <header className="flex items-baseline justify-between gap-2">
                   <span className="text-xs font-semibold text-accent">{ref}</span>
-                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                    {poem.source === "wakapoetry" ? "trans. McAuley" : "trans. NGS 1940"}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <SpeakButton japanese={poem.japanese} english={poem.english} />
+                    <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                      {poem.source === "wakapoetry" ? "trans. McAuley" : "trans. NGS 1940"}
+                    </span>
+                  </div>
                 </header>
                 {poem.preface && (
                   <p className="mt-1 text-[11px] italic text-muted-foreground">
