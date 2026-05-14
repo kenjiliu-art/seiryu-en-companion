@@ -13,6 +13,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { PlantThumb } from "@/components/PlantThumb";
 import { ConstructionPin, defaultConstructionPins, type ConstructionPinSpec } from "@/components/ConstructionGallery";
+import { Volume2, Square } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Index,
