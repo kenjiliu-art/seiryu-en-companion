@@ -1,10 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { TransformWrapper, TransformComponent, useControls } from "react-zoom-pan-pinch";
-import { Plus, Minus, Maximize2 } from "lucide-react";
-import { PdfMap } from "@/components/PdfMap";
-
-const gardenMapPdf = "/garden-map.pdf";
+import { useEffect, useRef, useState } from "react";
+import gardenMap from "@/assets/garden-map.jpg";
 import { plants as initialPlants, manyoshuUrl, type Plant } from "@/data/plants";
 import { poems } from "@/data/poems";
 import {
@@ -39,41 +35,9 @@ function plantCategory(p: Plant): PlantCategory {
   return "none";
 }
 function categoryDotClass(c: PlantCategory): string {
-  if (c === "manyoshu") return "bg-emerald-500 border-emerald-800";
-  if (c === "substitute") return "bg-amber-500 border-amber-800";
-  return "bg-slate-400 border-slate-700";
-}
-
-function ZoomControls() {
-  const { zoomIn, zoomOut, resetTransform } = useControls();
-  return (
-    <div className="absolute right-3 top-3 z-20 flex flex-col gap-1 rounded-md border border-border bg-card/95 p-1 shadow-md backdrop-blur">
-      <button
-        type="button"
-        onClick={() => zoomIn()}
-        className="flex h-8 w-8 items-center justify-center rounded text-foreground hover:bg-muted"
-        aria-label="Zoom in"
-      >
-        <Plus className="h-4 w-4" />
-      </button>
-      <button
-        type="button"
-        onClick={() => zoomOut()}
-        className="flex h-8 w-8 items-center justify-center rounded text-foreground hover:bg-muted"
-        aria-label="Zoom out"
-      >
-        <Minus className="h-4 w-4" />
-      </button>
-      <button
-        type="button"
-        onClick={() => resetTransform()}
-        className="flex h-8 w-8 items-center justify-center rounded text-foreground hover:bg-muted"
-        aria-label="Reset view"
-      >
-        <Maximize2 className="h-4 w-4" />
-      </button>
-    </div>
-  );
+  if (c === "manyoshu") return "bg-emerald-600";
+  if (c === "substitute") return "bg-amber-500";
+  return "bg-muted-foreground";
 }
 
 function Index() {
@@ -87,22 +51,9 @@ function Index() {
     substitute: true,
     none: true,
   });
-  const toggleCat = useCallback(
-    (c: PlantCategory) => setVisibleCats((v) => ({ ...v, [c]: !v[c] })),
-    [],
-  );
+  const toggleCat = (c: PlantCategory) =>
+    setVisibleCats((v) => ({ ...v, [c]: !v[c] }));
   const mapRef = useRef<HTMLDivElement>(null);
-
-  // Pre-compute category once per plants change instead of on every render row.
-  const categorized = useMemo(
-    () => plants.map((p) => ({ p, category: plantCategory(p) })),
-    [plants],
-  );
-  const stats = useMemo(() => {
-    let withPoems = 0;
-    for (const p of plants) if (p.manyoshu || p.categoryRefs) withPoems++;
-    return { total: plants.length, withPoems };
-  }, [plants]);
 
   useEffect(() => {
     if (!dragId) return;
@@ -125,10 +76,10 @@ function Index() {
     };
   }, [dragId]);
 
-  const exportCoords = useCallback(() => {
+  const exportCoords = () => {
     const text = plants.map((p) => `  ${p.id}: { x: ${p.x}, y: ${p.y} },`).join("\n");
     navigator.clipboard.writeText(text);
-  }, [plants]);
+  };
 
 
   return (
@@ -149,70 +100,47 @@ function Index() {
 
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-10 md:px-16 md:py-14">
         {/* Map */}
-        <div className="relative overflow-hidden rounded-md border border-border bg-card shadow-sm">
-          <TransformWrapper
-            initialScale={1}
-            minScale={1}
-            maxScale={6}
-            wheel={{ step: 0.15 }}
-            doubleClick={{ mode: "zoomIn", step: 0.7 }}
-            panning={{ disabled: editMode, velocityDisabled: true }}
-            limitToBounds
-          >
-            {() => (
-              <>
-                <ZoomControls />
-                <TransformComponent
-                  wrapperClass="!w-full !h-[60vh] md:!h-[70vh] bg-card"
-                  contentClass="!w-full !h-full"
-                >
-                  <div className="relative w-full" ref={mapRef}>
-                    <PdfMap src={gardenMapPdf} className="block w-full" />
-                    {categorized.map(({ p, category }) => {
-                      if (!visibleCats[category]) return null;
-                      return (
-                        <button
-                          key={p.id}
-                          onClick={(e) => {
-                            if (editMode) return;
-                            e.stopPropagation();
-                            setActive(p);
-                          }}
-                          onMouseDown={(e) => {
-                            if (editMode) {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              setDragId(p.id);
-                            }
-                          }}
-                          onMouseEnter={() => setHovered(p.id)}
-                          onMouseLeave={() => setHovered(null)}
-                          style={{ left: `${p.x}%`, top: `${p.y}%` }}
-                          className={`group absolute -translate-x-1/2 -translate-y-1/2 ${editMode ? "cursor-move" : "cursor-pointer"}`}
-                          aria-label={p.name}
-                        >
-                          <span className="relative flex items-center justify-center">
-                            <span aria-hidden className="absolute h-6 w-6 rounded-full bg-white/80 blur-sm" />
-                            <span
-                              className={`relative block h-4 w-4 rounded-full border-[1.5px] shadow-sm transition-transform ${categoryDotClass(category)} ${
-                                hovered === p.id || dragId === p.id ? "scale-150" : "group-hover:scale-125"
-                              }`}
-                            />
-                            <span aria-hidden className="absolute h-1 w-1 rounded-full bg-white" />
-                          </span>
-                          {(hovered === p.id || dragId === p.id) && (
-                            <span className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded bg-foreground px-2 py-1 text-xs text-background shadow-lg">
-                              {p.name}{editMode && ` · ${p.x}, ${p.y}`}
-                            </span>
-                          )}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </TransformComponent>
-              </>
-            )}
-          </TransformWrapper>
+        <div className="relative overflow-hidden rounded-md border border-border bg-card p-6 shadow-sm md:p-10">
+          <div className="relative" ref={mapRef}>
+            <img
+              src={gardenMap}
+              alt="Planting plan of the JACCC James Irvine Japanese Garden"
+              className="block w-full select-none opacity-60"
+              draggable={false}
+            />
+            {plants.map((p) => {
+              const category = plantCategory(p);
+              if (!visibleCats[category]) return null;
+              return (
+              <button
+                key={p.id}
+                onClick={() => !editMode && setActive(p)}
+                onMouseDown={(e) => {
+                  if (editMode) {
+                    e.preventDefault();
+                    setDragId(p.id);
+                  }
+                }}
+                onMouseEnter={() => setHovered(p.id)}
+                onMouseLeave={() => setHovered(null)}
+                style={{ left: `${p.x}%`, top: `${p.y}%` }}
+                className={`group absolute -translate-x-1/2 -translate-y-1/2 ${editMode ? "cursor-move" : ""}`}
+                aria-label={p.name}
+              >
+                <span
+                  className={`block h-3.5 w-3.5 rounded-full border-2 border-white shadow-md ring-4 ring-white/70 transition-transform ${categoryDotClass(category)} ${
+                    hovered === p.id || dragId === p.id ? "scale-150" : "group-hover:scale-125"
+                  }`}
+                />
+                {(hovered === p.id || dragId === p.id) && (
+                  <span className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded bg-foreground px-2 py-1 text-xs text-background shadow-lg">
+                    {p.name}{editMode && ` · ${p.x}, ${p.y}`}
+                  </span>
+                )}
+              </button>
+              );
+            })}
+          </div>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-border/60 px-4 py-3 text-xs text-muted-foreground">
             <label className="flex items-center gap-2 cursor-pointer">
               <input
@@ -231,9 +159,9 @@ function Index() {
               </button>
             )}
             {([
-              ["manyoshu", "bg-emerald-500 border-emerald-800", "In the Man\u2019yōshū"],
-              ["substitute", "bg-amber-500 border-amber-800", "SoCal substitute / general match"],
-              ["none", "bg-slate-400 border-slate-700", "Not in the Man\u2019yōshū"],
+              ["manyoshu", "bg-emerald-600", "In the Man\u2019yōshū"],
+              ["substitute", "bg-amber-500", "SoCal substitute / general match"],
+              ["none", "bg-muted-foreground", "Not in the Man\u2019yōshū"],
             ] as const).map(([cat, color, label]) => {
               const on = visibleCats[cat];
               return (
@@ -247,7 +175,7 @@ function Index() {
                       : "border-dashed border-border/60 text-muted-foreground/60 line-through"
                   }`}
                 >
-                  <span className={`block h-3.5 w-3.5 rounded-full border-[1.5px] shadow-sm ${color} ${on ? "" : "opacity-40"}`} />
+                  <span className={`block h-3 w-3 rounded-full border-2 border-white shadow-sm ${color} ${on ? "" : "opacity-40"}`} />
                   {label}
                 </button>
               );
@@ -260,7 +188,7 @@ function Index() {
           <div className="border-b border-border/60 px-4 py-3">
             <h2 className="font-serif text-lg">Plant Legend</h2>
             <p className="text-xs text-muted-foreground">
-              {stats.total} species · {stats.withPoems} with
+              {plants.length} species · {plants.filter((p) => p.manyoshu || p.categoryRefs).length} with
               Man&apos;yōshū poems
             </p>
           </div>
