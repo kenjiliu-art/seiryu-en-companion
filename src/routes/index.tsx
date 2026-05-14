@@ -119,6 +119,11 @@ function Index() {
                           poem
                         </span>
                       )}
+                      {!p.manyoshu && p.categoryRefs && (
+                        <span className="rounded-full bg-accent/10 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-accent/80">
+                          general
+                        </span>
+                      )}
                     </span>
                     {(p.japanese || p.romaji || p.scientific) && (
                       <span className="text-xs italic text-muted-foreground">
