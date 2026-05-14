@@ -2,7 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { TransformWrapper, TransformComponent, useControls } from "react-zoom-pan-pinch";
 import { Plus, Minus, Maximize2 } from "lucide-react";
-import gardenMap from "@/assets/garden-map.svg";
+import { PdfMap } from "@/components/PdfMap";
+
+const gardenMapPdf = "/garden-map.pdf";
 import { plants as initialPlants, manyoshuUrl, type Plant } from "@/data/plants";
 import { poems } from "@/data/poems";
 import {
@@ -165,12 +167,7 @@ function Index() {
                   contentClass="!w-full !h-full"
                 >
                   <div className="relative w-full" ref={mapRef}>
-                    <img
-                      src={gardenMap}
-                      alt="Planting plan of the JACCC James Irvine Japanese Garden"
-                      className="block w-full select-none opacity-70"
-                      draggable={false}
-                    />
+                    <PdfMap src={gardenMapPdf} className="block w-full" />
                     {categorized.map(({ p, category }) => {
                       if (!visibleCats[category]) return null;
                       return (
