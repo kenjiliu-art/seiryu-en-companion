@@ -263,6 +263,7 @@ export const plants: Plant[] = [
     scientific: "Pyrus kawakamii",
     description: "A substitute for the edible pears commonly found in Japanese gardens. Nashi is the general word for pear.",
     manyoshu: ["MYS X: 2188", "MYS X: 2189", "MYS XVI: 3834", "MYS XIX: 4259"],
+    substitute: true,
     x: 18, y: 38,
   },
   {
