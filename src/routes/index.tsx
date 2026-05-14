@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { TransformWrapper, TransformComponent, useControls } from "react-zoom-pan-pinch";
 import { Plus, Minus, Maximize2 } from "lucide-react";
 import gardenMap from "@/assets/garden-map.svg";
@@ -85,9 +85,22 @@ function Index() {
     substitute: true,
     none: true,
   });
-  const toggleCat = (c: PlantCategory) =>
-    setVisibleCats((v) => ({ ...v, [c]: !v[c] }));
+  const toggleCat = useCallback(
+    (c: PlantCategory) => setVisibleCats((v) => ({ ...v, [c]: !v[c] })),
+    [],
+  );
   const mapRef = useRef<HTMLDivElement>(null);
+
+  // Pre-compute category once per plants change instead of on every render row.
+  const categorized = useMemo(
+    () => plants.map((p) => ({ p, category: plantCategory(p) })),
+    [plants],
+  );
+  const stats = useMemo(() => {
+    let withPoems = 0;
+    for (const p of plants) if (p.manyoshu || p.categoryRefs) withPoems++;
+    return { total: plants.length, withPoems };
+  }, [plants]);
 
   useEffect(() => {
     if (!dragId) return;
@@ -110,10 +123,10 @@ function Index() {
     };
   }, [dragId]);
 
-  const exportCoords = () => {
+  const exportCoords = useCallback(() => {
     const text = plants.map((p) => `  ${p.id}: { x: ${p.x}, y: ${p.y} },`).join("\n");
     navigator.clipboard.writeText(text);
-  };
+  }, [plants]);
 
 
   return (
@@ -158,8 +171,7 @@ function Index() {
                       className="block w-full select-none opacity-70"
                       draggable={false}
                     />
-                    {plants.map((p) => {
-                      const category = plantCategory(p);
+                    {categorized.map(({ p, category }) => {
                       if (!visibleCats[category]) return null;
                       return (
                         <button
@@ -247,7 +259,7 @@ function Index() {
           <div className="border-b border-border/60 px-4 py-3">
             <h2 className="font-serif text-lg">Plant Legend</h2>
             <p className="text-xs text-muted-foreground">
-              {plants.length} species · {plants.filter((p) => p.manyoshu || p.categoryRefs).length} with
+              {stats.total} species · {stats.withPoems} with
               Man&apos;yōshū poems
             </p>
           </div>
