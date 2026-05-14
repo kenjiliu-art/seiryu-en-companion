@@ -59,6 +59,7 @@ function Index() {
   const [editMode, setEditMode] = useState(false);
   const [plants, setPlants] = useState<Plant[]>(initialPlants);
   const [pins, setPins] = useState<ConstructionPinSpec[]>(defaultConstructionPins);
+  const [legendOpen, setLegendOpen] = useState(true);
   const [dragId, setDragId] = useState<string | null>(null);
   const [dragPinId, setDragPinId] = useState<string | null>(null);
   const [visibleCats, setVisibleCats] = useState<Record<PlantCategory, boolean>>({
