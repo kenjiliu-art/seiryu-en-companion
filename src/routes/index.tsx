@@ -42,6 +42,38 @@ function categoryDotClass(c: PlantCategory): string {
   return "bg-muted-foreground";
 }
 
+function ZoomControls() {
+  const { zoomIn, zoomOut, resetTransform } = useControls();
+  return (
+    <div className="absolute right-3 top-3 z-20 flex flex-col gap-1 rounded-md border border-border bg-card/95 p-1 shadow-md backdrop-blur">
+      <button
+        type="button"
+        onClick={() => zoomIn()}
+        className="flex h-8 w-8 items-center justify-center rounded text-foreground hover:bg-muted"
+        aria-label="Zoom in"
+      >
+        <Plus className="h-4 w-4" />
+      </button>
+      <button
+        type="button"
+        onClick={() => zoomOut()}
+        className="flex h-8 w-8 items-center justify-center rounded text-foreground hover:bg-muted"
+        aria-label="Zoom out"
+      >
+        <Minus className="h-4 w-4" />
+      </button>
+      <button
+        type="button"
+        onClick={() => resetTransform()}
+        className="flex h-8 w-8 items-center justify-center rounded text-foreground hover:bg-muted"
+        aria-label="Reset view"
+      >
+        <Maximize2 className="h-4 w-4" />
+      </button>
+    </div>
+  );
+}
+
 function Index() {
   const [active, setActive] = useState<Plant | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
