@@ -1,26 +1,195 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import gardenMap from "@/assets/garden-map.jpg";
+import { plants, type Plant } from "@/data/plants";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: "James Irvine Japanese Garden — Interactive Planting Map" },
+      {
+        name: "description",
+        content:
+          "Explore the JACCC James Irvine Japanese Garden plant by plant, with Man'yōshū poem connections for each species.",
+      },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
-
 function Index() {
-  return <PlaceholderIndex />;
+  const [active, setActive] = useState<Plant | null>(null);
+  const [hovered, setHovered] = useState<string | null>(null);
+
+  return (
+    <main className="min-h-screen bg-background text-foreground">
+      <header className="border-b border-border/60 px-6 py-6 md:px-10">
+        <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
+          Japanese American Cultural &amp; Community Center
+        </p>
+        <h1 className="mt-1 font-serif text-3xl md:text-4xl">
+          James Irvine Japanese Garden
+        </h1>
+        <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+          An interactive planting plan after Takeo Uesugi&apos;s 1979 design. Click a
+          marker on the map — or a plant in the legend — to read its uses,
+          symbolism, and Man&apos;yōshū (万葉集) poem references.
+        </p>
+      </header>
+
+      <div className="grid gap-6 px-4 py-6 md:px-10 lg:grid-cols-[1fr_320px]">
+        {/* Map */}
+        <div className="relative overflow-hidden rounded-md border border-border bg-card shadow-sm">
+          <div className="relative">
+            <img
+              src={gardenMap}
+              alt="Planting plan of the JACCC James Irvine Japanese Garden"
+              className="block w-full select-none"
+              draggable={false}
+            />
+            {plants.map((p) => (
+              <button
+                key={p.id}
+                onClick={() => setActive(p)}
+                onMouseEnter={() => setHovered(p.id)}
+                onMouseLeave={() => setHovered(null)}
+                style={{ left: `${p.x}%`, top: `${p.y}%` }}
+                className="group absolute -translate-x-1/2 -translate-y-1/2"
+                aria-label={p.name}
+              >
+                <span
+                  className={`block h-3 w-3 rounded-full border-2 border-primary-foreground bg-primary shadow-md transition-transform ${
+                    hovered === p.id ? "scale-150" : "group-hover:scale-125"
+                  } ${p.manyoshu ? "ring-2 ring-accent/60" : ""}`}
+                />
+                {hovered === p.id && (
+                  <span className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded bg-foreground px-2 py-1 text-xs text-background shadow-lg">
+                    {p.name}
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-border/60 px-4 py-3 text-xs text-muted-foreground">
+            <span className="flex items-center gap-2">
+              <span className="block h-3 w-3 rounded-full border-2 border-primary-foreground bg-primary ring-2 ring-accent/60" />
+              Plant referenced in the Man&apos;yōshū
+            </span>
+            <span className="flex items-center gap-2">
+              <span className="block h-3 w-3 rounded-full border-2 border-primary-foreground bg-primary" />
+              Garden plant
+            </span>
+          </div>
+        </div>
+
+        {/* Legend */}
+        <aside className="rounded-md border border-border bg-card">
+          <div className="border-b border-border/60 px-4 py-3">
+            <h2 className="font-serif text-lg">Plant Legend</h2>
+            <p className="text-xs text-muted-foreground">
+              {plants.length} species · {plants.filter((p) => p.manyoshu).length} with
+              Man&apos;yōshū poems
+            </p>
+          </div>
+          <ScrollArea className="h-[60vh]">
+            <ul className="divide-y divide-border/50">
+              {plants.map((p) => (
+                <li key={p.id}>
+                  <button
+                    onClick={() => setActive(p)}
+                    onMouseEnter={() => setHovered(p.id)}
+                    onMouseLeave={() => setHovered(null)}
+                    className={`flex w-full flex-col gap-0.5 px-4 py-2.5 text-left transition-colors hover:bg-muted/60 ${
+                      hovered === p.id ? "bg-muted/60" : ""
+                    }`}
+                  >
+                    <span className="flex items-center gap-2 text-sm font-medium">
+                      {p.name}
+                      {p.manyoshu && (
+                        <span className="rounded-full bg-accent/15 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-accent">
+                          poem
+                        </span>
+                      )}
+                    </span>
+                    {(p.japanese || p.romaji || p.scientific) && (
+                      <span className="text-xs italic text-muted-foreground">
+                        {p.japanese && <span className="not-italic mr-1">{p.japanese}</span>}
+                        {p.romaji && <span className="mr-1">{p.romaji}</span>}
+                        {p.scientific && <span>· {p.scientific}</span>}
+                      </span>
+                    )}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </ScrollArea>
+        </aside>
+      </div>
+
+      <footer className="border-t border-border/60 px-6 py-6 text-xs text-muted-foreground md:px-10">
+        Planting survey by Jon Ngai, landscape architecture intern, August 2021. Garden
+        designed 1978–1979 by Takeo Uesugi for the JACCC, inspired by Murin-an in Kyoto.
+      </footer>
+
+      <Dialog open={!!active} onOpenChange={(o) => !o && setActive(null)}>
+        <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-lg">
+          {active && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="font-serif text-2xl">
+                  {active.name}
+                  {active.japanese && (
+                    <span className="ml-2 text-lg font-normal text-muted-foreground">
+                      {active.japanese}
+                    </span>
+                  )}
+                </DialogTitle>
+                <DialogDescription className="italic">
+                  {active.romaji && <>{active.romaji}</>}
+                  {active.romaji && active.scientific && " · "}
+                  {active.scientific && <>{active.scientific}</>}
+                </DialogDescription>
+              </DialogHeader>
+
+              <p className="text-sm leading-relaxed">{active.description}</p>
+
+              {active.manyoshu && (
+                <div className="rounded-md border border-border/60 bg-muted/40 p-3">
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-accent">
+                    Man&apos;yōshū Connection · 万葉集
+                  </h3>
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                    {active.manyoshu.join(" · ")}
+                  </p>
+                  {active.links && active.links.length > 0 && (
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {active.links.map((l) => (
+                        <a
+                          key={l.url}
+                          href={l.url}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          className="rounded-full border border-accent/40 bg-background px-3 py-1 text-xs text-accent hover:bg-accent hover:text-accent-foreground"
+                        >
+                          {l.label} ↗
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+    </main>
+  );
 }
