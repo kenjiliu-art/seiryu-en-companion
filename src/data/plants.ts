@@ -10,6 +10,9 @@ export type Plant = {
   /** General-category fallback poems used when no species-specific
    *  Man'yōshū poem exists for this plant (e.g. leather fern → fern). */
   categoryRefs?: { label: string; refs: string[] };
+  /** True when the species was substituted for the original Man'yōshū plant
+   *  to suit the Los Angeles / Southern California climate. */
+  substitute?: boolean;
   /** Extra curated links (collections, etc.) */
   links?: { label: string; url: string }[];
   x: number;
@@ -233,6 +236,7 @@ export const plants: Plant[] = [
       "MYS XVIII: 4086", "MYS XVIII: 4087", "MYS XVIII: 4088",
       "MYS XVIII: 4113", "MYS XVIII: 4115", "MYS XX: 4369",
     ],
+    substitute: true,
     x: 35, y: 72,
   },
   {
@@ -259,6 +263,7 @@ export const plants: Plant[] = [
     scientific: "Pyrus kawakamii",
     description: "A substitute for the edible pears commonly found in Japanese gardens. Nashi is the general word for pear.",
     manyoshu: ["MYS X: 2188", "MYS X: 2189", "MYS XVI: 3834", "MYS XIX: 4259"],
+    substitute: true,
     x: 18, y: 38,
   },
   {
@@ -269,6 +274,7 @@ export const plants: Plant[] = [
     description:
       "Though not the same juniper found in the Man'yōshū, this dwarf form is widely used as a groundcover in Japanese gardens.",
     manyoshu: ["MYS III: 446"],
+    substitute: true,
     x: 52, y: 75,
   },
   {
@@ -323,6 +329,7 @@ export const plants: Plant[] = [
       refs: ["MYS VIII: 1418", "MYS X: 1872"],
     },
     links: [{ label: "All warabi (fern) poems", url: "http://www.wakapoetry.net/tag/warabi/" }],
+    substitute: true,
     x: 72, y: 70,
   },
 ];

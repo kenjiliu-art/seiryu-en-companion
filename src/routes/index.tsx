@@ -88,6 +88,10 @@ function Index() {
               <span className="block h-3 w-3 rounded-full border-2 border-primary-foreground bg-primary" />
               Garden plant
             </span>
+            <span className="flex items-center gap-2">
+              <span className="rounded-full border border-dashed border-muted-foreground/40 px-1.5 py-0.5 text-[10px] uppercase tracking-wider">LA sub</span>
+              Substituted for SoCal climate
+            </span>
           </div>
         </div>
 
@@ -122,6 +126,14 @@ function Index() {
                       {!p.manyoshu && p.categoryRefs && (
                         <span className="rounded-full bg-accent/10 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-accent/80">
                           general
+                        </span>
+                      )}
+                      {p.substitute && (
+                        <span
+                          title="Substituted for the original Man'yōshū plant to suit the Los Angeles climate"
+                          className="rounded-full border border-dashed border-muted-foreground/40 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground"
+                        >
+                          LA sub
                         </span>
                       )}
                     </span>
@@ -164,6 +176,14 @@ function Index() {
                   {active.scientific && <>{active.scientific}</>}
                 </DialogDescription>
               </DialogHeader>
+
+              {active.substitute && (
+                <p className="rounded-md border border-dashed border-muted-foreground/40 bg-muted/30 px-3 py-2 text-[11px] text-muted-foreground">
+                  <span className="font-semibold uppercase tracking-wider">LA substitute</span> ·
+                  Not the exact species in the Man&apos;yōshū — a local stand-in chosen to thrive in the
+                  Southern California climate.
+                </p>
+              )}
 
               <p className="text-sm leading-relaxed">{active.description}</p>
 
