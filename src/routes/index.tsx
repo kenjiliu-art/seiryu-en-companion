@@ -39,6 +39,16 @@ function categoryDotClass(c: PlantCategory): string {
   if (c === "substitute") return "bg-amber-500";
   return "bg-muted-foreground";
 }
+function categoryHaloClass(c: PlantCategory): string {
+  if (c === "manyoshu") return "bg-emerald-500/15 group-hover:bg-emerald-500/30";
+  if (c === "substitute") return "bg-amber-500/15 group-hover:bg-amber-500/30";
+  return "bg-slate-400/15 group-hover:bg-slate-400/30";
+}
+function categoryGlowStyle(c: PlantCategory): string {
+  if (c === "manyoshu") return "0 0 8px rgba(5,150,105,0.45)";
+  if (c === "substitute") return "0 0 8px rgba(217,119,6,0.45)";
+  return "0 0 8px rgba(71,85,105,0.35)";
+}
 
 function Index() {
   const [active, setActive] = useState<Plant | null>(null);
@@ -127,11 +137,19 @@ function Index() {
                 className={`group absolute -translate-x-1/2 -translate-y-1/2 ${editMode ? "cursor-move" : ""}`}
                 aria-label={p.name}
               >
-                <span
-                  className={`block h-3.5 w-3.5 rounded-full border-2 border-white shadow-md ring-4 ring-white/70 transition-transform ${categoryDotClass(category)} ${
-                    hovered === p.id || dragId === p.id ? "scale-150" : "group-hover:scale-125"
-                  }`}
-                />
+                <span className="relative flex h-8 w-8 items-center justify-center">
+                  <span
+                    className={`absolute inset-0 rounded-full border border-white/60 shadow-sm backdrop-blur-[2px] transition-all duration-300 ${categoryHaloClass(category)} ${
+                      hovered === p.id || dragId === p.id ? "scale-125" : "group-hover:scale-125"
+                    }`}
+                  />
+                  <span
+                    className={`relative h-2.5 w-2.5 rounded-full transition-transform duration-300 ${categoryDotClass(category)} ${
+                      hovered === p.id || dragId === p.id ? "scale-125" : ""
+                    }`}
+                    style={{ boxShadow: categoryGlowStyle(category) }}
+                  />
+                </span>
                 {(hovered === p.id || dragId === p.id) && (
                   <span className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded bg-foreground px-2 py-1 text-xs text-background shadow-lg">
                     {p.name}{editMode && ` · ${p.x}, ${p.y}`}
@@ -159,10 +177,10 @@ function Index() {
               </button>
             )}
             {([
-              ["manyoshu", "bg-emerald-600", "In the Man\u2019yōshū"],
-              ["substitute", "bg-amber-500", "SoCal substitute / general match"],
-              ["none", "bg-muted-foreground", "Not in the Man\u2019yōshū"],
-            ] as const).map(([cat, color, label]) => {
+              ["manyoshu", "bg-emerald-600", "bg-emerald-500/15 border-emerald-500/30", "In the Man\u2019yōshū"],
+              ["substitute", "bg-amber-500", "bg-amber-500/15 border-amber-500/30", "SoCal substitute / general match"],
+              ["none", "bg-muted-foreground", "bg-slate-400/15 border-slate-400/30", "Not in the Man\u2019yōshū"],
+            ] as const).map(([cat, dot, halo, label]) => {
               const on = visibleCats[cat];
               return (
                 <button
@@ -175,7 +193,10 @@ function Index() {
                       : "border-dashed border-border/60 text-muted-foreground/60 line-through"
                   }`}
                 >
-                  <span className={`block h-3 w-3 rounded-full border-2 border-white shadow-sm ${color} ${on ? "" : "opacity-40"}`} />
+                  <span className={`relative flex h-5 w-5 items-center justify-center ${on ? "" : "opacity-40"}`}>
+                    <span className={`absolute inset-0 rounded-full border ${halo}`} />
+                    <span className={`relative h-1.5 w-1.5 rounded-full ${dot}`} />
+                  </span>
                   {label}
                 </button>
               );
