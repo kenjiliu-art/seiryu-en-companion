@@ -329,6 +329,7 @@ export const plants: Plant[] = [
       refs: ["MYS VIII: 1418", "MYS X: 1872"],
     },
     links: [{ label: "All warabi (fern) poems", url: "http://www.wakapoetry.net/tag/warabi/" }],
+    substitute: true,
     x: 72, y: 70,
   },
 ];
