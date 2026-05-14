@@ -274,6 +274,7 @@ export const plants: Plant[] = [
     description:
       "Though not the same juniper found in the Man'yōshū, this dwarf form is widely used as a groundcover in Japanese gardens.",
     manyoshu: ["MYS III: 446"],
+    substitute: true,
     x: 52, y: 75,
   },
   {
