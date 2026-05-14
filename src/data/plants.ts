@@ -236,7 +236,7 @@ export const plants: Plant[] = [
       "MYS XVIII: 4086", "MYS XVIII: 4087", "MYS XVIII: 4088",
       "MYS XVIII: 4113", "MYS XVIII: 4115", "MYS XX: 4369",
     ],
-    x: 35, y: 72,
+    substitute: true,
   },
   {
     id: "dwarf-mondo",
