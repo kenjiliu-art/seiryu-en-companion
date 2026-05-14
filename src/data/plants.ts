@@ -314,6 +314,11 @@ export const plants: Plant[] = [
     scientific: "Rumohra adiantiformis",
     description:
       "Not native to Japan — substituted to suit the Southern California climate. In Japan, ferns are used to help keep food longer.",
+    categoryRefs: {
+      label: "Fern (sawarabi 早蕨 / shida 羊歯)",
+      refs: ["MYS VIII: 1418", "MYS X: 1872"],
+    },
+    links: [{ label: "All warabi (fern) poems", url: "http://www.wakapoetry.net/tag/warabi/" }],
     x: 72, y: 70,
   },
 ];
