@@ -35,7 +35,7 @@ function plantCategory(p: Plant): PlantCategory {
   return "none";
 }
 function categoryDotClass(c: PlantCategory): string {
-  if (c === "manyoshu") return "bg-primary";
+  if (c === "manyoshu") return "bg-emerald-600";
   if (c === "substitute") return "bg-amber-500";
   return "bg-muted-foreground";
 }
@@ -151,7 +151,7 @@ function Index() {
               </button>
             )}
             <span className="flex items-center gap-2">
-              <span className="block h-3 w-3 rounded-full border-2 border-primary-foreground bg-primary shadow-sm" />
+              <span className="block h-3 w-3 rounded-full border-2 border-primary-foreground bg-emerald-600 shadow-sm" />
               In the Man&apos;yōshū
             </span>
             <span className="flex items-center gap-2">
