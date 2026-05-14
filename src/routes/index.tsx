@@ -127,7 +127,7 @@ function Index() {
       <div className="mx-auto flex max-w-[1600px] flex-col gap-10 px-4 py-8 md:px-10 md:py-12">
         {/* Map */}
         <div
-          className="relative overflow-hidden rounded-md border border-stone-200/60 p-6 shadow-sm md:p-12"
+          className="relative overflow-hidden rounded-md border border-stone-200/60 p-4 shadow-sm md:p-8"
           style={{ backgroundColor: "#FDFCF8" }}
         >
           {/* Washi paper grain */}
@@ -140,7 +140,7 @@ function Index() {
           <div aria-hidden className="pointer-events-none absolute right-1/4 top-0 h-32 w-px bg-stone-300/60" />
 
           {/* Asymmetric inner frame — offset right for ma (negative space) */}
-          <div className="relative ml-0 lg:ml-[5%]">
+          <div className="relative ml-0 lg:ml-[2%]">
             <div
               className="relative border border-stone-200 p-1"
               style={{ backgroundColor: "#F7F5EF" }}
