@@ -13,7 +13,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { PlantThumb } from "@/components/PlantThumb";
 import { ConstructionPin, defaultConstructionPins, type ConstructionPinSpec } from "@/components/ConstructionGallery";
-import { Volume2, Square } from "lucide-react";
+import { Volume2, Square, ChevronDown } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -262,71 +262,82 @@ function Index() {
 
         {/* Legend */}
         <aside className="rounded-md border border-border bg-card">
-          <div className="border-b border-border/60 px-4 py-3">
-            <h2 className="font-serif text-lg">Plant Legend</h2>
-            <p className="text-xs text-muted-foreground">
-              {plants.length} species · {plants.filter((p) => p.manyoshu || p.categoryRefs).length} with
-              Man&apos;yōshū poems
-            </p>
-          </div>
-          <ScrollArea className="max-h-[60vh]">
-            <ul className="divide-y divide-border/50">
-              {plants.map((p) => (
-                <li key={p.id}>
-                  <button
-                    onClick={() => setActive(p)}
-                    onMouseEnter={() => setHovered(p.id)}
-                    onMouseLeave={() => setHovered(null)}
-                    className={`flex w-full items-start gap-3 px-4 py-2.5 text-left transition-colors hover:bg-muted/60 ${
-                      hovered === p.id ? "bg-muted/60" : ""
-                    }`}
-                  >
-                    <PlantThumb
-                      plantId={p.id}
-                      alt={p.name}
-                      fallbackClass={
-                        plantCategory(p) === "manyoshu"
-                          ? "bg-emerald-600"
-                          : plantCategory(p) === "substitute"
-                            ? "bg-amber-500"
-                            : "bg-muted-foreground"
-                      }
-                    />
-                    <span className="flex flex-1 flex-col gap-0.5">
-                    <span className="flex items-center gap-2 text-sm font-medium">
-                      {p.name}
-                      {p.manyoshu && (
-                        <span className="rounded-full bg-accent/15 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-accent">
-                          poem
-                        </span>
-                      )}
-                      {!p.manyoshu && p.categoryRefs && (
-                        <span className="rounded-full bg-accent/10 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-accent/80">
-                          general
-                        </span>
-                      )}
-                      {p.substitute && (
-                        <span
-                          title="Substituted for the original Man'yōshū plant to suit the Los Angeles climate"
-                          className="rounded-full border border-dashed border-muted-foreground/40 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground"
-                        >
-                          LA sub
-                        </span>
-                      )}
-                    </span>
-                    {(p.japanese || p.romaji || p.scientific) && (
-                      <span className="text-xs italic text-muted-foreground">
-                        {p.japanese && <span className="not-italic mr-1">{p.japanese}</span>}
-                        {p.romaji && <span className="mr-1">{p.romaji}</span>}
-                        {p.scientific && <span>· {p.scientific}</span>}
+          <button
+            onClick={() => setLegendOpen((o) => !o)}
+            aria-expanded={legendOpen}
+            className="flex w-full items-center justify-between gap-3 border-b border-border/60 px-4 py-3 text-left transition-colors hover:bg-muted/40"
+          >
+            <span>
+              <h2 className="font-serif text-lg">Plant Legend</h2>
+              <p className="text-xs text-muted-foreground">
+                {plants.length} species · {plants.filter((p) => p.manyoshu || p.categoryRefs).length} with
+                Man&apos;yōshū poems
+              </p>
+            </span>
+            <ChevronDown
+              className={`h-4 w-4 text-muted-foreground transition-transform ${legendOpen ? "rotate-180" : ""}`}
+            />
+          </button>
+          {legendOpen && (
+            <ScrollArea className="max-h-[60vh]">
+              <ul className="divide-y divide-border/50">
+                {plants.map((p) => (
+                  <li key={p.id}>
+                    <button
+                      onClick={() => setActive(p)}
+                      onMouseEnter={() => setHovered(p.id)}
+                      onMouseLeave={() => setHovered(null)}
+                      className={`flex w-full items-start gap-3 px-4 py-2.5 text-left transition-colors hover:bg-muted/60 ${
+                        hovered === p.id ? "bg-muted/60" : ""
+                      }`}
+                    >
+                      <PlantThumb
+                        plantId={p.id}
+                        alt={p.name}
+                        fallbackClass={
+                          plantCategory(p) === "manyoshu"
+                            ? "bg-emerald-600"
+                            : plantCategory(p) === "substitute"
+                              ? "bg-amber-500"
+                              : "bg-muted-foreground"
+                        }
+                      />
+                      <span className="flex flex-1 flex-col gap-0.5">
+                      <span className="flex items-center gap-2 text-sm font-medium">
+                        {p.name}
+                        {p.manyoshu && (
+                          <span className="rounded-full bg-accent/15 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-accent">
+                            poem
+                          </span>
+                        )}
+                        {!p.manyoshu && p.categoryRefs && (
+                          <span className="rounded-full bg-accent/10 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-accent/80">
+                            general
+                          </span>
+                        )}
+                        {p.substitute && (
+                          <span
+                            title="Substituted for the original Man'yōshū plant to suit the Los Angeles climate"
+                            className="rounded-full border border-dashed border-muted-foreground/40 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground"
+                          >
+                            LA sub
+                          </span>
+                        )}
                       </span>
-                    )}
-                    </span>
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </ScrollArea>
+                      {(p.japanese || p.romaji || p.scientific) && (
+                        <span className="text-xs italic text-muted-foreground">
+                          {p.japanese && <span className="not-italic mr-1">{p.japanese}</span>}
+                          {p.romaji && <span className="mr-1">{p.romaji}</span>}
+                          {p.scientific && <span>· {p.scientific}</span>}
+                        </span>
+                      )}
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </ScrollArea>
+          )}
         </aside>
       </div>
 
