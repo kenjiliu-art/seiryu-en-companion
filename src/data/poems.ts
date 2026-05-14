@@ -31,24 +31,6 @@ export const poems: Record<string, Poem> = {
     "source": "wakapoetry",
     "url": "http://www.wakapoetry.net/mys-i-34/"
   },
-  "MYS I: 63": {
-    "preface": "A poem Yamanoe no Okura composed when in China, and thinking of home.",
-    "japanese": "去来子等　早日本邊　大伴乃　御津乃濱松　待戀奴良武",
-    "romaji": "iza kodomo\npayaku yamato pe\nopotomo no\nmitu no pama matu\nmatikopinuramu",
-    "english": "Hey, now, everyone!\nLet’s haste back to Yamato!\nIn Ōtomo\nUpon the beach at Mitsu, the pines\nMust long for our return&#8230;",
-    "author": "いざ子ども早く大和へ大伴の御津の濱松待ち戀ひぬらむ",
-    "source": "wakapoetry",
-    "url": "http://www.wakapoetry.net/mys-i-63/"
-  },
-  "MYS II: 144": {
-    "preface": undefined,
-    "japanese": "磐代の野中に立てる結び松心も解けずいにしへ思ほゆ",
-    "romaji": "ipasiro no\nnonaka&nbsp; ni tateru\nmusubimatu\nkokoro mo tokezu\ninisipe omopoyu",
-    "english": "At Iwashiro\n Amid the fields do stand\n Bound pines;\n My heart will not unbind,\n Caught in thought of times long gone…",
-    "author": "Naga no Okimaro\n長意吉麻呂",
-    "source": "wakapoetry",
-    "url": "http://www.wakapoetry.net/mys-ii-144/"
-  },
   "MYS I: 65": {
     "preface": "A poem composed by Prince Naga, on the occasion of a visit to the Naniwa Palace in Kyōun 3 [707].",
     "japanese": "霰打　安良礼松原　住吉之　弟日娘与　見礼常不飽香聞",
@@ -58,23 +40,14 @@ export const poems: Record<string, Poem> = {
     "source": "wakapoetry",
     "url": "http://www.wakapoetry.net/mys-i-65/"
   },
-  "MYS II: 145": {
-    "preface": "A poem composed later by Yamanoue no omi Okura.",
-    "japanese": "翼なすあり通ひつつ見らめども人こそ知らね松は知るらむ",
-    "romaji": "tubasa nasu\narigayopitutu\nmiramedomo\npito koso sirane\nmatu pa siruramu",
-    "english": "Bearing wings\nHis soul does traverse the skies;\nThe sight\nMeans nothing to men, but\nThe pine, alone, understands.",
-    "author": "Yamanoue no Okura",
+  "MYS I: 63": {
+    "preface": "A poem Yamanoe no Okura composed when in China, and thinking of home.",
+    "japanese": "去来子等　早日本邊　大伴乃　御津乃濱松　待戀奴良武",
+    "romaji": "iza kodomo\npayaku yamato pe\nopotomo no\nmitu no pama matu\nmatikopinuramu",
+    "english": "Hey, now, everyone!\nLet’s haste back to Yamato!\nIn Ōtomo\nUpon the beach at Mitsu, the pines\nMust long for our return&#8230;",
+    "author": "いざ子ども早く大和へ大伴の御津の濱松待ち戀ひぬらむ",
     "source": "wakapoetry",
-    "url": "http://www.wakapoetry.net/mys-ii-145/"
-  },
-  "MYS II: 199": {
-    "preface": "A poem composed by Hitomaro, Lord Kakinomoto, when Prince Takechi was lying in state at Kinoe.",
-    "japanese": "かけまくも　ゆゆしきかも　言はまくも　あやに畏き　明日香の　眞神の原に　ひさかたの　天つ御門を　畏くも　定めたまひて　神さぶと　磐隱ります　やすみしし　我が大君の　きこしめす　背面の國の　眞木立つ　不破山超えて　高麗劍　和射見が原の　假宮に　天降りいまして　天の下　治めたまひ　食す國を　定めたまふと　鷄が鳴く　東の國の　御いくさを　召したまひて　ちはやぶる　人を和せと　奉ろはぬ　國を治めと　皇子ながら　任けたまへば　大御身に　大刀取り佩かし　大御手に　弓取り持たし　御軍士を　率ひたまひ　整ふる　鼓の音は　雷の　聲と聞くまで　吹き鳴せる　小角の音も　敵見たる　虎か吼ゆると　諸人の　おびゆるまでに　ささげたる　幡の靡きは　冬ごもり　春さり來れば　野ごとに　つきてある火の　風の共　靡かふごとく　取り持てる　弓弭の騷き　み雪降る　冬の林に　つむじかも　い卷き渡ると　思ふまで　聞きの畏く　引き放つ　矢の繁けく　大雪の　亂れて來たれ　まつろはず　立ち向ひしも　露霜の　消なば消ぬべく　行く鳥の　爭ふはしに　渡會の　齋きの宮ゆ　神風に　い吹き惑はし　天雲を　日の目も見せず　常闇に　覆ひ賜ひて　定めてし　瑞穗の國を　神ながら　太敷きまして　やすみしし　我が大君の　天の下　申したまへば　萬代に　しかしもあらむと　木綿花の　榮ゆる時に　我が大君　皇子の御門を　神宮に　裝ひまつりて　使はしし　御門の人も　白栲の　麻衣着て　埴安の　御門の原に　あかねさす　日のことごと　獸じもの　い匍ひ伏しつつ　ぬばたまの　夕になれば　大殿を　振り放け見つつ　鶉なす　い匍ひもとほり　侍へど　侍ひえねば　春鳥の　さまよひぬれば　嘆きも　いまだ過ぎぬに　思ひも　いまだ盡きねば　言さへく　百濟の原ゆ　神葬り　葬りいませて　あさもよし　城上の宮を　常宮と　高く奉りて　神ながら　鎭まりましぬ　しかれども　我が大君の　萬代と　思ほしめして　作らしし　香具山の宮　萬代に　過ぎむと思へや　天のごと　振り放け見つつ　玉たすき　懸けて偲はむ　畏かれども",
-    "romaji": "kakemaku mo\nyuyusiki ka mo\nipamaku mo\naya ni kasikoki\nasuka nö\nmakamï nö para ni\npisakata nö\nama tu mikado wo\nkasikoku mo\nsadametamapite\nkamu sabu tö\nipagakurimasu\nyasumi sisi\nwa ga opokimi nö\nkikösimesu\nsötömo nö kuni nö\nmakï tatu\npupa yama koete\nköma turugi\nwazami ga para nö\nkarimiya ni\namoriimasite\namë nö sita\nwosametamapi\nwosu kuni wo\nsadametamapu tö\ntöri ga naku\naduma nö kuni nö\nmi-ikusa wo\nmesitamapite\ntipayaburu\npitö wo yapase tö\nmaturopanu\nkuni wo wosame tö\nmiko nagara\nmaketamapeba\nopomimi ni\ntati toripakasi\nopomite ni\nyumi törimotasi\nmi-ikusa wo\nadömopitamapi\ntötönöpuru\ntudumi nö otö pa\nikaduti nö\nkowe tö kiku made\npuki naseru\nkuda nö otö mo\nata mitaru\ntora ka poyuru tö\nmoröpitö nö\nobiyuru made ni\nsasagetaru\npata nö nabiki pa\npuyugömori\nparu sarikureba\nno götö ni\ntukite aru pï nö\nkaze nö muta\nnabikapu götöku\ntörimoteru\nyupazu nö sawagi\nmi-yuki puru\npuyu nö payasi ni\ntumuzi ka mo\nimakiwataru tö\nomopu made\nkiki nö kasikoku\npikipanatu\nya nö sigeku\nopo-yuki nö\nmidarete kitare\nmaturopazu\ntatimukapisi mo\ntuyu simo nö\nkenaba kenubëku\nyuku töri nö\narasopu pasi ni\nwatarapi nö\nituki nö miya yu\nkamukaze ni\ni pukimadopasi\nama kumo wo\npi nö me mo misezu\ntököyamï ni\nopopitamapite\nsadametesi\nmidupo nö kuni wo\nkamu nagara\nputo sikimasite\nyasumi sisi\nwa ga opokimi nö\nam&amp;ieuml; nö sita\nmawositamapeba\nyöröduyö ni\nsikasi mo aramu tö\nyupu pana nö\nsakayuru töki ni\nwa ga opokimi\nmiko nö mikado wo\nkamumiya ni\nyösöpimaturite\ntukapasisi\nmikado nö pitö mo\nsirotapë nö\nasagörömo kite\npaniyasu nö\nmikado nö para ni\nakane sasu\npi nö kötögötö\nsisizi monö\nipapi pusitutu\nnubatama nö\nyupupe ni nareba\nopotönö wo\npurisake mitutu\nudura nasu,\nipapi motöpori\nsamorapedö\nsamorapieneba\nparu töri nö\nsamayopinureba\nnagëki mo\nimada suginu ni\nomopi mo\nimada tukineba\nkötö sapeku\nkudara nö para yu\nkamupaburi\npaburiimasete\nasa mo yösi\nkinope nö miya wo\ntökömiya tö\ntakakumaturite\nkamu nagara\nsidumarimasinu\nsikaredömo\nwa ga opokimi nö\nyöröduyö tö\noposimesite\ntukurasisi\nkagu yama nö miya\nyöröduyö ni\nsugimu tö omope ya\namë nö götö\npurisake mitutu\ntama tasuki\nkakete sinopamu\nkasikoku aredömo",
-    "english": "I do speak these words, though\nThey may profane what&#8217;s holy;\nI speak them\nFilled with awe:\nAt Asuka,\nOn the field of Makami,\nOur eternal,\nDivine Emperor,\nAwesome,\nDecided,\nAs would a god,\nTo rest within stone halls.\nAll knowing and all powerful,\nOur Emperor\nRuled\nThe northern provinces.\nWooded\nFuwa mountain crossing,\nTo Koryo-bladed,\nWazami field,\nTo a new palace\nHe came down from heaven;\nThe state,\nHe governed;\nThe land, he ruled.\nThat was his decision.\nFrom the cock-crowing\nEastern provinces,\nHis warriors\nHe called.\n&#8220;The rough\nFolk, pacify; and\nThe unruly\nLands, control,&#8221; said he to\nHis son, my prince,\nAnd fitting to that state.\nTo your mighty body,\nYou strapped your sword;\nIn your hand,\nYou held your bow;\nYour warriors,\nYou summoned:\nThe call to arms\nDrums&#8217; roar\nThe thunder\nSpoke;\nThe sounding of\nThe battle horns were as\nAt the foe\nA tiger roaring.\nMany folk\nWere thus struck with fear.\nHigh flying\nBanners snapping?\nBuried in winter,\nWith the spring\nThe fields\nAre set ablaze;\nFire with the wind\nBlows back and forth?\nHeld,\nThe snap of bowstrings:\nAs a snow-covered\nWinter woodland\nRent by a whirlwind,\nTwisting round and over,\nIt sounded,\nTerrifying:\nLoosing, shooting\nA multitude of arrows,\nA blizzard,\nConfused and falling;\nThe unruly\nFoe stood fast\nAs dew and frost,\n&#8220;If we die then so be it!&#8221;\nLike flocking birds.\nThen amidst the battle,\nFrom Watarai,\nFrom the holy shrine,\nThe gods&#8217; own wind\nBlew down confusion,\nHeaven&#8217;s clouds,\nHid the sunlight;\nUtter darkness\nCovered all,\nAnd overwhelmed them.\nIn this Land of Bounteous Grain\nMy prince was a god,\nRuling\nEvery corner;\nMy great prince\nThe state,\nCommanded;\nFor a myriad reigns\nIt would be so, we thought;\nBut when bright as mulberry-cloth flowers\nHe flourished,\nMy dear prince,\nHis palace,\nAs a god&#8217;s shrine,\nWas garlanded and\nHe was laid within;\nThe prince&#8217;s servants\nWhite hempen\nMourning dress put on;\nAt Haniyasu,\nOn the field before the palace,\nGlowing madder red\nThe sunlight;\nLike beasts,\nThey trailed in and laid them down;\nWith lily seed\nDusk&#8217;s arrival,\nOn the great hall\nThey fixed their gaze;\nAs peeping quail,\nCrawled they on their bellies.\nThey served you but,\nNow there is no point:\nAs birds of spring,\nThey moaned;\nOur grieving too\nIs not yet done;\nOur sorrow too\nIs not exhausted;\nMangled words\nFrom the field of Kudara\nIn a god&#8217;s funeral\nWe interred you.\nAs goodly flax,\nYour shrine at Kinoe:\nAn eternal palace,\nBuilt high for you.\nAs a god\nAre you enshrined.\nThough that be so,\nMy great prince,\nWould live a myriad years,\nI thought.\nYou had built\nA palace at Mt Kagu.\nFor a myriad years\nThere you would endure, I thought.\nAs does the sky,\nIt fills my gaze,\nA jeweled sash\nHolding my thoughts\nFull of awe.",
-    "author": undefined,
-    "source": "wakapoetry",
-    "url": "http://www.wakapoetry.net/mys-ii-199/"
+    "url": "http://www.wakapoetry.net/mys-i-63/"
   },
   "MYS II: 141": {
     "preface": "Two poems composed by Prince Arima, on feeling sorrowful and tying the branches of a pine tree together.",
@@ -94,6 +67,24 @@ export const poems: Record<string, Poem> = {
     "source": "wakapoetry",
     "url": "http://www.wakapoetry.net/mys-ii-143/"
   },
+  "MYS II: 144": {
+    "preface": undefined,
+    "japanese": "磐代の野中に立てる結び松心も解けずいにしへ思ほゆ",
+    "romaji": "ipasiro no\nnonaka&nbsp; ni tateru\nmusubimatu\nkokoro mo tokezu\ninisipe omopoyu",
+    "english": "At Iwashiro\n Amid the fields do stand\n Bound pines;\n My heart will not unbind,\n Caught in thought of times long gone…",
+    "author": "Naga no Okimaro\n長意吉麻呂",
+    "source": "wakapoetry",
+    "url": "http://www.wakapoetry.net/mys-ii-144/"
+  },
+  "MYS II: 145": {
+    "preface": "A poem composed later by Yamanoue no omi Okura.",
+    "japanese": "翼なすあり通ひつつ見らめども人こそ知らね松は知るらむ",
+    "romaji": "tubasa nasu\narigayopitutu\nmiramedomo\npito koso sirane\nmatu pa siruramu",
+    "english": "Bearing wings\nHis soul does traverse the skies;\nThe sight\nMeans nothing to men, but\nThe pine, alone, understands.",
+    "author": "Yamanoue no Okura",
+    "source": "wakapoetry",
+    "url": "http://www.wakapoetry.net/mys-ii-145/"
+  },
   "MYS II: 146": {
     "preface": "A poem composed on the occasion of the Imperial visit to the province of Ki in the first year of Taihō [701].",
     "japanese": "後見むと君が結べる磐代の小松がうれをまたも見むかも",
@@ -112,14 +103,14 @@ export const poems: Record<string, Poem> = {
     "source": "wakapoetry",
     "url": "http://www.wakapoetry.net/mys-ii-185/"
   },
-  "MYS III: 257": {
-    "preface": "A poem on Mount Kagu by Kamo no Taruhito.",
-    "japanese": "天之芳来山　霞立　春尓至婆　松風尓　池浪立而　櫻花　木乃晩茂尓　奥邊波　鴨妻喚　邊津方尓　味村左和伎　百礒城之　大宮人乃　退出而　遊船尓波　梶棹毛　無而不樂毛　己具人奈四二",
-    "romaji": "amorituku\name no kaguyama\nkiri tatu\nparu ni itareba\nmatukaze ni\nikenami tatite\nsakurabana\nko no kuresige ni\nokipe ni pa\nkamo tuma yobapi\npetupe ni\nadi murasawagi\nmomosiki no\nopomiyabito no\nmakaridete\nasobu pune ni pa\nkadisawo mo\nnakute sabusi mo\nkogu pito nasi ni",
-    "english": "Descended from heaven is\nSacred Mount Kagu where\nMists arise\nWhen the spring does come,\nThe wind through the pines\nRaises waves from pond waters, and\nCherry blossom’s\nProfusion shades the trees, while\nOut in the offing,\nDucks call for a mate and\nOn the shore\nTeals flock noisily;\nHundredfold,\nThe palace folk were wont to\nTravel out\nOn pleasure boats, but\nOars and poles\nAre there none—so sad—\nFor there’s not a soul to row them…",
+  "MYS II: 199": {
+    "preface": "A poem composed by Hitomaro, Lord Kakinomoto, when Prince Takechi was lying in state at Kinoe.",
+    "japanese": "かけまくも　ゆゆしきかも　言はまくも　あやに畏き　明日香の　眞神の原に　ひさかたの　天つ御門を　畏くも　定めたまひて　神さぶと　磐隱ります　やすみしし　我が大君の　きこしめす　背面の國の　眞木立つ　不破山超えて　高麗劍　和射見が原の　假宮に　天降りいまして　天の下　治めたまひ　食す國を　定めたまふと　鷄が鳴く　東の國の　御いくさを　召したまひて　ちはやぶる　人を和せと　奉ろはぬ　國を治めと　皇子ながら　任けたまへば　大御身に　大刀取り佩かし　大御手に　弓取り持たし　御軍士を　率ひたまひ　整ふる　鼓の音は　雷の　聲と聞くまで　吹き鳴せる　小角の音も　敵見たる　虎か吼ゆると　諸人の　おびゆるまでに　ささげたる　幡の靡きは　冬ごもり　春さり來れば　野ごとに　つきてある火の　風の共　靡かふごとく　取り持てる　弓弭の騷き　み雪降る　冬の林に　つむじかも　い卷き渡ると　思ふまで　聞きの畏く　引き放つ　矢の繁けく　大雪の　亂れて來たれ　まつろはず　立ち向ひしも　露霜の　消なば消ぬべく　行く鳥の　爭ふはしに　渡會の　齋きの宮ゆ　神風に　い吹き惑はし　天雲を　日の目も見せず　常闇に　覆ひ賜ひて　定めてし　瑞穗の國を　神ながら　太敷きまして　やすみしし　我が大君の　天の下　申したまへば　萬代に　しかしもあらむと　木綿花の　榮ゆる時に　我が大君　皇子の御門を　神宮に　裝ひまつりて　使はしし　御門の人も　白栲の　麻衣着て　埴安の　御門の原に　あかねさす　日のことごと　獸じもの　い匍ひ伏しつつ　ぬばたまの　夕になれば　大殿を　振り放け見つつ　鶉なす　い匍ひもとほり　侍へど　侍ひえねば　春鳥の　さまよひぬれば　嘆きも　いまだ過ぎぬに　思ひも　いまだ盡きねば　言さへく　百濟の原ゆ　神葬り　葬りいませて　あさもよし　城上の宮を　常宮と　高く奉りて　神ながら　鎭まりましぬ　しかれども　我が大君の　萬代と　思ほしめして　作らしし　香具山の宮　萬代に　過ぎむと思へや　天のごと　振り放け見つつ　玉たすき　懸けて偲はむ　畏かれども",
+    "romaji": "kakemaku mo\nyuyusiki ka mo\nipamaku mo\naya ni kasikoki\nasuka nö\nmakamï nö para ni\npisakata nö\nama tu mikado wo\nkasikoku mo\nsadametamapite\nkamu sabu tö\nipagakurimasu\nyasumi sisi\nwa ga opokimi nö\nkikösimesu\nsötömo nö kuni nö\nmakï tatu\npupa yama koete\nköma turugi\nwazami ga para nö\nkarimiya ni\namoriimasite\namë nö sita\nwosametamapi\nwosu kuni wo\nsadametamapu tö\ntöri ga naku\naduma nö kuni nö\nmi-ikusa wo\nmesitamapite\ntipayaburu\npitö wo yapase tö\nmaturopanu\nkuni wo wosame tö\nmiko nagara\nmaketamapeba\nopomimi ni\ntati toripakasi\nopomite ni\nyumi törimotasi\nmi-ikusa wo\nadömopitamapi\ntötönöpuru\ntudumi nö otö pa\nikaduti nö\nkowe tö kiku made\npuki naseru\nkuda nö otö mo\nata mitaru\ntora ka poyuru tö\nmoröpitö nö\nobiyuru made ni\nsasagetaru\npata nö nabiki pa\npuyugömori\nparu sarikureba\nno götö ni\ntukite aru pï nö\nkaze nö muta\nnabikapu götöku\ntörimoteru\nyupazu nö sawagi\nmi-yuki puru\npuyu nö payasi ni\ntumuzi ka mo\nimakiwataru tö\nomopu made\nkiki nö kasikoku\npikipanatu\nya nö sigeku\nopo-yuki nö\nmidarete kitare\nmaturopazu\ntatimukapisi mo\ntuyu simo nö\nkenaba kenubëku\nyuku töri nö\narasopu pasi ni\nwatarapi nö\nituki nö miya yu\nkamukaze ni\ni pukimadopasi\nama kumo wo\npi nö me mo misezu\ntököyamï ni\nopopitamapite\nsadametesi\nmidupo nö kuni wo\nkamu nagara\nputo sikimasite\nyasumi sisi\nwa ga opokimi nö\nam&amp;ieuml; nö sita\nmawositamapeba\nyöröduyö ni\nsikasi mo aramu tö\nyupu pana nö\nsakayuru töki ni\nwa ga opokimi\nmiko nö mikado wo\nkamumiya ni\nyösöpimaturite\ntukapasisi\nmikado nö pitö mo\nsirotapë nö\nasagörömo kite\npaniyasu nö\nmikado nö para ni\nakane sasu\npi nö kötögötö\nsisizi monö\nipapi pusitutu\nnubatama nö\nyupupe ni nareba\nopotönö wo\npurisake mitutu\nudura nasu,\nipapi motöpori\nsamorapedö\nsamorapieneba\nparu töri nö\nsamayopinureba\nnagëki mo\nimada suginu ni\nomopi mo\nimada tukineba\nkötö sapeku\nkudara nö para yu\nkamupaburi\npaburiimasete\nasa mo yösi\nkinope nö miya wo\ntökömiya tö\ntakakumaturite\nkamu nagara\nsidumarimasinu\nsikaredömo\nwa ga opokimi nö\nyöröduyö tö\noposimesite\ntukurasisi\nkagu yama nö miya\nyöröduyö ni\nsugimu tö omope ya\namë nö götö\npurisake mitutu\ntama tasuki\nkakete sinopamu\nkasikoku aredömo",
+    "english": "I do speak these words, though\nThey may profane what&#8217;s holy;\nI speak them\nFilled with awe:\nAt Asuka,\nOn the field of Makami,\nOur eternal,\nDivine Emperor,\nAwesome,\nDecided,\nAs would a god,\nTo rest within stone halls.\nAll knowing and all powerful,\nOur Emperor\nRuled\nThe northern provinces.\nWooded\nFuwa mountain crossing,\nTo Koryo-bladed,\nWazami field,\nTo a new palace\nHe came down from heaven;\nThe state,\nHe governed;\nThe land, he ruled.\nThat was his decision.\nFrom the cock-crowing\nEastern provinces,\nHis warriors\nHe called.\n&#8220;The rough\nFolk, pacify; and\nThe unruly\nLands, control,&#8221; said he to\nHis son, my prince,\nAnd fitting to that state.\nTo your mighty body,\nYou strapped your sword;\nIn your hand,\nYou held your bow;\nYour warriors,\nYou summoned:\nThe call to arms\nDrums&#8217; roar\nThe thunder\nSpoke;\nThe sounding of\nThe battle horns were as\nAt the foe\nA tiger roaring.\nMany folk\nWere thus struck with fear.\nHigh flying\nBanners snapping?\nBuried in winter,\nWith the spring\nThe fields\nAre set ablaze;\nFire with the wind\nBlows back and forth?\nHeld,\nThe snap of bowstrings:\nAs a snow-covered\nWinter woodland\nRent by a whirlwind,\nTwisting round and over,\nIt sounded,\nTerrifying:\nLoosing, shooting\nA multitude of arrows,\nA blizzard,\nConfused and falling;\nThe unruly\nFoe stood fast\nAs dew and frost,\n&#8220;If we die then so be it!&#8221;\nLike flocking birds.\nThen amidst the battle,\nFrom Watarai,\nFrom the holy shrine,\nThe gods&#8217; own wind\nBlew down confusion,\nHeaven&#8217;s clouds,\nHid the sunlight;\nUtter darkness\nCovered all,\nAnd overwhelmed them.\nIn this Land of Bounteous Grain\nMy prince was a god,\nRuling\nEvery corner;\nMy great prince\nThe state,\nCommanded;\nFor a myriad reigns\nIt would be so, we thought;\nBut when bright as mulberry-cloth flowers\nHe flourished,\nMy dear prince,\nHis palace,\nAs a god&#8217;s shrine,\nWas garlanded and\nHe was laid within;\nThe prince&#8217;s servants\nWhite hempen\nMourning dress put on;\nAt Haniyasu,\nOn the field before the palace,\nGlowing madder red\nThe sunlight;\nLike beasts,\nThey trailed in and laid them down;\nWith lily seed\nDusk&#8217;s arrival,\nOn the great hall\nThey fixed their gaze;\nAs peeping quail,\nCrawled they on their bellies.\nThey served you but,\nNow there is no point:\nAs birds of spring,\nThey moaned;\nOur grieving too\nIs not yet done;\nOur sorrow too\nIs not exhausted;\nMangled words\nFrom the field of Kudara\nIn a god&#8217;s funeral\nWe interred you.\nAs goodly flax,\nYour shrine at Kinoe:\nAn eternal palace,\nBuilt high for you.\nAs a god\nAre you enshrined.\nThough that be so,\nMy great prince,\nWould live a myriad years,\nI thought.\nYou had built\nA palace at Mt Kagu.\nFor a myriad years\nThere you would endure, I thought.\nAs does the sky,\nIt fills my gaze,\nA jeweled sash\nHolding my thoughts\nFull of awe.",
     "author": undefined,
     "source": "wakapoetry",
-    "url": "http://www.wakapoetry.net/mys-iii-257/"
+    "url": "http://www.wakapoetry.net/mys-ii-199/"
   },
   "MYS II: 217": {
     "preface": "A poem composed by Hitomaro, Lord Kakinomoto on the death of a lady-in-waiting from Tsu in Kibi.",
@@ -129,6 +120,24 @@ export const poems: Record<string, Poem> = {
     "author": undefined,
     "source": "wakapoetry",
     "url": "http://www.wakapoetry.net/mys-ii-217/"
+  },
+  "MYS II: 133": {
+    "preface": undefined,
+    "japanese": "笹の葉はみ山もさやにさやげども我れは妹思ふ別れ來ぬれば",
+    "romaji": "sasa nö pa pa\nmi yama mo saya ni\nsayagedömo\nware pa imo omopu\nwakarekonureba",
+    "english": "The leaves of bamboo grass\nAll o&#8217;er the mount with silken\nRustles sound, yet\nI dream of my darling,\nFor I am parted from her.",
+    "author": undefined,
+    "source": "wakapoetry",
+    "url": "http://www.wakapoetry.net/mys-ii-133/"
+  },
+  "MYS III: 257": {
+    "preface": "A poem on Mount Kagu by Kamo no Taruhito.",
+    "japanese": "天之芳来山　霞立　春尓至婆　松風尓　池浪立而　櫻花　木乃晩茂尓　奥邊波　鴨妻喚　邊津方尓　味村左和伎　百礒城之　大宮人乃　退出而　遊船尓波　梶棹毛　無而不樂毛　己具人奈四二",
+    "romaji": "amorituku\name no kaguyama\nkiri tatu\nparu ni itareba\nmatukaze ni\nikenami tatite\nsakurabana\nko no kuresige ni\nokipe ni pa\nkamo tuma yobapi\npetupe ni\nadi murasawagi\nmomosiki no\nopomiyabito no\nmakaridete\nasobu pune ni pa\nkadisawo mo\nnakute sabusi mo\nkogu pito nasi ni",
+    "english": "Descended from heaven is\nSacred Mount Kagu where\nMists arise\nWhen the spring does come,\nThe wind through the pines\nRaises waves from pond waters, and\nCherry blossom’s\nProfusion shades the trees, while\nOut in the offing,\nDucks call for a mate and\nOn the shore\nTeals flock noisily;\nHundredfold,\nThe palace folk were wont to\nTravel out\nOn pleasure boats, but\nOars and poles\nAre there none—so sad—\nFor there’s not a soul to row them…",
+    "author": undefined,
+    "source": "wakapoetry",
+    "url": "http://www.wakapoetry.net/mys-iii-257/"
   },
   "MYS III: 379": {
     "preface": "A poem, with tanka, with which Lady Ōtomo of Sakanoue worships the gods.",
@@ -157,15 +166,6 @@ export const poems: Record<string, Poem> = {
     "source": "wakapoetry",
     "url": "http://www.wakapoetry.net/mys-v-824/"
   },
-  "MYS VI: 990": {
-    "preface": "A poem on a pine tree in Shigeoka in Atomi, by Ki no Shikahito",
-    "japanese": "茂岡に神さび立ちて栄えたる千代松の木の年の知らなく",
-    "romaji": "sigewoka ni\n kamusabi tatite\n sakaetaru\n tiyo matu no ki no\n tosi no siranaku",
-    "english": "In Shigeoka\n Divinely stands\n Flourishing\n A pine for a thousand generations\n All unknowing of the passing years.",
-    "author": "Ki no Shikahito紀鹿人",
-    "source": "wakapoetry",
-    "url": "http://www.wakapoetry.net/mys-vi-990/"
-  },
   "MYS VI: 971": {
     "preface": "A poem composed on the 17th day of the Eighth Month Tempyō 4 by Takahashi no Mushimaro, when Fujiwara no Umakai was sent into the west to inspect the military forces there.",
     "japanese": "白雲の　龍田の山の　露霜に　色づく時に　うち越えて　旅行く君は　五百重山　い行きさくみ　敵守る　筑紫に至り　山のそき　野のそき見よと　伴の部を　班ち遣はし　山彦の　答へむ極み　たにぐくの　さ渡る極み　国形を　見したまひて　冬こもり　春さりゆかば　飛ぶ鳥の　早く来まさね　龍田道の　岡辺の道に　丹つつじの　にほはむ時の　桜花　咲きなむ時に　山たづの　迎へ参ゐ出む　君が来まさば",
@@ -174,6 +174,15 @@ export const poems: Record<string, Poem> = {
     "author": "Shun’e\n俊恵",
     "source": "wakapoetry",
     "url": "http://www.wakapoetry.net/mys-vi-971/"
+  },
+  "MYS VI: 990": {
+    "preface": "A poem on a pine tree in Shigeoka in Atomi, by Ki no Shikahito",
+    "japanese": "茂岡に神さび立ちて栄えたる千代松の木の年の知らなく",
+    "romaji": "sigewoka ni\n kamusabi tatite\n sakaetaru\n tiyo matu no ki no\n tosi no siranaku",
+    "english": "In Shigeoka\n Divinely stands\n Flourishing\n A pine for a thousand generations\n All unknowing of the passing years.",
+    "author": "Ki no Shikahito紀鹿人",
+    "source": "wakapoetry",
+    "url": "http://www.wakapoetry.net/mys-vi-990/"
   },
   "MYS VII: 1188": {
     "preface": undefined,
@@ -192,6 +201,15 @@ export const poems: Record<string, Poem> = {
     "author": undefined,
     "source": "wakapoetry",
     "url": "http://www.wakapoetry.net/mys-vii-1412/"
+  },
+  "MYS VIII: 1418": {
+    "preface": "A poem composed by Prince Shiki.",
+    "japanese": "石走る垂水の上のさわらびの萌え出づる春になりにけるかも",
+    "romaji": "ipabasiru\ntarumi no upe no\nsawarabi no\nmoeiduru paru ni\nnarinikeru kamo",
+    "english": "Rock-running,\nThe cataracts, and beside them\nFlower-fern\nHas put forth shoots: spring\nIs here, indeed!",
+    "author": "Prince Shiki (? &#8211; 716)志貴皇子",
+    "source": "wakapoetry",
+    "url": "http://www.wakapoetry.net/mys-viii-1418/"
   },
   "MYS X: 1869": {
     "preface": "Composed on blossom.",
@@ -247,6 +265,15 @@ export const poems: Record<string, Poem> = {
     "source": "wakapoetry",
     "url": "http://www.wakapoetry.net/mys-xix-4291/"
   },
+  "MYS XVII: 3890": {
+    "preface": "In the winter, Eleventh Month, 2nd year of Tempyō, the Governor-General of the Dazifu, Lord Ōtomo, was made a Major Councillor concurrently with his position as Governor-General; on his return to the capital, his retainers set sail and returned to the capital with him. Here are ten poems they composed in their sensitivity, suffering from the hardships of the journey.",
+    "japanese": "我が背子を吾が松原よ見わたせば海人娘子ども玉藻刈る見ゆ",
+    "romaji": "wa ga seko wo\na ga matubara yo\nmiwataseba\namawotömedömo\ntamamo karu miyu",
+    "english": "My friend,\nI pine and from this field\nGaze out upon\nThe diver girls\nSeeing them cutting jewelled seaweed.",
+    "author": "The above poem is by Isomori, Lord Mino.",
+    "source": "wakapoetry",
+    "url": "http://www.wakapoetry.net/mys-xvii-3890/"
+  },
   "MYS XVI: 3791": {
     "preface": "In ancient times, there was an old man. His name was Bamboo Cutting Ancient (takatori no okina). In the Third Month, this old man climbed a hill to gaze into the distance, whereupon he suddenly came upon nine maidens brewing fresh greens. Their beauty was beyond description, with faces fairer by far than flowers. The maidens called mockingly to the old man, “Come here, old fellow! Blow on our fire!” “Oho!” said the Old Man, and slowly made his way up to them, arriving close by in due course. After a while, the Maidens said to one another, laughing, “Who called this old man here?” The Bamboo Cutting Ancient replied quickly, “Unintentionally have I encountered divinity. In my confused heart, I had no ill intent. Let me pay for the sin of approaching too closely with a poem.” This is the poem he promptly composed.",
     "japanese": "みどり子の　若子髪には　たらちし　母に抱かえ　ひむつきの　稚児が髪には　木綿肩衣　純裏に縫ひ着　頚つきの　童髪には　結ひはたの　袖つけ衣　着し我れを　丹よれる　子らがよちには　蜷の腸　か黒し髪を　ま櫛持ち　ここにかき垂れ　取り束ね　上げても巻きみ　解き乱り　童になしみ　さ丹つかふ　色になつける　紫の　大綾の衣　住吉の　遠里小野の　ま榛持ち　にほほし衣に　高麗錦　紐に縫ひつけ　刺部重部　なみ重ね着て　打麻やし　麻績の子ら　あり衣の　財の子らが　打ちし栲　延へて織る布　日さらしの　麻手作りを　信巾裳成者之寸丹取為支屋所経　稲置娘子が　妻どふと　我れにおこせし　彼方の　二綾下沓　飛ぶ鳥　明日香壮士が　長雨禁へ　縫ひし黒沓　さし履きて　庭にたたずみ　退けな立ち　禁娘子が　ほの聞きて　我れにおこせし　水縹の　絹の帯を　引き帯なす　韓帯に取らせ　わたつみの　殿の甍に　飛び翔ける　すがるのごとき　腰細に　取り装ほひ　まそ鏡　取り並め懸けて　おのが顔　かへらひ見つつ　春さりて　野辺を廻れば　おもしろみ　我れを思へか　さ野つ鳥　来鳴き翔らふ　秋さりて　山辺を行けば　なつかしと　我れを思へか　天雲も　行きたなびく　かへり立ち　道を来れば　うちひさす　宮女　さす竹の　舎人壮士も　忍ぶらひ　かへらひ見つつ　誰が子ぞとや　思はえてある　如是所為故為　いにしへ　ささきし我れや　はしきやし　今日やも子らに　いさにとや　思はえてある　如是所為故為　いにしへの　賢しき人も　後の世の　鑑にせむと　老人を　送りし車　持ち帰りけり　持ち帰りけり",
@@ -265,15 +292,6 @@ export const poems: Record<string, Poem> = {
     "source": "wakapoetry",
     "url": "http://www.wakapoetry.net/mys-xvi-3834/"
   },
-  "MYS XVII: 3890": {
-    "preface": "In the winter, Eleventh Month, 2nd year of Tempyō, the Governor-General of the Dazifu, Lord Ōtomo, was made a Major Councillor concurrently with his position as Governor-General; on his return to the capital, his retainers set sail and returned to the capital with him. Here are ten poems they composed in their sensitivity, suffering from the hardships of the journey.",
-    "japanese": "我が背子を吾が松原よ見わたせば海人娘子ども玉藻刈る見ゆ",
-    "romaji": "wa ga seko wo\na ga matubara yo\nmiwataseba\namawotömedömo\ntamamo karu miyu",
-    "english": "My friend,\nI pine and from this field\nGaze out upon\nThe diver girls\nSeeing them cutting jewelled seaweed.",
-    "author": "The above poem is by Isomori, Lord Mino.",
-    "source": "wakapoetry",
-    "url": "http://www.wakapoetry.net/mys-xvii-3890/"
-  },
   "MYS XVII: 3899": {
     "preface": undefined,
     "japanese": "海人娘子漁り焚く火のおぼほしく角の松原思ほゆるかも",
@@ -283,19 +301,13 @@ export const poems: Record<string, Poem> = {
     "source": "wakapoetry",
     "url": "http://www.wakapoetry.net/mys-xvii-3899/"
   },
-  "MYS VI: 1042": {
-    "english": "Ikuji to drink under a pine-tree.\n\no solitary pine, how many\n\nGenerations of man have you known ?\n\nIs it because of your great age\n\nThat the passing winds sing in so clear a tone ?\n\nPrince Nagaya",
-    "source": "ngs",
-    "url": "https://archive.org/details/Manyoshu"
-  },
-  "MYS XVII: 3942": {
-    "english": "X HE P me bloom, though you\noverlook it\n\nAmong the mass of blossoms,\nBlows now in vain.\n\nOtomo Tabito",
-    "source": "ngs",
-    "url": "https://archive.org/details/Manyoshu"
-  },
-  "MYS XI: 2653": {
-    "english": "hoofs,\n\nI rush out under the pine and look,\n\nHoping it may be you.",
-    "source": "ngs",
-    "url": "https://archive.org/details/Manyoshu"
+  "MYS XX: 4431": {
+    "preface": undefined,
+    "japanese": "佐左賀波乃　佐也久志毛用尓　奈奈弁加流　去呂毛尓麻世流　古侶賀波太波毛",
+    "romaji": "sasa ga pa nö\nsayagu simo yo ni\nnana pe karu\nkörömo ni maseru\nkörö ga pada pa mo",
+    "english": "The leaves of bamboo grass\nRustle on this frosty night;\nWearing sevenfold\nGarments cannot compare\nTo my darling&#8217;s skin.",
+    "author": "笹が葉のさやぐ霜夜に七重着る衣に增せる子ろが肌はも",
+    "source": "wakapoetry",
+    "url": "http://www.wakapoetry.net/mys-xx-4431/"
   }
 };
