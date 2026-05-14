@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import gardenMap from "@/assets/garden-map.jpg";
+import gardenMap from "@/assets/garden-map.svg";
 import { plants as initialPlants, manyoshuUrl, type Plant } from "@/data/plants";
 import { poems } from "@/data/poems";
 import {
