@@ -77,9 +77,9 @@ function Index() {
         </p>
       </header>
 
-      <div className="grid gap-6 px-4 py-6 md:px-10 lg:grid-cols-[1fr_320px]">
+      <div className="grid gap-10 px-6 py-10 md:px-16 md:py-14 lg:grid-cols-[1fr_320px] lg:gap-12">
         {/* Map */}
-        <div className="relative overflow-hidden rounded-md border border-border bg-card shadow-sm">
+        <div className="relative overflow-hidden rounded-md border border-border bg-card p-6 shadow-sm md:p-10">
           <div className="relative" ref={mapRef}>
             <img
               src={gardenMap}
