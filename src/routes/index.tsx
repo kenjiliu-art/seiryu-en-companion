@@ -37,9 +37,9 @@ function plantCategory(p: Plant): PlantCategory {
   return "none";
 }
 function categoryDotClass(c: PlantCategory): string {
-  if (c === "manyoshu") return "bg-emerald-600";
-  if (c === "substitute") return "bg-amber-500";
-  return "bg-muted-foreground";
+  if (c === "manyoshu") return "bg-emerald-500 border-emerald-800";
+  if (c === "substitute") return "bg-amber-500 border-amber-800";
+  return "bg-slate-400 border-slate-700";
 }
 
 function ZoomControls() {
