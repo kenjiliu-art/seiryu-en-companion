@@ -1,0 +1,43 @@
+// Wikipedia article slugs for each plant id. The PlantThumb component
+// fetches Wikipedia's REST summary endpoint at runtime, which returns a
+// CC-BY-SA / public-domain thumbnail (sourced from Wikimedia Commons).
+// If a slug is missing or the article has no lead image, the component
+// falls back to a category-colored placeholder.
+export const plantWiki: Record<string, string> = {
+  "black-pine": "Pinus_thunbergii",
+  "flowering-cherry": "Prunus_serrulata",
+  "wisteria": "Wisteria_floribunda",
+  "azalea": "Azalea",
+  "japanese-camellia": "Camellia_japonica",
+  "sasanqua-camellia": "Camellia_sasanqua",
+  "japanese-magnolia": "Magnolia_liliiflora",
+  "japanese-maple": "Acer_palmatum",
+  "madake-bamboo": "Phyllostachys_bambusoides",
+  "golden-bamboo": "Phyllostachys_aurea",
+  "broad-leaf-bamboo": "Sasa_(plant)",
+  "camphor": "Cinnamomum_camphora",
+  "crape-myrtle": "Lagerstroemia",
+  "fortnight-lily": "Dietes_iridioides",
+  "dwarf-mondo": "Ophiopogon_japonicus",
+  "evergreen-pear": "Pyrus_kawakamii",
+  "miniature-juniper": "Juniperus_procumbens",
+  "japanese-holly": "Ilex_crenata",
+  "japanese-pittosporum": "Pittosporum_tobira",
+  "japanese-elm": "Ulmus_davidiana",
+  "donated-persimmon": "Diospyros_kaki",
+  "baran": "Aspidistra_elatior",
+  "leather-fern": "Rumohra_adiantiformis",
+  "cedar": "Cedrus",
+  "false-heather": "Cuphea_hyssopifolia",
+  "sprenger-asparagus": "Asparagus_aethiopicus",
+  "pomegranate": "Pomegranate",
+  "heavenly-bamboo": "Nandina",
+  "redwood": "Sequoia_sempervirens",
+  "indian-hawthorne": "Rhaphiolepis_indica",
+  "lilyturf": "Liriope_spicata",
+  "creeping-periwinkle": "Vinca_minor",
+  "old-gold-juniper": "Juniperus_×_pfitzeriana",
+  "golden-rain-tree": "Koelreuteria_paniculata",
+  "victorian-box": "Pittosporum_undulatum",
+  "dwarf-sacred-bamboo": "Nandina",
+};
