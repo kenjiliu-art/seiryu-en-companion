@@ -332,6 +332,139 @@ export const plants: Plant[] = [
     substitute: true,
     x: 48.1, y: 76.7,
   },
+  {
+    id: "cedar",
+    name: "Cedar",
+    japanese: "杉",
+    romaji: "Sugi",
+    scientific: "Cedrus spp.",
+    description:
+      "A towering evergreen used widely in Japanese landscapes and temple architecture. The fragrant wood is prized for construction, sake barrels, and incense.",
+    categoryRefs: {
+      label: "Cedar (sugi, 杉)",
+      refs: [
+        "MYS III: 257", "MYS III: 259", "MYS III: 422",
+        "MYS VI: 1042",
+        "MYS VII: 1403",
+        "MYS IX: 1773",
+        "MYS X: 1922", "MYS X: 2192",
+        "MYS XI: 2488", "MYS XI: 2638",
+        "MYS XIII: 3228", "MYS XIII: 3229",
+      ],
+    },
+    links: [{ label: "All sugi (cedar) poems", url: "http://www.wakapoetry.net/tag/sugi/" }],
+    x: 5, y: 5,
+  },
+  {
+    id: "false-heather",
+    name: "False Heather",
+    scientific: "Cuphea hyssopifolia",
+    description:
+      "A low-growing Mexican shrub with tiny lavender flowers, used here as a tidy evergreen groundcover well suited to the Los Angeles climate.",
+    substitute: true,
+    x: 10, y: 5,
+  },
+  {
+    id: "sprenger-asparagus",
+    name: "Sprenger Asparagus",
+    scientific: "Asparagus densiflorus 'Sprengeri'",
+    description:
+      "A South African ornamental with arching, feathery foliage. Used as a soft textural groundcover; not native to Japan.",
+    substitute: true,
+    x: 15, y: 5,
+  },
+  {
+    id: "pomegranate",
+    name: "Pomegranate",
+    romaji: "Zakuro",
+    scientific: "Punica granatum",
+    description:
+      "Introduced to Japan from the Asian mainland after the Man'yōshū era. Valued for its brilliant orange blossoms, ornamental fruit, and use in bonsai.",
+    x: 20, y: 5,
+  },
+  {
+    id: "heavenly-bamboo",
+    name: "Heavenly Bamboo",
+    romaji: "Nanten",
+    scientific: "Nandina domestica",
+    description:
+      "Despite its name, not a true bamboo. Long planted near Japanese entryways for its red winter berries and the auspicious sound of its name (nan-ten, 'turning misfortune').",
+    x: 25, y: 5,
+  },
+  {
+    id: "redwood",
+    name: "Coast Redwood",
+    scientific: "Sequoia sempervirens",
+    description:
+      "A California native used here as a tall evergreen backdrop, echoing the role cedar (sugi) plays in Japanese gardens.",
+    substitute: true,
+    x: 30, y: 5,
+  },
+  {
+    id: "indian-hawthorne",
+    name: "Indian Hawthorn",
+    scientific: "Rhaphiolepis indica",
+    description:
+      "A compact evergreen shrub with pink-white spring blossoms. A reliable Southern California stand-in for Japanese flowering shrubs.",
+    substitute: true,
+    x: 35, y: 5,
+  },
+  {
+    id: "lilyturf",
+    name: "Lilyturf",
+    scientific: "Liriope spicata",
+    description:
+      "A grass-like groundcover with slender purple flower spikes. Often used in Japanese gardens to soften path edges and stones.",
+    x: 40, y: 5,
+  },
+  {
+    id: "creeping-periwinkle",
+    name: "Creeping Periwinkle",
+    scientific: "Vinca minor",
+    description:
+      "A trailing evergreen groundcover with violet-blue flowers, used here in place of native Japanese groundcovers for its drought tolerance.",
+    substitute: true,
+    x: 45, y: 5,
+  },
+  {
+    id: "old-gold-juniper",
+    name: "Juniper 'Old Gold'",
+    scientific: "Juniperus × pfitzeriana 'Old Gold'",
+    description:
+      "A spreading juniper with golden-yellow new growth, used as ornamental low cover. A cultivated variety of the broader juniper family found in the Man'yōshū.",
+    categoryRefs: {
+      label: "Juniper (muro, 室)",
+      refs: ["MYS III: 446"],
+    },
+    substitute: true,
+    x: 50, y: 5,
+  },
+  {
+    id: "golden-rain-tree",
+    name: "Golden Rain Tree",
+    scientific: "Koelreuteria paniculata",
+    description:
+      "A small deciduous tree with cascading yellow summer flowers followed by papery lantern-shaped seed pods.",
+    x: 55, y: 5,
+  },
+  {
+    id: "victorian-box",
+    name: "Victorian Box",
+    scientific: "Pittosporum undulatum",
+    description:
+      "An Australian evergreen tree with fragrant cream flowers, used as a screening tree in this Los Angeles adaptation of a Japanese garden.",
+    substitute: true,
+    x: 60, y: 5,
+  },
+  {
+    id: "dwarf-sacred-bamboo",
+    name: "Dwarf Sacred Bamboo",
+    romaji: "Otafuku Nanten",
+    scientific: "Nandina domestica 'Nana'",
+    description:
+      "A compact cultivar of heavenly bamboo, prized for its dense mounding habit and crimson winter foliage. Planted as a low accent at path edges.",
+    x: 65, y: 5,
+  },
 ];
 
 /** "MYS X: 1869" → "http://www.wakapoetry.net/mys-x-1869/" */
