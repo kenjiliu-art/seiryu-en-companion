@@ -186,7 +186,10 @@ function Index() {
               </button>
               );
             })}
+              </div>
+            </div>
           </div>
+
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-border/60 px-4 py-3 text-xs text-muted-foreground">
             <label className="flex items-center gap-2 cursor-pointer">
               <input
