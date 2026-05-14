@@ -297,6 +297,7 @@ function Index() {
                         {p.scientific && <span>· {p.scientific}</span>}
                       </span>
                     )}
+                    </span>
                   </button>
                 </li>
               ))}
