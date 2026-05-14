@@ -5,7 +5,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
   DialogDescription,
 } from "@/components/ui/dialog";
 import {
@@ -27,20 +26,67 @@ import img08 from "@/assets/construction/08.jpg";
 import img09 from "@/assets/construction/09.jpg";
 import img10 from "@/assets/construction/10.jpg";
 
-const photos = [
-  { src: img01, caption: "Volunteers shaping the stream channel by hand" },
-  { src: img02, caption: "Setting boulders and planting along the upper slope" },
-  { src: img03, caption: "Truck delivering fill to the future garden site" },
-  { src: img04, caption: "Grading the basin beneath the JACCC plaza" },
-  { src: img05, caption: "Boulder placement along the dry stream bed" },
-  { src: img06, caption: "Selecting stones at the quarry" },
-  { src: img07, caption: "Crew lifting a stone into place" },
-  { src: img08, caption: "Stone arrangement nearing completion" },
-  { src: img09, caption: "Mid-construction view of the boulder work" },
-  { src: img10, caption: "The volunteer crew, on site" },
+type Photo = { src: string; caption: string };
+
+const ALL: Record<string, Photo> = {
+  "01": { src: img01, caption: "Volunteers shaping the stream channel by hand" },
+  "02": { src: img02, caption: "Setting boulders and planting along the upper slope" },
+  "03": { src: img03, caption: "Truck delivering fill to the future garden site" },
+  "04": { src: img04, caption: "Grading the basin beneath the JACCC plaza" },
+  "05": { src: img05, caption: "Boulder placement along the dry stream bed" },
+  "06": { src: img06, caption: "Selecting stones at the quarry" },
+  "07": { src: img07, caption: "Crew lifting a stone into place" },
+  "08": { src: img08, caption: "Stone arrangement nearing completion" },
+  "09": { src: img09, caption: "Mid-construction view of the boulder work" },
+  "10": { src: img10, caption: "The volunteer crew, on site" },
+};
+
+export type ConstructionPinSpec = {
+  id: string;
+  x: number; // % of map width
+  y: number; // % of map height
+  title: string;
+  description: string;
+  photos: string[]; // keys into ALL
+};
+
+export const constructionPins: ConstructionPinSpec[] = [
+  {
+    id: "site-prep",
+    x: 78,
+    y: 12,
+    title: "Site preparation",
+    description: "Trucks delivering fill and grading the basin beneath the JACCC plaza, 1979.",
+    photos: ["03", "04"],
+  },
+  {
+    id: "stream",
+    x: 48,
+    y: 50,
+    title: "Stream &amp; basin",
+    description: "Hand-shaping the dry stream channel and the central basin.",
+    photos: ["01", "02"],
+  },
+  {
+    id: "boulders",
+    x: 22,
+    y: 72,
+    title: "Boulder placement",
+    description: "Selecting stones at the quarry and setting them along the lower slope.",
+    photos: ["06", "05", "07", "08", "09"],
+  },
+  {
+    id: "crew",
+    x: 88,
+    y: 88,
+    title: "The volunteer crew",
+    description: "On-site portrait of the volunteers who built the garden.",
+    photos: ["10"],
+  },
 ];
 
-export function ConstructionGallery() {
+export function ConstructionPin({ pin }: { pin: ConstructionPinSpec }) {
+  const [open, setOpen] = useState(false);
   const [api, setApi] = useState<CarouselApi | null>(null);
   const [current, setCurrent] = useState(0);
 
@@ -54,56 +100,71 @@ export function ConstructionGallery() {
     };
   }, [api]);
 
-  return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <button className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background px-4 py-2 text-xs font-medium text-foreground shadow-sm transition-colors hover:bg-accent">
-          <Camera className="h-3.5 w-3.5" aria-hidden />
-          Behind the scenes
-        </button>
-      </DialogTrigger>
-      <DialogContent className="max-w-4xl border-stone-200/60 bg-background p-0 sm:max-w-4xl">
-        <DialogHeader className="px-6 pt-6">
-          <DialogTitle className="font-serif text-2xl">
-            Building the garden, 1979
-          </DialogTitle>
-          <DialogDescription>
-            Photos from the construction of the James Irvine Japanese Garden by
-            volunteers and Takeo Uesugi&apos;s crew.
-          </DialogDescription>
-        </DialogHeader>
+  const photos = pin.photos.map((k) => ALL[k]);
 
-        <div className="px-12 pb-6 pt-2">
-          <Carousel setApi={setApi} opts={{ loop: true }}>
-            <CarouselContent>
-              {photos.map((photo, i) => (
-                <CarouselItem key={i}>
-                  <figure className="flex flex-col items-center gap-3">
-                    <div className="flex h-[60vh] w-full items-center justify-center overflow-hidden rounded-sm bg-stone-100">
-                      <img
-                        src={photo.src}
-                        alt={photo.caption}
-                        className="max-h-full max-w-full object-contain"
-                        loading="lazy"
-                      />
-                    </div>
-                    <figcaption className="text-center text-xs text-muted-foreground">
-                      {photo.caption}{" "}
-                      <span className="ml-2 tabular-nums opacity-60">
-                        {i + 1} / {photos.length}
-                      </span>
-                    </figcaption>
-                  </figure>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="-left-10" />
-            <CarouselNext className="-right-10" />
-          </Carousel>
-          {/* hidden but referenced to satisfy linter for current */}
-          <span className="sr-only">Slide {current + 1}</span>
-        </div>
-      </DialogContent>
-    </Dialog>
+  return (
+    <>
+      <button
+        onClick={() => setOpen(true)}
+        style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
+        className="group absolute z-20 -translate-x-1/2 -translate-y-1/2"
+        aria-label={`Construction photos: ${pin.title}`}
+      >
+        <span className="relative flex h-7 w-7 items-center justify-center">
+          <span className="absolute inset-0 rounded-full border border-stone-700/40 bg-stone-50/90 shadow-sm transition-transform duration-300 group-hover:scale-125" />
+          <Camera className="relative h-3.5 w-3.5 text-stone-700" aria-hidden />
+        </span>
+        <span className="pointer-events-none absolute left-1/2 top-full z-10 mt-1.5 hidden -translate-x-1/2 whitespace-nowrap rounded bg-foreground px-2 py-0.5 text-[10px] uppercase tracking-wider text-background shadow-lg group-hover:block">
+          {pin.title.replace(/&amp;/g, "&")} · {photos.length}
+        </span>
+      </button>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-w-3xl border-stone-200/60 bg-background p-0 sm:max-w-3xl">
+          <DialogHeader className="px-6 pt-6">
+            <DialogTitle
+              className="font-serif text-2xl"
+              dangerouslySetInnerHTML={{ __html: pin.title }}
+            />
+            <DialogDescription>{pin.description}</DialogDescription>
+          </DialogHeader>
+          <div className={photos.length > 1 ? "px-12 pb-6 pt-2" : "px-6 pb-6 pt-2"}>
+            <Carousel setApi={setApi} opts={{ loop: true }}>
+              <CarouselContent>
+                {photos.map((photo, i) => (
+                  <CarouselItem key={i}>
+                    <figure className="flex flex-col items-center gap-3">
+                      <div className="flex h-[55vh] w-full items-center justify-center overflow-hidden rounded-sm bg-stone-100">
+                        <img
+                          src={photo.src}
+                          alt={photo.caption}
+                          className="max-h-full max-w-full object-contain"
+                          loading="lazy"
+                        />
+                      </div>
+                      <figcaption className="text-center text-xs text-muted-foreground">
+                        {photo.caption}
+                        {photos.length > 1 && (
+                          <span className="ml-2 tabular-nums opacity-60">
+                            {i + 1} / {photos.length}
+                          </span>
+                        )}
+                      </figcaption>
+                    </figure>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              {photos.length > 1 && (
+                <>
+                  <CarouselPrevious className="-left-10" />
+                  <CarouselNext className="-right-10" />
+                </>
+              )}
+            </Carousel>
+            <span className="sr-only">Slide {current + 1}</span>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
