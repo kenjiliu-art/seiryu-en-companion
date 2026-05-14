@@ -13,7 +13,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { PlantThumb } from "@/components/PlantThumb";
 import { ConstructionPin, defaultConstructionPins, type ConstructionPinSpec } from "@/components/ConstructionGallery";
-import { Volume2, Square, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -452,12 +452,9 @@ function RefsSection({
               >
                 <header className="flex items-baseline justify-between gap-2">
                   <span className="text-xs font-semibold text-accent">{ref}</span>
-                  <div className="flex items-center gap-2">
-                    <SpeakButton english={poem.english} />
-                    <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                      {poem.source === "wakapoetry" ? "trans. McAuley" : "trans. NGS 1940"}
-                    </span>
-                  </div>
+                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                    {poem.source === "wakapoetry" ? "trans. McAuley" : "trans. NGS 1940"}
+                  </span>
                 </header>
                 {poem.preface && (
                   <p className="mt-1 text-[11px] italic text-muted-foreground">
