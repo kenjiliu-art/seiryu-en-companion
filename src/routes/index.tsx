@@ -26,6 +26,20 @@ export const Route = createFileRoute("/")({
   }),
 });
 
+type PlantCategory = "manyoshu" | "substitute" | "none";
+function plantCategory(p: Plant): PlantCategory {
+  // A plant counts as "in the Man'yōshū" only when it's the actual species
+  // referenced (specific poems AND not flagged as a SoCal substitute).
+  if (p.manyoshu && !p.substitute) return "manyoshu";
+  if (p.substitute || p.categoryRefs) return "substitute";
+  return "none";
+}
+function categoryDotClass(c: PlantCategory): string {
+  if (c === "manyoshu") return "bg-primary";
+  if (c === "substitute") return "bg-amber-500";
+  return "bg-muted-foreground";
+}
+
 function Index() {
   const [active, setActive] = useState<Plant | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
@@ -87,7 +101,9 @@ function Index() {
               className="block w-full select-none"
               draggable={false}
             />
-            {plants.map((p) => (
+            {plants.map((p) => {
+              const category = plantCategory(p);
+              return (
               <button
                 key={p.id}
                 onClick={() => !editMode && setActive(p)}
@@ -104,9 +120,9 @@ function Index() {
                 aria-label={p.name}
               >
                 <span
-                  className={`block h-3 w-3 rounded-full border-2 border-primary-foreground bg-primary shadow-md transition-transform ${
+                  className={`block h-3 w-3 rounded-full border-2 border-primary-foreground shadow-md transition-transform ${categoryDotClass(category)} ${
                     hovered === p.id || dragId === p.id ? "scale-150" : "group-hover:scale-125"
-                  } ${p.manyoshu ? "ring-2 ring-accent/60" : p.categoryRefs ? "ring-2 ring-accent/30" : ""}`}
+                  }`}
                 />
                 {(hovered === p.id || dragId === p.id) && (
                   <span className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded bg-foreground px-2 py-1 text-xs text-background shadow-lg">
@@ -114,7 +130,8 @@ function Index() {
                   </span>
                 )}
               </button>
-            ))}
+              );
+            })}
           </div>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-border/60 px-4 py-3 text-xs text-muted-foreground">
             <label className="flex items-center gap-2 cursor-pointer">
@@ -134,16 +151,16 @@ function Index() {
               </button>
             )}
             <span className="flex items-center gap-2">
-              <span className="block h-3 w-3 rounded-full border-2 border-primary-foreground bg-primary ring-2 ring-accent/60" />
-              Plant referenced in the Man&apos;yōshū
+              <span className="block h-3 w-3 rounded-full border-2 border-primary-foreground bg-primary shadow-sm" />
+              In the Man&apos;yōshū
             </span>
             <span className="flex items-center gap-2">
-              <span className="block h-3 w-3 rounded-full border-2 border-primary-foreground bg-primary" />
-              Garden plant
+              <span className="block h-3 w-3 rounded-full border-2 border-primary-foreground bg-amber-500 shadow-sm" />
+              SoCal substitute / general match
             </span>
             <span className="flex items-center gap-2">
-              <span className="rounded-full border border-dashed border-muted-foreground/40 px-1.5 py-0.5 text-[10px] uppercase tracking-wider">LA sub</span>
-              Substituted for SoCal climate
+              <span className="block h-3 w-3 rounded-full border-2 border-primary-foreground bg-muted-foreground shadow-sm" />
+              Not in the Man&apos;yōshū
             </span>
           </div>
         </div>
