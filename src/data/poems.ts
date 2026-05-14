@@ -1,7 +1,4 @@
 // Auto-generated. Inline English translations of cited Man'yōshū poems.
-// Sources:
-//   - wakapoetry.net (Thomas McAuley translations)
-//   - The Manyōshū (Nippon Gakujutsu Shinkōkai, 1940/1965 ed.) via archive.org
 export type Poem = {
   preface?: string;
   japanese?: string;
@@ -13,6 +10,15 @@ export type Poem = {
 };
 
 export const poems: Record<string, Poem> = {
+  "MYS I: 65": {
+    "preface": "A poem composed by Prince Naga, on the occasion of a visit to the Naniwa Palace in Kyōun 3 [707].",
+    "japanese": "霰打　安良礼松原　住吉之　弟日娘与　見礼常不飽香聞",
+    "romaji": "arare utu\nararematubara\nsumiyosi no\notoiwotome to\nmiredo akanu kamo",
+    "english": "Hail strikes\nArarematsubara\nIn Sumiyoshi\nA pleasure girl\nI see, yet cannot get my fill.",
+    "author": "Prince Naga (?-715)長皇子",
+    "source": "wakapoetry",
+    "url": "http://www.wakapoetry.net/mys-i-65/"
+  },
   "MYS I: 54": {
     "preface": "A poem composed on the occasion of a vist to the province of Kii by His Majesty, the Retired Emperor, in the first year of Taihō (701).",
     "japanese": "巨勢山乃　列々椿　都良々々尓　見乍思奈　許湍乃春野乎",
@@ -30,15 +36,6 @@ export const poems: Record<string, Poem> = {
     "author": "Prince Kawashima川島皇子",
     "source": "wakapoetry",
     "url": "http://www.wakapoetry.net/mys-i-34/"
-  },
-  "MYS I: 65": {
-    "preface": "A poem composed by Prince Naga, on the occasion of a visit to the Naniwa Palace in Kyōun 3 [707].",
-    "japanese": "霰打　安良礼松原　住吉之　弟日娘与　見礼常不飽香聞",
-    "romaji": "arare utu\nararematubara\nsumiyosi no\notoiwotome to\nmiredo akanu kamo",
-    "english": "Hail strikes\nArarematsubara\nIn Sumiyoshi\nA pleasure girl\nI see, yet cannot get my fill.",
-    "author": "Prince Naga (?-715)長皇子",
-    "source": "wakapoetry",
-    "url": "http://www.wakapoetry.net/mys-i-65/"
   },
   "MYS I: 63": {
     "preface": "A poem Yamanoe no Okura composed when in China, and thinking of home.",
@@ -67,6 +64,24 @@ export const poems: Record<string, Poem> = {
     "source": "wakapoetry",
     "url": "http://www.wakapoetry.net/mys-ii-143/"
   },
+  "MYS II: 133": {
+    "preface": undefined,
+    "japanese": "笹の葉はみ山もさやにさやげども我れは妹思ふ別れ來ぬれば",
+    "romaji": "sasa nö pa pa\nmi yama mo saya ni\nsayagedömo\nware pa imo omopu\nwakarekonureba",
+    "english": "The leaves of bamboo grass\nAll o&#8217;er the mount with silken\nRustles sound, yet\nI dream of my darling,\nFor I am parted from her.",
+    "author": undefined,
+    "source": "wakapoetry",
+    "url": "http://www.wakapoetry.net/mys-ii-133/"
+  },
+  "MYS II: 146": {
+    "preface": "A poem composed on the occasion of the Imperial visit to the province of Ki in the first year of Taihō [701].",
+    "japanese": "後見むと君が結べる磐代の小松がうれをまたも見むかも",
+    "romaji": "noti mimu to\nkimi ga musuberu\nipasiro no\nkomatu ga ure wo\nmata mo mimu kamo",
+    "english": "Thinking to see it more\nThe Prince did tie\nAt Iwashiro\nPine saplings’ tips &#8211;\nI wonder, will he see them more…",
+    "author": "This poem appears in the Kakinonomoto no Hitomaro Collection.",
+    "source": "wakapoetry",
+    "url": "http://www.wakapoetry.net/mys-ii-146/"
+  },
   "MYS II: 144": {
     "preface": undefined,
     "japanese": "磐代の野中に立てる結び松心も解けずいにしへ思ほゆ",
@@ -84,15 +99,6 @@ export const poems: Record<string, Poem> = {
     "author": "Yamanoue no Okura",
     "source": "wakapoetry",
     "url": "http://www.wakapoetry.net/mys-ii-145/"
-  },
-  "MYS II: 146": {
-    "preface": "A poem composed on the occasion of the Imperial visit to the province of Ki in the first year of Taihō [701].",
-    "japanese": "後見むと君が結べる磐代の小松がうれをまたも見むかも",
-    "romaji": "noti mimu to\nkimi ga musuberu\nipasiro no\nkomatu ga ure wo\nmata mo mimu kamo",
-    "english": "Thinking to see it more\nThe Prince did tie\nAt Iwashiro\nPine saplings’ tips &#8211;\nI wonder, will he see them more…",
-    "author": "This poem appears in the Kakinonomoto no Hitomaro Collection.",
-    "source": "wakapoetry",
-    "url": "http://www.wakapoetry.net/mys-ii-146/"
   },
   "MYS II: 185": {
     "preface": "[One of] twenty-three poems composed by His Imperial Highness, the Prince&#8217;s guardsmen in their sorrow.",
@@ -121,15 +127,6 @@ export const poems: Record<string, Poem> = {
     "source": "wakapoetry",
     "url": "http://www.wakapoetry.net/mys-ii-217/"
   },
-  "MYS II: 133": {
-    "preface": undefined,
-    "japanese": "笹の葉はみ山もさやにさやげども我れは妹思ふ別れ來ぬれば",
-    "romaji": "sasa nö pa pa\nmi yama mo saya ni\nsayagedömo\nware pa imo omopu\nwakarekonureba",
-    "english": "The leaves of bamboo grass\nAll o&#8217;er the mount with silken\nRustles sound, yet\nI dream of my darling,\nFor I am parted from her.",
-    "author": undefined,
-    "source": "wakapoetry",
-    "url": "http://www.wakapoetry.net/mys-ii-133/"
-  },
   "MYS III: 257": {
     "preface": "A poem on Mount Kagu by Kamo no Taruhito.",
     "japanese": "天之芳来山　霞立　春尓至婆　松風尓　池浪立而　櫻花　木乃晩茂尓　奥邊波　鴨妻喚　邊津方尓　味村左和伎　百礒城之　大宮人乃　退出而　遊船尓波　梶棹毛　無而不樂毛　己具人奈四二",
@@ -138,6 +135,15 @@ export const poems: Record<string, Poem> = {
     "author": undefined,
     "source": "wakapoetry",
     "url": "http://www.wakapoetry.net/mys-iii-257/"
+  },
+  "MYS III: 324": {
+    "preface": "A poem composed Yamabe no Akahito  when he climbed Kamioka.",
+    "japanese": "みもろの　神なび山に　五百枝さし　しじに生ひたる　栂の木の　いや継ぎ継ぎに　玉葛　絶ゆることなく　ありつつも　やまず通はむ　明日香の　古き都は　山高み　川とほしろし　春の日は　山し見がほし　秋の夜は　川しさやけし　朝雲に　鶴は乱れ　夕霧に　かはづは騒く　見るごとに　音のみし泣かゆ　いにしへ思へば",
+    "romaji": "mimoro no\nkamunabi yama ni\niope sasi\nsidi ni opitaru\ntuga no ki no\niya tugitugi ni\ntamakadura\ntayuru koto naku\naritutu mo\nyamazu kayopamu\nasuka no\npuruki miyako pa\nyama takami\nkawa toposirosi\nparu no pi pa\nyama si migaposi\naki no yo pa\nkapa si sayakesi\nasagumo ni\ntadu pa midare\nyupugiri ni\nkawadu wa sawagu\nmiru goto ni\nne nomi si nakayu\ninisie omopeba",
+    "english": "On the sacred\nMountain of the Gods\nWith many branches\nFlourishing grow\nHemlock trees,\nAll and ever joined with\nHydrangea\nNever-ending\nAlways there\nEver would I be\nIn Asuka,\nThe ancient capital, where\nMountains mighty and\nRivers grand do lie, and\nOn spring days\nIt is the mountains I would see;\nOn autumn nights\nThe river, so refreshing!\nAmongst the morning clouds\nThe cranes do swoop and soar;\nThe evening mists\nAre noisy with the frogs;\nThe simple sights\nCall forth my tears\nWhile I think on times gone by…",
+    "author": "Yamabe no Akahito\n山部赤人",
+    "source": "wakapoetry",
+    "url": "http://www.wakapoetry.net/mys-iii-324/"
   },
   "MYS III: 379": {
     "preface": "A poem, with tanka, with which Lady Ōtomo of Sakanoue worships the gods.",
@@ -265,15 +271,6 @@ export const poems: Record<string, Poem> = {
     "source": "wakapoetry",
     "url": "http://www.wakapoetry.net/mys-xix-4291/"
   },
-  "MYS XVII: 3890": {
-    "preface": "In the winter, Eleventh Month, 2nd year of Tempyō, the Governor-General of the Dazifu, Lord Ōtomo, was made a Major Councillor concurrently with his position as Governor-General; on his return to the capital, his retainers set sail and returned to the capital with him. Here are ten poems they composed in their sensitivity, suffering from the hardships of the journey.",
-    "japanese": "我が背子を吾が松原よ見わたせば海人娘子ども玉藻刈る見ゆ",
-    "romaji": "wa ga seko wo\na ga matubara yo\nmiwataseba\namawotömedömo\ntamamo karu miyu",
-    "english": "My friend,\nI pine and from this field\nGaze out upon\nThe diver girls\nSeeing them cutting jewelled seaweed.",
-    "author": "The above poem is by Isomori, Lord Mino.",
-    "source": "wakapoetry",
-    "url": "http://www.wakapoetry.net/mys-xvii-3890/"
-  },
   "MYS XVI: 3791": {
     "preface": "In ancient times, there was an old man. His name was Bamboo Cutting Ancient (takatori no okina). In the Third Month, this old man climbed a hill to gaze into the distance, whereupon he suddenly came upon nine maidens brewing fresh greens. Their beauty was beyond description, with faces fairer by far than flowers. The maidens called mockingly to the old man, “Come here, old fellow! Blow on our fire!” “Oho!” said the Old Man, and slowly made his way up to them, arriving close by in due course. After a while, the Maidens said to one another, laughing, “Who called this old man here?” The Bamboo Cutting Ancient replied quickly, “Unintentionally have I encountered divinity. In my confused heart, I had no ill intent. Let me pay for the sin of approaching too closely with a poem.” This is the poem he promptly composed.",
     "japanese": "みどり子の　若子髪には　たらちし　母に抱かえ　ひむつきの　稚児が髪には　木綿肩衣　純裏に縫ひ着　頚つきの　童髪には　結ひはたの　袖つけ衣　着し我れを　丹よれる　子らがよちには　蜷の腸　か黒し髪を　ま櫛持ち　ここにかき垂れ　取り束ね　上げても巻きみ　解き乱り　童になしみ　さ丹つかふ　色になつける　紫の　大綾の衣　住吉の　遠里小野の　ま榛持ち　にほほし衣に　高麗錦　紐に縫ひつけ　刺部重部　なみ重ね着て　打麻やし　麻績の子ら　あり衣の　財の子らが　打ちし栲　延へて織る布　日さらしの　麻手作りを　信巾裳成者之寸丹取為支屋所経　稲置娘子が　妻どふと　我れにおこせし　彼方の　二綾下沓　飛ぶ鳥　明日香壮士が　長雨禁へ　縫ひし黒沓　さし履きて　庭にたたずみ　退けな立ち　禁娘子が　ほの聞きて　我れにおこせし　水縹の　絹の帯を　引き帯なす　韓帯に取らせ　わたつみの　殿の甍に　飛び翔ける　すがるのごとき　腰細に　取り装ほひ　まそ鏡　取り並め懸けて　おのが顔　かへらひ見つつ　春さりて　野辺を廻れば　おもしろみ　我れを思へか　さ野つ鳥　来鳴き翔らふ　秋さりて　山辺を行けば　なつかしと　我れを思へか　天雲も　行きたなびく　かへり立ち　道を来れば　うちひさす　宮女　さす竹の　舎人壮士も　忍ぶらひ　かへらひ見つつ　誰が子ぞとや　思はえてある　如是所為故為　いにしへ　ささきし我れや　はしきやし　今日やも子らに　いさにとや　思はえてある　如是所為故為　いにしへの　賢しき人も　後の世の　鑑にせむと　老人を　送りし車　持ち帰りけり　持ち帰りけり",
@@ -291,6 +288,15 @@ export const poems: Record<string, Poem> = {
     "author": undefined,
     "source": "wakapoetry",
     "url": "http://www.wakapoetry.net/mys-xvi-3834/"
+  },
+  "MYS XVII: 3890": {
+    "preface": "In the winter, Eleventh Month, 2nd year of Tempyō, the Governor-General of the Dazifu, Lord Ōtomo, was made a Major Councillor concurrently with his position as Governor-General; on his return to the capital, his retainers set sail and returned to the capital with him. Here are ten poems they composed in their sensitivity, suffering from the hardships of the journey.",
+    "japanese": "我が背子を吾が松原よ見わたせば海人娘子ども玉藻刈る見ゆ",
+    "romaji": "wa ga seko wo\na ga matubara yo\nmiwataseba\namawotömedömo\ntamamo karu miyu",
+    "english": "My friend,\nI pine and from this field\nGaze out upon\nThe diver girls\nSeeing them cutting jewelled seaweed.",
+    "author": "The above poem is by Isomori, Lord Mino.",
+    "source": "wakapoetry",
+    "url": "http://www.wakapoetry.net/mys-xvii-3890/"
   },
   "MYS XVII: 3899": {
     "preface": undefined,
