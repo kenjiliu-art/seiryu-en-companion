@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import gardenMap from "@/assets/garden-map.jpg";
 import { plants, manyoshuUrl, type Plant } from "@/data/plants";
+import { poems } from "@/data/poems";
 import {
   Dialog,
   DialogContent,
@@ -161,51 +162,115 @@ function Index() {
 
               <p className="text-sm leading-relaxed">{active.description}</p>
 
-              {active.manyoshu && (
-                <div className="rounded-md border border-border/60 bg-muted/40 p-3">
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-accent">
-                    Man&apos;yōshū Connection · 万葉集
-                  </h3>
-                  <p className="mt-1 text-[11px] text-muted-foreground">
-                    {active.manyoshu.length} poem{active.manyoshu.length === 1 ? "" : "s"} · click any reference to read on wakapoetry.net
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-1.5">
-                    {active.manyoshu.map((ref) => {
-                      const url = manyoshuUrl(ref);
-                      return url ? (
-                        <a
-                          key={ref}
-                          href={url}
-                          target="_blank"
-                          rel="noreferrer noopener"
-                          className="rounded border border-accent/40 bg-background px-2 py-0.5 text-[11px] text-accent hover:bg-accent hover:text-accent-foreground"
-                        >
-                          {ref.replace("MYS ", "")}
-                        </a>
-                      ) : (
-                        <span key={ref} className="px-2 py-0.5 text-[11px] text-muted-foreground">
-                          {ref}
-                        </span>
-                      );
-                    })}
+              {active.manyoshu && (() => {
+                const withText = active.manyoshu.filter((r) => poems[r]);
+                const linksOnly = active.manyoshu.filter((r) => !poems[r]);
+                return (
+                  <div className="rounded-md border border-border/60 bg-muted/40 p-3">
+                    <h3 className="text-xs font-semibold uppercase tracking-wider text-accent">
+                      Man&apos;yōshū Connection · 万葉集
+                    </h3>
+                    <p className="mt-1 text-[11px] text-muted-foreground">
+                      {active.manyoshu.length} poem{active.manyoshu.length === 1 ? "" : "s"} ·{" "}
+                      {withText.length} with translation, {linksOnly.length} link-only
+                    </p>
+
+                    {withText.length > 0 && (
+                      <div className="mt-3 space-y-3">
+                        {withText.map((ref) => {
+                          const poem = poems[ref];
+                          const url = poem.url || manyoshuUrl(ref);
+                          return (
+                            <article
+                              key={ref}
+                              className="rounded border border-border/50 bg-background/60 p-3"
+                            >
+                              <header className="flex items-baseline justify-between gap-2">
+                                <span className="text-xs font-semibold text-accent">
+                                  {ref.replace("MYS ", "MYS ")}
+                                </span>
+                                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                                  {poem.source === "wakapoetry" ? "trans. McAuley" : "trans. NGS 1940"}
+                                </span>
+                              </header>
+                              {poem.preface && (
+                                <p className="mt-1 text-[11px] italic text-muted-foreground">
+                                  {poem.preface}
+                                </p>
+                              )}
+                              {poem.japanese && (
+                                <p className="mt-2 font-serif text-sm leading-relaxed">
+                                  {poem.japanese}
+                                </p>
+                              )}
+                              <pre className="mt-2 whitespace-pre-wrap font-serif text-[13px] leading-relaxed text-foreground">
+                                {poem.english}
+                              </pre>
+                              <footer className="mt-2 flex items-center justify-between gap-2 text-[11px] text-muted-foreground">
+                                {poem.author && <span>— {poem.author}</span>}
+                                {url && (
+                                  <a
+                                    href={url}
+                                    target="_blank"
+                                    rel="noreferrer noopener"
+                                    className="text-accent underline-offset-2 hover:underline"
+                                  >
+                                    source ↗
+                                  </a>
+                                )}
+                              </footer>
+                            </article>
+                          );
+                        })}
+                      </div>
+                    )}
+
+                    {linksOnly.length > 0 && (
+                      <div className="mt-3">
+                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                          Read on wakapoetry.net
+                        </p>
+                        <div className="mt-1.5 flex flex-wrap gap-1.5">
+                          {linksOnly.map((ref) => {
+                            const url = manyoshuUrl(ref);
+                            return url ? (
+                              <a
+                                key={ref}
+                                href={url}
+                                target="_blank"
+                                rel="noreferrer noopener"
+                                className="rounded border border-accent/40 bg-background px-2 py-0.5 text-[11px] text-accent hover:bg-accent hover:text-accent-foreground"
+                              >
+                                {ref.replace("MYS ", "")}
+                              </a>
+                            ) : (
+                              <span key={ref} className="px-2 py-0.5 text-[11px] text-muted-foreground">
+                                {ref}
+                              </span>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+
+                    {active.links && active.links.length > 0 && (
+                      <div className="mt-3 flex flex-wrap gap-2 border-t border-border/40 pt-3">
+                        {active.links.map((l) => (
+                          <a
+                            key={l.url}
+                            href={l.url}
+                            target="_blank"
+                            rel="noreferrer noopener"
+                            className="text-xs text-accent underline-offset-2 hover:underline"
+                          >
+                            {l.label} ↗
+                          </a>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                  {active.links && active.links.length > 0 && (
-                    <div className="mt-3 flex flex-wrap gap-2 border-t border-border/40 pt-3">
-                      {active.links.map((l) => (
-                        <a
-                          key={l.url}
-                          href={l.url}
-                          target="_blank"
-                          rel="noreferrer noopener"
-                          className="text-xs text-accent underline-offset-2 hover:underline"
-                        >
-                          {l.label} ↗
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
+                );
+              })()}
             </>
           )}
         </DialogContent>
