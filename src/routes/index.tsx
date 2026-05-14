@@ -124,6 +124,14 @@ function Index() {
                           general
                         </span>
                       )}
+                      {p.substitute && (
+                        <span
+                          title="Substituted for the original Man'yōshū plant to suit the Los Angeles climate"
+                          className="rounded-full border border-dashed border-muted-foreground/40 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground"
+                        >
+                          LA sub
+                        </span>
+                      )}
                     </span>
                     {(p.japanese || p.romaji || p.scientific) && (
                       <span className="text-xs italic text-muted-foreground">
