@@ -32,6 +32,8 @@ function Index() {
   const [editMode, setEditMode] = useState(false);
   const [plants, setPlants] = useState<Plant[]>(initialPlants);
   const [dragId, setDragId] = useState<string | null>(null);
+  const [mapTx, setMapTx] = useState({ x: 0, y: 0, scale: 1 });
+  const [draggingMap, setDraggingMap] = useState(false);
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -55,10 +57,34 @@ function Index() {
     };
   }, [dragId]);
 
+  // Drag the background map (in edit mode) to align it under the existing hotspots.
+  useEffect(() => {
+    if (!draggingMap) return;
+    const onMove = (e: MouseEvent) => {
+      const el = mapRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      setMapTx((t) => ({
+        ...t,
+        x: t.x + (e.movementX / rect.width) * 100,
+        y: t.y + (e.movementY / rect.height) * 100,
+      }));
+    };
+    const onUp = () => setDraggingMap(false);
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
+  }, [draggingMap]);
+
   const exportCoords = () => {
     const text = plants.map((p) => `  ${p.id}: { x: ${p.x}, y: ${p.y} },`).join("\n");
     navigator.clipboard.writeText(text);
   };
+
+  const resetMap = () => setMapTx({ x: 0, y: 0, scale: 1 });
 
 
   return (
