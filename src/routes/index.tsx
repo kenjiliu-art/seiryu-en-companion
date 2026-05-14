@@ -504,7 +504,7 @@ function RefsSection({
   );
 }
 
-function SpeakButton({ japanese, english }: { japanese?: string; english: string }) {
+function SpeakButton({ english }: { english: string }) {
   const [speaking, setSpeaking] = useState(false);
 
   useEffect(() => {
@@ -520,24 +520,14 @@ function SpeakButton({ japanese, english }: { japanese?: string; english: string
     const synth = window.speechSynthesis;
     synth.cancel();
 
-    const utterances: SpeechSynthesisUtterance[] = [];
-    if (japanese) {
-      const u = new SpeechSynthesisUtterance(japanese);
-      u.lang = "ja-JP";
-      u.rate = 0.85;
-      utterances.push(u);
-    }
-    const e = new SpeechSynthesisUtterance(english);
-    e.lang = "en-US";
-    e.rate = 0.9;
-    utterances.push(e);
-
-    const last = utterances[utterances.length - 1];
-    last.onend = () => setSpeaking(false);
-    last.onerror = () => setSpeaking(false);
+    const u = new SpeechSynthesisUtterance(english);
+    u.lang = "en-US";
+    u.rate = 0.9;
+    u.onend = () => setSpeaking(false);
+    u.onerror = () => setSpeaking(false);
 
     setSpeaking(true);
-    utterances.forEach((u) => synth.speak(u));
+    synth.speak(u);
   };
 
   const stop = () => {
