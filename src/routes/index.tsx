@@ -29,6 +29,37 @@ export const Route = createFileRoute("/")({
 function Index() {
   const [active, setActive] = useState<Plant | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
+  const [editMode, setEditMode] = useState(false);
+  const [plants, setPlants] = useState<Plant[]>(initialPlants);
+  const [dragId, setDragId] = useState<string | null>(null);
+  const mapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!dragId) return;
+    const onMove = (e: MouseEvent) => {
+      const el = mapRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+      const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+      setPlants((prev) =>
+        prev.map((p) => (p.id === dragId ? { ...p, x: +x.toFixed(1), y: +y.toFixed(1) } : p)),
+      );
+    };
+    const onUp = () => setDragId(null);
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
+  }, [dragId]);
+
+  const exportCoords = () => {
+    const text = plants.map((p) => `  ${p.id}: { x: ${p.x}, y: ${p.y} },`).join("\n");
+    navigator.clipboard.writeText(text);
+  };
+
 
   return (
     <main className="min-h-screen bg-background text-foreground">
