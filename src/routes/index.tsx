@@ -98,7 +98,7 @@ function Index() {
             <img
               src={gardenMap}
               alt="Planting plan of the JACCC James Irvine Japanese Garden"
-              className="block w-full select-none"
+              className="block w-full select-none opacity-60"
               draggable={false}
             />
             {plants.map((p) => {
@@ -120,7 +120,7 @@ function Index() {
                 aria-label={p.name}
               >
                 <span
-                  className={`block h-3 w-3 rounded-full border-2 border-primary-foreground shadow-md transition-transform ${categoryDotClass(category)} ${
+                  className={`block h-3.5 w-3.5 rounded-full border-2 border-white shadow-md ring-4 ring-white/70 transition-transform ${categoryDotClass(category)} ${
                     hovered === p.id || dragId === p.id ? "scale-150" : "group-hover:scale-125"
                   }`}
                 />
