@@ -253,10 +253,22 @@ function Index() {
                     onClick={() => setActive(p)}
                     onMouseEnter={() => setHovered(p.id)}
                     onMouseLeave={() => setHovered(null)}
-                    className={`flex w-full flex-col gap-0.5 px-4 py-2.5 text-left transition-colors hover:bg-muted/60 ${
+                    className={`flex w-full items-start gap-3 px-4 py-2.5 text-left transition-colors hover:bg-muted/60 ${
                       hovered === p.id ? "bg-muted/60" : ""
                     }`}
                   >
+                    <PlantThumb
+                      plantId={p.id}
+                      alt={p.name}
+                      fallbackClass={
+                        plantCategory(p) === "manyoshu"
+                          ? "bg-emerald-600"
+                          : plantCategory(p) === "substitute"
+                            ? "bg-amber-500"
+                            : "bg-muted-foreground"
+                      }
+                    />
+                    <span className="flex flex-1 flex-col gap-0.5">
                     <span className="flex items-center gap-2 text-sm font-medium">
                       {p.name}
                       {p.manyoshu && (
