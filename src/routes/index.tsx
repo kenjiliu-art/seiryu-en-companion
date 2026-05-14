@@ -26,6 +26,20 @@ export const Route = createFileRoute("/")({
   }),
 });
 
+type PlantCategory = "manyoshu" | "substitute" | "none";
+function plantCategory(p: Plant): PlantCategory {
+  // A plant counts as "in the Man'yōshū" only when it's the actual species
+  // referenced (specific poems AND not flagged as a SoCal substitute).
+  if (p.manyoshu && !p.substitute) return "manyoshu";
+  if (p.substitute || p.categoryRefs) return "substitute";
+  return "none";
+}
+function categoryDotClass(c: PlantCategory): string {
+  if (c === "manyoshu") return "bg-primary";
+  if (c === "substitute") return "bg-amber-500";
+  return "bg-muted-foreground";
+}
+
 function Index() {
   const [active, setActive] = useState<Plant | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
