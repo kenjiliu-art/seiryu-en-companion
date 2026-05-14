@@ -39,6 +39,16 @@ function categoryDotClass(c: PlantCategory): string {
   if (c === "substitute") return "bg-amber-500";
   return "bg-muted-foreground";
 }
+function categoryHaloClass(c: PlantCategory): string {
+  if (c === "manyoshu") return "bg-emerald-500/15 group-hover:bg-emerald-500/30";
+  if (c === "substitute") return "bg-amber-500/15 group-hover:bg-amber-500/30";
+  return "bg-slate-400/15 group-hover:bg-slate-400/30";
+}
+function categoryGlowStyle(c: PlantCategory): string {
+  if (c === "manyoshu") return "0 0 8px rgba(5,150,105,0.45)";
+  if (c === "substitute") return "0 0 8px rgba(217,119,6,0.45)";
+  return "0 0 8px rgba(71,85,105,0.35)";
+}
 
 function Index() {
   const [active, setActive] = useState<Plant | null>(null);
