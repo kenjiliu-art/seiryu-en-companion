@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import gardenMap from "@/assets/garden-map.jpg";
 import { plants, manyoshuUrl, type Plant } from "@/data/plants";
+import { poems } from "@/data/poems";
 import {
   Dialog,
   DialogContent,
