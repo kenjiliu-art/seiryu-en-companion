@@ -96,7 +96,7 @@ function Index() {
           <div className="border-b border-border/60 px-4 py-3">
             <h2 className="font-serif text-lg">Plant Legend</h2>
             <p className="text-xs text-muted-foreground">
-              {plants.length} species · {plants.filter((p) => p.manyoshu).length} with
+              {plants.length} species · {plants.filter((p) => p.manyoshu || p.categoryRefs).length} with
               Man&apos;yōshū poems
             </p>
           </div>
