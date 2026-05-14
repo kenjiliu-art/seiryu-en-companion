@@ -104,6 +104,16 @@ export const plants: Plant[] = [
     scientific: "Camellia japonica",
     description:
       "Oil pressed from the seeds (tsubaki-abura, 椿油) has been traditionally used in Japan for hair care, and the plant is used to prepare anti-inflammatory medicines. Camellias offer splashes of color and impermanence in the landscape.",
+    categoryRefs: {
+      label: "Camellia (tsubaki, 椿)",
+      refs: [
+        "MYS I: 54", "MYS I: 56", "MYS I: 73",
+        "MYS VII: 1262", "MYS XIII: 3222",
+        "MYS XIX: 4152", "MYS XIX: 4177",
+        "MYS XX: 4418", "MYS XX: 4481",
+      ],
+    },
+    links: [{ label: "All camellia (tsubaki) poems", url: "http://www.wakapoetry.net/tag/tsubaki/" }],
     x: 62, y: 55,
   },
   {
