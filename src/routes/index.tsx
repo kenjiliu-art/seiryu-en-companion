@@ -177,10 +177,10 @@ function Index() {
               </button>
             )}
             {([
-              ["manyoshu", "bg-emerald-600", "In the Man\u2019yōshū"],
-              ["substitute", "bg-amber-500", "SoCal substitute / general match"],
-              ["none", "bg-muted-foreground", "Not in the Man\u2019yōshū"],
-            ] as const).map(([cat, color, label]) => {
+              ["manyoshu", "bg-emerald-600", "bg-emerald-500/15 border-emerald-500/30", "In the Man\u2019yōshū"],
+              ["substitute", "bg-amber-500", "bg-amber-500/15 border-amber-500/30", "SoCal substitute / general match"],
+              ["none", "bg-muted-foreground", "bg-slate-400/15 border-slate-400/30", "Not in the Man\u2019yōshū"],
+            ] as const).map(([cat, dot, halo, label]) => {
               const on = visibleCats[cat];
               return (
                 <button
@@ -193,7 +193,10 @@ function Index() {
                       : "border-dashed border-border/60 text-muted-foreground/60 line-through"
                   }`}
                 >
-                  <span className={`block h-3 w-3 rounded-full border-2 border-white shadow-sm ${color} ${on ? "" : "opacity-40"}`} />
+                  <span className={`relative flex h-5 w-5 items-center justify-center ${on ? "" : "opacity-40"}`}>
+                    <span className={`absolute inset-0 rounded-full border ${halo}`} />
+                    <span className={`relative h-1.5 w-1.5 rounded-full ${dot}`} />
+                  </span>
                   {label}
                 </button>
               );
