@@ -157,7 +157,7 @@ function Index() {
               Man&apos;yōshū poems
             </p>
           </div>
-          <ScrollArea className="h-[60vh]">
+          <ScrollArea className="max-h-[60vh]">
             <ul className="divide-y divide-border/50">
               {plants.map((p) => (
                 <li key={p.id}>
