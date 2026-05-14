@@ -124,7 +124,7 @@ function Index() {
         </p>
       </header>
 
-      <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-10 md:px-16 md:py-14">
+      <div className="mx-auto flex max-w-[1600px] flex-col gap-10 px-4 py-8 md:px-10 md:py-12">
         {/* Map */}
         <div
           className="relative overflow-hidden rounded-md border border-stone-200/60 p-6 shadow-sm md:p-12"
