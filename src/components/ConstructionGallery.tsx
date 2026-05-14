@@ -38,7 +38,7 @@ const ALL: Record<string, Photo> = {
   "07": { src: img07, caption: "Crew lifting a stone into place" },
   "08": { src: img08, caption: "Stone arrangement nearing completion" },
   "09": { src: img09, caption: "Mid-construction view of the boulder work" },
-  "10": { src: img10, caption: "The volunteer crew, on site" },
+  "10": { src: img10, caption: "The Southern California Gardeners Federation volunteer crew" },
 };
 
 export type ConstructionPinSpec = {
