@@ -87,7 +87,9 @@ function Index() {
               className="block w-full select-none"
               draggable={false}
             />
-            {plants.map((p) => (
+            {plants.map((p) => {
+              const category = plantCategory(p);
+              return (
               <button
                 key={p.id}
                 onClick={() => !editMode && setActive(p)}
@@ -104,9 +106,9 @@ function Index() {
                 aria-label={p.name}
               >
                 <span
-                  className={`block h-3 w-3 rounded-full border-2 border-primary-foreground bg-primary shadow-md transition-transform ${
+                  className={`block h-3 w-3 rounded-full border-2 border-primary-foreground shadow-md transition-transform ${categoryDotClass(category)} ${
                     hovered === p.id || dragId === p.id ? "scale-150" : "group-hover:scale-125"
-                  } ${p.manyoshu ? "ring-2 ring-accent/60" : p.categoryRefs ? "ring-2 ring-accent/30" : ""}`}
+                  }`}
                 />
                 {(hovered === p.id || dragId === p.id) && (
                   <span className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded bg-foreground px-2 py-1 text-xs text-background shadow-lg">
