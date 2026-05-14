@@ -516,10 +516,68 @@ function RefsSection({
   );
 }
 
+const COMMON_EN = new Set([
+  "the","and","of","my","his","her","our","as","is","at","in","on","to","for","with","was","were","be","i","a","it","so","too","do","no","go","he","we","me","by","if","or","but","from","more","some","this","that","these","those","they","them","their","an","are","have","has","had","will","would","could","should","you","your","when","then","there","here","up","down","over","into","out","off","than","what","who","how","why","where","whose","whom","not","all","any","each","every","both","few","many","most","other","such","only","own","same","very","one","two","three","ever","never","always","yet","still","now","new","old","good","great","long","short","high","low","like","just","also","upon","amid","amidst","unto","while","whilst","oh","ah","alas","yes","nay","lo","ye","thee","thou","thy","thine"
+]);
+function looksJapanese(word: string): boolean {
+  const stripped = word.replace(/[^A-Za-zĀĪŪĒŌāīūēō'’-]/g, "");
+  if (stripped.length < 3) return false;
+  const lower = stripped.toLowerCase();
+  if (COMMON_EN.has(lower)) return false;
+  // must be capitalized (proper noun) OR contain a Japanese-style digraph
+  const cap = /^[A-ZĀĪŪĒŌ]/.test(stripped);
+  const noMacron = lower
+    .replace(/ā/g, "a").replace(/ī/g, "i").replace(/ū/g, "u")
+    .replace(/ē/g, "e").replace(/ō/g, "o");
+  if (!/^[a-z'’-]+$/.test(noMacron)) return false;
+  if (!/[aeiou]$|n$/.test(noMacron)) return false;
+  const hasDigraph = /(ts|sh|ch|ky|gy|ny|ry|hy|by|py|my|sy|ts|dz)/.test(noMacron);
+  // pure CV(N) syllabic structure
+  const syllabic = /^([bcdfghjklmnpqrstvwyz]?[aeiou])+n?$/.test(noMacron.replace(/['’-]/g, ""));
+  return (cap && (syllabic || hasDigraph)) || hasDigraph;
+}
+
+function pickVoice(lang: string): SpeechSynthesisVoice | undefined {
+  const voices = window.speechSynthesis.getVoices();
+  const exact = voices.filter((v) => v.lang.toLowerCase().startsWith(lang.toLowerCase()));
+  // Prefer Google / Microsoft / native voices
+  return (
+    exact.find((v) => /google/i.test(v.name)) ||
+    exact.find((v) => /microsoft|kyoko|otoya|samantha/i.test(v.name)) ||
+    exact[0]
+  );
+}
+
+function buildSegments(text: string): { lang: string; text: string }[] {
+  const tokens = text.split(/(\s+)/);
+  const segments: { lang: string; text: string }[] = [];
+  let cur: { lang: string; text: string } = { lang: "en-US", text: "" };
+  for (const t of tokens) {
+    if (/^\s*$/.test(t)) {
+      cur.text += t;
+      continue;
+    }
+    const lang = looksJapanese(t) ? "ja-JP" : "en-US";
+    if (lang !== cur.lang && cur.text.trim()) {
+      segments.push(cur);
+      cur = { lang, text: t };
+    } else {
+      cur.lang = lang;
+      cur.text += t;
+    }
+  }
+  if (cur.text.trim()) segments.push(cur);
+  return segments;
+}
+
 function SpeakButton({ english }: { english: string }) {
   const [speaking, setSpeaking] = useState(false);
 
   useEffect(() => {
+    if (typeof window !== "undefined" && window.speechSynthesis) {
+      // Trigger voice list load
+      window.speechSynthesis.getVoices();
+    }
     return () => {
       if (typeof window !== "undefined" && window.speechSynthesis) {
         window.speechSynthesis.cancel();
@@ -532,14 +590,23 @@ function SpeakButton({ english }: { english: string }) {
     const synth = window.speechSynthesis;
     synth.cancel();
 
-    const u = new SpeechSynthesisUtterance(english);
-    u.lang = "en-US";
-    u.rate = 0.9;
-    u.onend = () => setSpeaking(false);
-    u.onerror = () => setSpeaking(false);
+    const segments = buildSegments(english);
+    const utterances = segments.map(({ lang, text }) => {
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = lang;
+      u.rate = lang === "ja-JP" ? 0.95 : 0.9;
+      const voice = pickVoice(lang);
+      if (voice) u.voice = voice;
+      return u;
+    });
+
+    if (utterances.length === 0) return;
+    const last = utterances[utterances.length - 1];
+    last.onend = () => setSpeaking(false);
+    last.onerror = () => setSpeaking(false);
 
     setSpeaking(true);
-    synth.speak(u);
+    utterances.forEach((u) => synth.speak(u));
   };
 
   const stop = () => {
