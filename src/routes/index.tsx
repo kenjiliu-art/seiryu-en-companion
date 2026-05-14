@@ -194,11 +194,15 @@ function Index() {
                           className={`group absolute -translate-x-1/2 -translate-y-1/2 ${editMode ? "cursor-move" : "cursor-pointer"}`}
                           aria-label={p.name}
                         >
-                          <span
-                            className={`block h-3.5 w-3.5 rounded-full border-2 border-white shadow-md ring-4 ring-white/70 transition-transform ${categoryDotClass(category)} ${
-                              hovered === p.id || dragId === p.id ? "scale-150" : "group-hover:scale-125"
-                            }`}
-                          />
+                          <span className="relative flex items-center justify-center">
+                            <span aria-hidden className="absolute h-6 w-6 rounded-full bg-white/80 blur-sm" />
+                            <span
+                              className={`relative block h-4 w-4 rounded-full border-[1.5px] shadow-sm transition-transform ${categoryDotClass(category)} ${
+                                hovered === p.id || dragId === p.id ? "scale-150" : "group-hover:scale-125"
+                              }`}
+                            />
+                            <span aria-hidden className="absolute h-1 w-1 rounded-full bg-white" />
+                          </span>
                           {(hovered === p.id || dragId === p.id) && (
                             <span className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded bg-foreground px-2 py-1 text-xs text-background shadow-lg">
                               {p.name}{editMode && ` · ${p.x}, ${p.y}`}
