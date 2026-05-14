@@ -85,9 +85,22 @@ function Index() {
     substitute: true,
     none: true,
   });
-  const toggleCat = (c: PlantCategory) =>
-    setVisibleCats((v) => ({ ...v, [c]: !v[c] }));
+  const toggleCat = useCallback(
+    (c: PlantCategory) => setVisibleCats((v) => ({ ...v, [c]: !v[c] })),
+    [],
+  );
   const mapRef = useRef<HTMLDivElement>(null);
+
+  // Pre-compute category once per plants change instead of on every render row.
+  const categorized = useMemo(
+    () => plants.map((p) => ({ p, category: plantCategory(p) })),
+    [plants],
+  );
+  const stats = useMemo(() => {
+    let withPoems = 0;
+    for (const p of plants) if (p.manyoshu || p.categoryRefs) withPoems++;
+    return { total: plants.length, withPoems };
+  }, [plants]);
 
   useEffect(() => {
     if (!dragId) return;
@@ -110,10 +123,10 @@ function Index() {
     };
   }, [dragId]);
 
-  const exportCoords = () => {
+  const exportCoords = useCallback(() => {
     const text = plants.map((p) => `  ${p.id}: { x: ${p.x}, y: ${p.y} },`).join("\n");
     navigator.clipboard.writeText(text);
-  };
+  }, [plants]);
 
 
   return (
