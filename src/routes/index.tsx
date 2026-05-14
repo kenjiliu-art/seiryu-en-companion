@@ -70,29 +70,40 @@ function Index() {
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!dragId) return;
+    if (!dragId && !dragPinId) return;
     const onMove = (e: MouseEvent) => {
       const el = mapRef.current;
       if (!el) return;
       const rect = el.getBoundingClientRect();
-      const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
-      const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
-      setPlants((prev) =>
-        prev.map((p) => (p.id === dragId ? { ...p, x: +x.toFixed(1), y: +y.toFixed(1) } : p)),
-      );
+      const x = +Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100)).toFixed(1);
+      const y = +Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100)).toFixed(1);
+      if (dragId) {
+        setPlants((prev) => prev.map((p) => (p.id === dragId ? { ...p, x, y } : p)));
+      }
+      if (dragPinId) {
+        setPins((prev) => prev.map((p) => (p.id === dragPinId ? { ...p, x, y } : p)));
+      }
     };
-    const onUp = () => setDragId(null);
+    const onUp = () => {
+      setDragId(null);
+      setDragPinId(null);
+    };
     window.addEventListener("mousemove", onMove);
     window.addEventListener("mouseup", onUp);
     return () => {
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseup", onUp);
     };
-  }, [dragId]);
+  }, [dragId, dragPinId]);
 
   const exportCoords = () => {
-    const text = plants.map((p) => `  ${p.id}: { x: ${p.x}, y: ${p.y} },`).join("\n");
-    navigator.clipboard.writeText(text);
+    const plantText = plants.map((p) => `  ${p.id}: { x: ${p.x}, y: ${p.y} },`).join("\n");
+    const pinText = pins
+      .map((p) => `  { id: "${p.id}", x: ${p.x}, y: ${p.y} },`)
+      .join("\n");
+    navigator.clipboard.writeText(
+      `// plants\n${plantText}\n\n// construction pins\n${pinText}`,
+    );
   };
 
 
