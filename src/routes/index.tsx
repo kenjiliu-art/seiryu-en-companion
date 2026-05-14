@@ -57,7 +57,9 @@ function Index() {
   const [hovered, setHovered] = useState<string | null>(null);
   const [editMode, setEditMode] = useState(false);
   const [plants, setPlants] = useState<Plant[]>(initialPlants);
+  const [pins, setPins] = useState<ConstructionPinSpec[]>(defaultConstructionPins);
   const [dragId, setDragId] = useState<string | null>(null);
+  const [dragPinId, setDragPinId] = useState<string | null>(null);
   const [visibleCats, setVisibleCats] = useState<Record<PlantCategory, boolean>>({
     manyoshu: true,
     substitute: true,
