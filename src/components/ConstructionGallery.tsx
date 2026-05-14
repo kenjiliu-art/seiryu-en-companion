@@ -63,7 +63,7 @@ export const defaultConstructionPins: ConstructionPinSpec[] = [
     id: "stream",
     x: 46.2,
     y: 70.8,
-    title: "Stream &amp; basin",
+    title: "Stream & basin",
     description: "Hand-shaping the dry stream channel and the central basin.",
     photos: ["01", "02"],
   },
