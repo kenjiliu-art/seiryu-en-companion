@@ -32,6 +32,8 @@ function Index() {
   const [editMode, setEditMode] = useState(false);
   const [plants, setPlants] = useState<Plant[]>(initialPlants);
   const [dragId, setDragId] = useState<string | null>(null);
+  const [mapTx, setMapTx] = useState({ x: 0, y: 0, scale: 1 });
+  const [draggingMap, setDraggingMap] = useState(false);
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -55,10 +57,34 @@ function Index() {
     };
   }, [dragId]);
 
+  // Drag the background map (in edit mode) to align it under the existing hotspots.
+  useEffect(() => {
+    if (!draggingMap) return;
+    const onMove = (e: MouseEvent) => {
+      const el = mapRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      setMapTx((t) => ({
+        ...t,
+        x: t.x + (e.movementX / rect.width) * 100,
+        y: t.y + (e.movementY / rect.height) * 100,
+      }));
+    };
+    const onUp = () => setDraggingMap(false);
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
+  }, [draggingMap]);
+
   const exportCoords = () => {
     const text = plants.map((p) => `  ${p.id}: { x: ${p.x}, y: ${p.y} },`).join("\n");
     navigator.clipboard.writeText(text);
   };
+
+  const resetMap = () => setMapTx({ x: 0, y: 0, scale: 1 });
 
 
   return (
@@ -80,11 +106,21 @@ function Index() {
       <div className="grid gap-6 px-4 py-6 md:px-10 lg:grid-cols-[1fr_320px]">
         {/* Map */}
         <div className="relative overflow-hidden rounded-md border border-border bg-card shadow-sm">
-          <div className="relative" ref={mapRef}>
+          <div className="relative overflow-hidden" ref={mapRef}>
             <img
               src={gardenMap}
               alt="Planting plan of the JACCC James Irvine Japanese Garden"
-              className="block w-full select-none"
+              onMouseDown={(e) => {
+                if (editMode) {
+                  e.preventDefault();
+                  setDraggingMap(true);
+                }
+              }}
+              style={{
+                transform: `translate(${mapTx.x}%, ${mapTx.y}%) scale(${mapTx.scale})`,
+                transformOrigin: "top left",
+              }}
+              className={`block w-full select-none ${editMode ? "cursor-grab active:cursor-grabbing" : ""}`}
               draggable={false}
             />
             {plants.map((p) => (
@@ -126,12 +162,35 @@ function Index() {
               Edit positions
             </label>
             {editMode && (
-              <button
-                onClick={exportCoords}
-                className="rounded border border-accent/40 px-2 py-0.5 text-accent hover:bg-accent hover:text-accent-foreground"
-              >
-                Copy coords
-              </button>
+              <>
+                <button
+                  onClick={exportCoords}
+                  className="rounded border border-accent/40 px-2 py-0.5 text-accent hover:bg-accent hover:text-accent-foreground"
+                >
+                  Copy coords
+                </button>
+                <label className="flex items-center gap-2">
+                  Map zoom
+                  <input
+                    type="range"
+                    min={0.5}
+                    max={2}
+                    step={0.01}
+                    value={mapTx.scale}
+                    onChange={(e) => setMapTx((t) => ({ ...t, scale: +e.target.value }))}
+                  />
+                  <span className="tabular-nums">{mapTx.scale.toFixed(2)}×</span>
+                </label>
+                <button
+                  onClick={resetMap}
+                  className="rounded border border-border px-2 py-0.5 hover:bg-muted"
+                >
+                  Reset map
+                </button>
+                <span className="text-muted-foreground/70">
+                  Drag the map to align it under the dots.
+                </span>
+              </>
             )}
             <span className="flex items-center gap-2">
               <span className="block h-3 w-3 rounded-full border-2 border-primary-foreground bg-primary ring-2 ring-accent/60" />
