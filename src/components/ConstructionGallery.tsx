@@ -50,7 +50,7 @@ export type ConstructionPinSpec = {
   photos: string[]; // keys into ALL
 };
 
-export const constructionPins: ConstructionPinSpec[] = [
+export const defaultConstructionPins: ConstructionPinSpec[] = [
   {
     id: "site-prep",
     x: 78,
