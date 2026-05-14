@@ -156,6 +156,15 @@ export const plants: Plant[] = [
     scientific: "Phyllostachys bambusoides",
     description:
       "A large bamboo that sprouts March–April, when its shoots are edible. The leaves are used to wrap rice balls; the wood is used for building and crafting. In the JACCC garden, the bamboo forest represents the future of the Japanese American community — its strength and flexibility.",
+    categoryRefs: {
+      label: "Bamboo (take, 竹)",
+      refs: [
+        "MYS III: 379", "MYS III: 420",
+        "MYS VI: 955", "MYS VI: 1047",
+        "MYS VII: 1412", "MYS XIX: 4291",
+      ],
+    },
+    links: [{ label: "All bamboo (take) poems", url: "http://www.wakapoetry.net/tag/take/" }],
     x: 82, y: 40,
   },
   {
@@ -185,6 +194,13 @@ export const plants: Plant[] = [
     name: "Broad Leaf Bamboo",
     romaji: "Sasa",
     description: "A short, broad-leafed bamboo used widely as understory and groundcover.",
+    categoryRefs: {
+      label: "Sasa / bamboo grass (笹)",
+      refs: [
+        "MYS II: 133", "MYS VII: 1121", "MYS XX: 4431",
+      ],
+    },
+    links: [{ label: "All sasa poems", url: "http://www.wakapoetry.net/tag/sasa/" }],
     x: 78, y: 65,
   },
   {
