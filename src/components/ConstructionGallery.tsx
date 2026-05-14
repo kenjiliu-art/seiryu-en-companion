@@ -80,7 +80,7 @@ export const defaultConstructionPins: ConstructionPinSpec[] = [
     x: 54.1,
     y: 54.8,
     title: "The volunteer crew",
-    description: "On-site portrait of the volunteers who built the garden.",
+    description: "On-site portrait of the Southern California Gardeners Federation volunteers who built the garden.",
     photos: ["10"],
   },
 ];
