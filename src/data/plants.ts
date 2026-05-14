@@ -7,6 +7,9 @@ export type Plant = {
   description: string;
   /** Raw refs like "MYS X: 1869" — auto-linked to wakapoetry.net */
   manyoshu?: string[];
+  /** General-category fallback poems used when no species-specific
+   *  Man'yōshū poem exists for this plant (e.g. leather fern → fern). */
+  categoryRefs?: { label: string; refs: string[] };
   /** Extra curated links (collections, etc.) */
   links?: { label: string; url: string }[];
   x: number;
