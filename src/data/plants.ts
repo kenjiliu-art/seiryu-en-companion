@@ -291,6 +291,10 @@ export const plants: Plant[] = [
     name: "Japanese Elm",
     scientific: "Ulmus davidiana var. japonica",
     description: "A native plant to Japan's forests.",
+    categoryRefs: {
+      label: "Tsuki / hemlock-elm (槻)",
+      refs: ["MYS III: 324"],
+    },
     x: 12, y: 55,
   },
   {
