@@ -10,6 +10,9 @@ export type Plant = {
   /** General-category fallback poems used when no species-specific
    *  Man'yōshū poem exists for this plant (e.g. leather fern → fern). */
   categoryRefs?: { label: string; refs: string[] };
+  /** True when the species was substituted for the original Man'yōshū plant
+   *  to suit the Los Angeles / Southern California climate. */
+  substitute?: boolean;
   /** Extra curated links (collections, etc.) */
   links?: { label: string; url: string }[];
   x: number;
