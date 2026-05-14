@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { PlantThumb } from "@/components/PlantThumb";
-import { ConstructionGallery } from "@/components/ConstructionGallery";
+import { ConstructionPin, constructionPins } from "@/components/ConstructionGallery";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -188,6 +188,9 @@ function Index() {
               </button>
               );
             })}
+            {constructionPins.map((pin) => (
+              <ConstructionPin key={pin.id} pin={pin} />
+            ))}
               </div>
             </div>
           </div>
@@ -307,12 +310,10 @@ function Index() {
         </aside>
       </div>
 
-      <footer className="flex flex-col gap-4 border-t border-border/60 px-6 py-6 text-xs text-muted-foreground md:flex-row md:items-center md:justify-between md:px-10">
-        <p className="max-w-2xl">
-          Planting survey by Jon Ngai, landscape architecture intern, August 2021. Garden
-          designed 1978–1979 by Takeo Uesugi for the JACCC, inspired by Murin-an in Kyoto.
-        </p>
-        <ConstructionGallery />
+      <footer className="border-t border-border/60 px-6 py-6 text-xs text-muted-foreground md:px-10">
+        Planting survey by Jon Ngai, landscape architecture intern, August 2021. Garden
+        designed 1978–1979 by Takeo Uesugi for the JACCC, inspired by Murin-an in Kyoto.
+        <span className="ml-2 opacity-70">Camera icons on the map open construction photos from 1979.</span>
       </footer>
 
       <Dialog open={!!active} onOpenChange={(o) => !o && setActive(null)}>
