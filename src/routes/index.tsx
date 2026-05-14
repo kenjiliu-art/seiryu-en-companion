@@ -13,6 +13,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { PlantThumb } from "@/components/PlantThumb";
 import { ConstructionPin, defaultConstructionPins, type ConstructionPinSpec } from "@/components/ConstructionGallery";
+import { Volume2, Square } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -439,9 +440,12 @@ function RefsSection({
               >
                 <header className="flex items-baseline justify-between gap-2">
                   <span className="text-xs font-semibold text-accent">{ref}</span>
-                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                    {poem.source === "wakapoetry" ? "trans. McAuley" : "trans. NGS 1940"}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <SpeakButton japanese={poem.japanese} english={poem.english} />
+                    <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                      {poem.source === "wakapoetry" ? "trans. McAuley" : "trans. NGS 1940"}
+                    </span>
+                  </div>
                 </header>
                 {poem.preface && (
                   <p className="mt-1 text-[11px] italic text-muted-foreground">
@@ -497,5 +501,62 @@ function RefsSection({
         </div>
       )}
     </div>
+  );
+}
+
+function SpeakButton({ japanese, english }: { japanese?: string; english: string }) {
+  const [speaking, setSpeaking] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      if (typeof window !== "undefined" && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, []);
+
+  const speak = () => {
+    if (typeof window === "undefined" || !window.speechSynthesis) return;
+    const synth = window.speechSynthesis;
+    synth.cancel();
+
+    const utterances: SpeechSynthesisUtterance[] = [];
+    if (japanese) {
+      const u = new SpeechSynthesisUtterance(japanese);
+      u.lang = "ja-JP";
+      u.rate = 0.85;
+      utterances.push(u);
+    }
+    const e = new SpeechSynthesisUtterance(english);
+    e.lang = "en-US";
+    e.rate = 0.9;
+    utterances.push(e);
+
+    const last = utterances[utterances.length - 1];
+    last.onend = () => setSpeaking(false);
+    last.onerror = () => setSpeaking(false);
+
+    setSpeaking(true);
+    utterances.forEach((u) => synth.speak(u));
+  };
+
+  const stop = () => {
+    if (typeof window !== "undefined" && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+    setSpeaking(false);
+  };
+
+  if (typeof window !== "undefined" && !window.speechSynthesis) return null;
+
+  return (
+    <button
+      onClick={speaking ? stop : speak}
+      aria-label={speaking ? "Stop reading poem" : "Read poem aloud"}
+      title={speaking ? "Stop" : "Read aloud"}
+      className="inline-flex h-6 w-6 items-center justify-center rounded border border-border/60 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+    >
+      {speaking ? <Square className="h-3 w-3" /> : <Volume2 className="h-3 w-3" />}
+    </button>
   );
 }
