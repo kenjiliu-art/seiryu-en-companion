@@ -353,7 +353,7 @@ export const plants: Plant[] = [
       ],
     },
     links: [{ label: "All sugi (cedar) poems", url: "http://www.wakapoetry.net/tag/sugi/" }],
-    x: 5, y: 5,
+    x: 56.3, y: 41,
   },
   {
     id: "false-heather",
@@ -362,7 +362,7 @@ export const plants: Plant[] = [
     description:
       "A low-growing Mexican shrub with tiny lavender flowers, used here as a tidy evergreen groundcover well suited to the Los Angeles climate.",
     substitute: true,
-    x: 10, y: 5,
+    x: 68.3, y: 66.8,
   },
   {
     id: "sprenger-asparagus",
@@ -371,7 +371,7 @@ export const plants: Plant[] = [
     description:
       "A South African ornamental with arching, feathery foliage. Used as a soft textural groundcover; not native to Japan.",
     substitute: true,
-    x: 15, y: 5,
+    x: 47.5, y: 24.3,
   },
   {
     id: "pomegranate",
@@ -380,7 +380,7 @@ export const plants: Plant[] = [
     scientific: "Punica granatum",
     description:
       "Introduced to Japan from the Asian mainland after the Man'yōshū era. Valued for its brilliant orange blossoms, ornamental fruit, and use in bonsai.",
-    x: 20, y: 5,
+    x: 34.6, y: 91,
   },
   {
     id: "heavenly-bamboo",
@@ -389,7 +389,7 @@ export const plants: Plant[] = [
     scientific: "Nandina domestica",
     description:
       "Despite its name, not a true bamboo. Long planted near Japanese entryways for its red winter berries and the auspicious sound of its name (nan-ten, 'turning misfortune').",
-    x: 25, y: 5,
+    x: 71.4, y: 39.9,
   },
   {
     id: "redwood",
@@ -398,7 +398,7 @@ export const plants: Plant[] = [
     description:
       "A California native used here as a tall evergreen backdrop, echoing the role cedar (sugi) plays in Japanese gardens.",
     substitute: true,
-    x: 30, y: 5,
+    x: 80.3, y: 47.1,
   },
   {
     id: "indian-hawthorne",
@@ -407,7 +407,7 @@ export const plants: Plant[] = [
     description:
       "A compact evergreen shrub with pink-white spring blossoms. A reliable Southern California stand-in for Japanese flowering shrubs.",
     substitute: true,
-    x: 35, y: 5,
+    x: 43.1, y: 56.9,
   },
   {
     id: "lilyturf",
@@ -415,7 +415,7 @@ export const plants: Plant[] = [
     scientific: "Liriope spicata",
     description:
       "A grass-like groundcover with slender purple flower spikes. Often used in Japanese gardens to soften path edges and stones.",
-    x: 40, y: 5,
+    x: 55.5, y: 63.6,
   },
   {
     id: "creeping-periwinkle",
@@ -424,7 +424,7 @@ export const plants: Plant[] = [
     description:
       "A trailing evergreen groundcover with violet-blue flowers, used here in place of native Japanese groundcovers for its drought tolerance.",
     substitute: true,
-    x: 45, y: 5,
+    x: 42.8, y: 41,
   },
   {
     id: "old-gold-juniper",
@@ -437,7 +437,7 @@ export const plants: Plant[] = [
       refs: ["MYS III: 446"],
     },
     substitute: true,
-    x: 50, y: 5,
+    x: 45.1, y: 80.1,
   },
   {
     id: "golden-rain-tree",
@@ -445,7 +445,7 @@ export const plants: Plant[] = [
     scientific: "Koelreuteria paniculata",
     description:
       "A small deciduous tree with cascading yellow summer flowers followed by papery lantern-shaped seed pods.",
-    x: 55, y: 5,
+    x: 58.9, y: 22.5,
   },
   {
     id: "victorian-box",
@@ -454,7 +454,7 @@ export const plants: Plant[] = [
     description:
       "An Australian evergreen tree with fragrant cream flowers, used as a screening tree in this Los Angeles adaptation of a Japanese garden.",
     substitute: true,
-    x: 60, y: 5,
+    x: 65.4, y: 44.5,
   },
   {
     id: "dwarf-sacred-bamboo",
@@ -463,7 +463,7 @@ export const plants: Plant[] = [
     scientific: "Nandina domestica 'Nana'",
     description:
       "A compact cultivar of heavenly bamboo, prized for its dense mounding habit and crimson winter foliage. Planted as a low accent at path edges.",
-    x: 65, y: 5,
+    x: 51.2, y: 56.4,
   },
 ];
 
