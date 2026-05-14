@@ -50,7 +50,7 @@ export type ConstructionPinSpec = {
   photos: string[]; // keys into ALL
 };
 
-export const constructionPins: ConstructionPinSpec[] = [
+export const defaultConstructionPins: ConstructionPinSpec[] = [
   {
     id: "site-prep",
     x: 78,
@@ -85,7 +85,17 @@ export const constructionPins: ConstructionPinSpec[] = [
   },
 ];
 
-export function ConstructionPin({ pin }: { pin: ConstructionPinSpec }) {
+export function ConstructionPin({
+  pin,
+  editMode = false,
+  isDragging = false,
+  onDragStart,
+}: {
+  pin: ConstructionPinSpec;
+  editMode?: boolean;
+  isDragging?: boolean;
+  onDragStart?: (id: string) => void;
+}) {
   const [open, setOpen] = useState(false);
   const [api, setApi] = useState<CarouselApi | null>(null);
   const [current, setCurrent] = useState(0);
@@ -105,17 +115,24 @@ export function ConstructionPin({ pin }: { pin: ConstructionPinSpec }) {
   return (
     <>
       <button
-        onClick={() => setOpen(true)}
+        onClick={() => !editMode && setOpen(true)}
+        onMouseDown={(e) => {
+          if (editMode) {
+            e.preventDefault();
+            onDragStart?.(pin.id);
+          }
+        }}
         style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
-        className="group absolute z-20 -translate-x-1/2 -translate-y-1/2"
+        className={`group absolute z-20 -translate-x-1/2 -translate-y-1/2 ${editMode ? "cursor-move" : ""}`}
         aria-label={`Construction photos: ${pin.title}`}
       >
         <span className="relative flex h-7 w-7 items-center justify-center">
-          <span className="absolute inset-0 rounded-full border border-stone-700/40 bg-stone-50/90 shadow-sm transition-transform duration-300 group-hover:scale-125" />
+          <span className={`absolute inset-0 rounded-full border border-stone-700/40 bg-stone-50/90 shadow-sm transition-transform duration-300 ${isDragging ? "scale-125 ring-2 ring-accent" : "group-hover:scale-125"}`} />
           <Camera className="relative h-3.5 w-3.5 text-stone-700" aria-hidden />
         </span>
-        <span className="pointer-events-none absolute left-1/2 top-full z-10 mt-1.5 hidden -translate-x-1/2 whitespace-nowrap rounded bg-foreground px-2 py-0.5 text-[10px] uppercase tracking-wider text-background shadow-lg group-hover:block">
-          {pin.title.replace(/&amp;/g, "&")} · {photos.length}
+        <span className={`pointer-events-none absolute left-1/2 top-full z-10 mt-1.5 -translate-x-1/2 whitespace-nowrap rounded bg-foreground px-2 py-0.5 text-[10px] uppercase tracking-wider text-background shadow-lg ${isDragging ? "block" : "hidden group-hover:block"}`}>
+          {pin.title.replace(/&amp;/g, "&")}
+          {isDragging ? ` · ${pin.x}, ${pin.y}` : ` · ${photos.length}`}
         </span>
       </button>
 
