@@ -177,6 +177,14 @@ function Index() {
                 </DialogDescription>
               </DialogHeader>
 
+              {active.substitute && (
+                <p className="rounded-md border border-dashed border-muted-foreground/40 bg-muted/30 px-3 py-2 text-[11px] text-muted-foreground">
+                  <span className="font-semibold uppercase tracking-wider">LA substitute</span> ·
+                  Not the exact species in the Man&apos;yōshū — a local stand-in chosen to thrive in the
+                  Southern California climate.
+                </p>
+              )}
+
               <p className="text-sm leading-relaxed">{active.description}</p>
 
               {(active.manyoshu || active.categoryRefs) && (
