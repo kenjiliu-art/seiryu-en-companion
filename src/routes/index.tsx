@@ -110,6 +110,7 @@ function Index() {
             />
             {plants.map((p) => {
               const category = plantCategory(p);
+              if (!visibleCats[category]) return null;
               return (
               <button
                 key={p.id}
