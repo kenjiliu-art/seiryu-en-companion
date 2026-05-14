@@ -77,7 +77,7 @@ function Index() {
         </p>
       </header>
 
-      <div className="grid gap-10 px-6 py-10 md:px-16 md:py-14 lg:grid-cols-[1fr_320px] lg:gap-12">
+      <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-10 md:px-16 md:py-14">
         {/* Map */}
         <div className="relative overflow-hidden rounded-md border border-border bg-card p-6 shadow-sm md:p-10">
           <div className="relative" ref={mapRef}>
@@ -157,7 +157,7 @@ function Index() {
               Man&apos;yōshū poems
             </p>
           </div>
-          <ScrollArea className="h-[60vh]">
+          <ScrollArea className="max-h-[60vh]">
             <ul className="divide-y divide-border/50">
               {plants.map((p) => (
                 <li key={p.id}>
