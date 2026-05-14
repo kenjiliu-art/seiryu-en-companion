@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import gardenMap from "@/assets/garden-map.jpg";
-import { plants, manyoshuUrl, type Plant } from "@/data/plants";
+import { plants as initialPlants, manyoshuUrl, type Plant } from "@/data/plants";
 import { poems } from "@/data/poems";
 import {
   Dialog,
@@ -29,6 +29,37 @@ export const Route = createFileRoute("/")({
 function Index() {
   const [active, setActive] = useState<Plant | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
+  const [editMode, setEditMode] = useState(false);
+  const [plants, setPlants] = useState<Plant[]>(initialPlants);
+  const [dragId, setDragId] = useState<string | null>(null);
+  const mapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!dragId) return;
+    const onMove = (e: MouseEvent) => {
+      const el = mapRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+      const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+      setPlants((prev) =>
+        prev.map((p) => (p.id === dragId ? { ...p, x: +x.toFixed(1), y: +y.toFixed(1) } : p)),
+      );
+    };
+    const onUp = () => setDragId(null);
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
+  }, [dragId]);
+
+  const exportCoords = () => {
+    const text = plants.map((p) => `  ${p.id}: { x: ${p.x}, y: ${p.y} },`).join("\n");
+    navigator.clipboard.writeText(text);
+  };
+
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -49,7 +80,7 @@ function Index() {
       <div className="grid gap-6 px-4 py-6 md:px-10 lg:grid-cols-[1fr_320px]">
         {/* Map */}
         <div className="relative overflow-hidden rounded-md border border-border bg-card shadow-sm">
-          <div className="relative">
+          <div className="relative" ref={mapRef}>
             <img
               src={gardenMap}
               alt="Planting plan of the JACCC James Irvine Japanese Garden"
@@ -59,27 +90,49 @@ function Index() {
             {plants.map((p) => (
               <button
                 key={p.id}
-                onClick={() => setActive(p)}
+                onClick={() => !editMode && setActive(p)}
+                onMouseDown={(e) => {
+                  if (editMode) {
+                    e.preventDefault();
+                    setDragId(p.id);
+                  }
+                }}
                 onMouseEnter={() => setHovered(p.id)}
                 onMouseLeave={() => setHovered(null)}
                 style={{ left: `${p.x}%`, top: `${p.y}%` }}
-                className="group absolute -translate-x-1/2 -translate-y-1/2"
+                className={`group absolute -translate-x-1/2 -translate-y-1/2 ${editMode ? "cursor-move" : ""}`}
                 aria-label={p.name}
               >
                 <span
                   className={`block h-3 w-3 rounded-full border-2 border-primary-foreground bg-primary shadow-md transition-transform ${
-                    hovered === p.id ? "scale-150" : "group-hover:scale-125"
+                    hovered === p.id || dragId === p.id ? "scale-150" : "group-hover:scale-125"
                   } ${p.manyoshu ? "ring-2 ring-accent/60" : p.categoryRefs ? "ring-2 ring-accent/30" : ""}`}
                 />
-                {hovered === p.id && (
+                {(hovered === p.id || dragId === p.id) && (
                   <span className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded bg-foreground px-2 py-1 text-xs text-background shadow-lg">
-                    {p.name}
+                    {p.name}{editMode && ` · ${p.x}, ${p.y}`}
                   </span>
                 )}
               </button>
             ))}
           </div>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-border/60 px-4 py-3 text-xs text-muted-foreground">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={editMode}
+                onChange={(e) => setEditMode(e.target.checked)}
+              />
+              Edit positions
+            </label>
+            {editMode && (
+              <button
+                onClick={exportCoords}
+                className="rounded border border-accent/40 px-2 py-0.5 text-accent hover:bg-accent hover:text-accent-foreground"
+              >
+                Copy coords
+              </button>
+            )}
             <span className="flex items-center gap-2">
               <span className="block h-3 w-3 rounded-full border-2 border-primary-foreground bg-primary ring-2 ring-accent/60" />
               Plant referenced in the Man&apos;yōshū
