@@ -171,8 +171,7 @@ function Index() {
                       className="block w-full select-none opacity-70"
                       draggable={false}
                     />
-                    {plants.map((p) => {
-                      const category = plantCategory(p);
+                    {categorized.map(({ p, category }) => {
                       if (!visibleCats[category]) return null;
                       return (
                         <button
