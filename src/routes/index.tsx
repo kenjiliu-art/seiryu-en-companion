@@ -201,8 +201,14 @@ function Index() {
               </button>
               );
             })}
-            {constructionPins.map((pin) => (
-              <ConstructionPin key={pin.id} pin={pin} />
+            {pins.map((pin) => (
+              <ConstructionPin
+                key={pin.id}
+                pin={pin}
+                editMode={editMode}
+                isDragging={dragPinId === pin.id}
+                onDragStart={(id) => setDragPinId(id)}
+              />
             ))}
               </div>
             </div>
