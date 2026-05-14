@@ -33,7 +33,7 @@ const ALL: Record<string, Photo> = {
   "02": { src: img02, caption: "Setting boulders and planting along the upper slope" },
   "03": { src: img03, caption: "Truck delivering fill to the future garden site" },
   "04": { src: img04, caption: "Grading the basin beneath the JACCC plaza" },
-  "05": { src: img05, caption: "Boulder placement along the dry stream bed" },
+  "05": { src: img05, caption: "Boulder placement along the stream bed and trail" },
   "06": { src: img06, caption: "Selecting stones at the quarry" },
   "07": { src: img07, caption: "Crew lifting a stone into place" },
   "08": { src: img08, caption: "Stone arrangement nearing completion" },
