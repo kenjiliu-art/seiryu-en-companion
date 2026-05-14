@@ -158,18 +158,28 @@ function Index() {
                 Copy coords
               </button>
             )}
-            <span className="flex items-center gap-2">
-              <span className="block h-3 w-3 rounded-full border-2 border-primary-foreground bg-emerald-600 shadow-sm" />
-              In the Man&apos;yōshū
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="block h-3 w-3 rounded-full border-2 border-primary-foreground bg-amber-500 shadow-sm" />
-              SoCal substitute / general match
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="block h-3 w-3 rounded-full border-2 border-primary-foreground bg-muted-foreground shadow-sm" />
-              Not in the Man&apos;yōshū
-            </span>
+            {([
+              ["manyoshu", "bg-emerald-600", "In the Man\u2019yōshū"],
+              ["substitute", "bg-amber-500", "SoCal substitute / general match"],
+              ["none", "bg-muted-foreground", "Not in the Man\u2019yōshū"],
+            ] as const).map(([cat, color, label]) => {
+              const on = visibleCats[cat];
+              return (
+                <button
+                  key={cat}
+                  onClick={() => toggleCat(cat)}
+                  aria-pressed={on}
+                  className={`flex items-center gap-2 rounded-full border px-2 py-1 transition-colors ${
+                    on
+                      ? "border-border bg-background text-foreground"
+                      : "border-dashed border-border/60 text-muted-foreground/60 line-through"
+                  }`}
+                >
+                  <span className={`block h-3 w-3 rounded-full border-2 border-white shadow-sm ${color} ${on ? "" : "opacity-40"}`} />
+                  {label}
+                </button>
+              );
+            })}
           </div>
         </div>
 
