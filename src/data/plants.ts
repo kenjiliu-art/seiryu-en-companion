@@ -49,7 +49,7 @@ export const plants: Plant[] = [
       "MYS XX: 4375", "MYS XX: 4439", "MYS XX: 4457", "MYS XX: 4464", "MYS XX: 4498", "MYS XX: 4501",
     ],
     links: [{ label: "All pine (matsu) poems", url: "http://www.wakapoetry.net/matsu/" }],
-    x: 38, y: 42,
+    x: 41.1, y: 66.9,
   },
   {
     id: "flowering-cherry",
@@ -60,7 +60,7 @@ export const plants: Plant[] = [
     description:
       "A prominent symbol in Japan, often seen on kimono and confectionery. The cherry symbolizes impermanence — its dormancy is seen as just as beautiful as its blossoms. The wood makes a gray-colored charcoal and the leaves are used to wrap mochi.",
     manyoshu: ["MYS VIII: 1440", "MYS X: 1869"],
-    x: 55, y: 35,
+    x: 52.8, y: 78,
   },
   {
     id: "wisteria",
@@ -83,7 +83,7 @@ export const plants: Plant[] = [
       "MYS XIX: 4199", "MYS XIX: 4200", "MYS XIX: 4201", "MYS XIX: 4202",
       "MYS XIX: 4207", "MYS XIX: 4210",
     ],
-    x: 70, y: 25,
+    x: 52.2, y: 15,
   },
   {
     id: "azalea",
@@ -97,7 +97,7 @@ export const plants: Plant[] = [
       "MYS II: 185", "MYS III: 434", "MYS III: 443", "MYS VI: 971",
       "MYS VII: 1188", "MYS IX: 1694", "MYS X: 1905", "MYS XIII: 3305", "MYS XIII: 3309",
     ],
-    x: 48, y: 60,
+    x: 66.3, y: 79.3,
   },
   {
     id: "japanese-camellia",
@@ -117,7 +117,7 @@ export const plants: Plant[] = [
       ],
     },
     links: [{ label: "All camellia (tsubaki) poems", url: "http://www.wakapoetry.net/tag/tsubaki/" }],
-    x: 62, y: 55,
+    x: 72.8, y: 80.1,
   },
   {
     id: "sasanqua-camellia",
@@ -130,7 +130,7 @@ export const plants: Plant[] = [
       "MYS XIX: 4152", "MYS XIX: 4177",
       "MYS XX: 4418", "MYS XX: 4481",
     ],
-    x: 75, y: 50,
+    x: 72.6, y: 63,
   },
   {
     id: "japanese-magnolia",
@@ -140,7 +140,7 @@ export const plants: Plant[] = [
     description:
       "Bark extract has been used for ~1,000 years in traditional Chinese and Japanese medicine for ailments ranging from asthma to depression to muscle pain.",
     manyoshu: ["MYS XIX: 4204"],
-    x: 30, y: 30,
+    x: 82.1, y: 78.5,
   },
   {
     id: "japanese-maple",
@@ -150,7 +150,7 @@ export const plants: Plant[] = [
     description:
       "The leaves are packed around apples and root crops to help preserve them. The wood is used to make instruments and flooring; the leaves are also used in bouquets.",
     manyoshu: ["MYS VIII: 1623", "MYS XIV: 3494"],
-    x: 45, y: 48,
+    x: 82, y: 58.8,
   },
   {
     id: "madake-bamboo",
@@ -168,7 +168,7 @@ export const plants: Plant[] = [
       ],
     },
     links: [{ label: "All bamboo (take) poems", url: "http://www.wakapoetry.net/tag/take/" }],
-    x: 82, y: 40,
+    x: 24.9, y: 81.9,
   },
   {
     id: "golden-bamboo",
@@ -190,7 +190,7 @@ export const plants: Plant[] = [
       "MYS XVI: 3791",
       "MYS XIX: 4286", "MYS XIX: 4291",
     ],
-    x: 88, y: 55,
+    x: 8.7, y: 88.2,
   },
   {
     id: "broad-leaf-bamboo",
@@ -204,7 +204,7 @@ export const plants: Plant[] = [
       ],
     },
     links: [{ label: "All sasa poems", url: "http://www.wakapoetry.net/tag/sasa/" }],
-    x: 78, y: 65,
+    x: 37.2, y: 95.8,
   },
   {
     id: "camphor",
@@ -212,7 +212,7 @@ export const plants: Plant[] = [
     romaji: "Kusunoki",
     scientific: "Cinnamomum camphora",
     description: "The oil of camphor trees is commonly used in industrial applications.",
-    x: 22, y: 50,
+    x: 64, y: 33.6,
   },
   {
     id: "crape-myrtle",
@@ -221,7 +221,7 @@ export const plants: Plant[] = [
     scientific: "Lagerstroemia",
     description:
       "Known in Japan as Saru Suberi — 'slippery' — from old folklore that the bark is so smooth not even a monkey can climb it.",
-    x: 60, y: 70,
+    x: 59.2, y: 71.9,
   },
   {
     id: "fortnight-lily",
@@ -237,7 +237,7 @@ export const plants: Plant[] = [
       "MYS XVIII: 4113", "MYS XVIII: 4115", "MYS XX: 4369",
     ],
     substitute: true,
-    x: 35, y: 72,
+    x: 44.4, y: 85.6,
   },
   {
     id: "dwarf-mondo",
@@ -254,7 +254,7 @@ export const plants: Plant[] = [
       "MYS XIV: 3577",
       "MYS XX: 4484",
     ],
-    x: 42, y: 80,
+    x: 57.3, y: 78.5,
   },
   {
     id: "evergreen-pear",
@@ -264,7 +264,7 @@ export const plants: Plant[] = [
     description: "A substitute for the edible pears commonly found in Japanese gardens. Nashi is the general word for pear.",
     manyoshu: ["MYS X: 2188", "MYS X: 2189", "MYS XVI: 3834", "MYS XIX: 4259"],
     substitute: true,
-    x: 18, y: 38,
+    x: 66.7, y: 88,
   },
   {
     id: "miniature-juniper",
@@ -275,7 +275,7 @@ export const plants: Plant[] = [
       "Though not the same juniper found in the Man'yōshū, this dwarf form is widely used as a groundcover in Japanese gardens.",
     manyoshu: ["MYS III: 446"],
     substitute: true,
-    x: 52, y: 75,
+    x: 66.4, y: 58.3,
   },
   {
     id: "japanese-holly",
@@ -283,14 +283,14 @@ export const plants: Plant[] = [
     scientific: "Ilex crenata",
     description:
       "A native plant to Japan. People put a sardine's head with hollies at the entrance of their homes — evils hate the smell of sardines and the jagged leaves of holly. The plant signifies 'defense.'",
-    x: 68, y: 78,
+    x: 35.8, y: 70.4,
   },
   {
     id: "japanese-pittosporum",
     name: "Japanese Pittosporum",
     scientific: "Pittosporum tobira",
     description: "A native plant to Japan, commonly used in ornamental applications.",
-    x: 28, y: 60,
+    x: 58.7, y: 61.2,
   },
   {
     id: "japanese-elm",
@@ -301,14 +301,14 @@ export const plants: Plant[] = [
       label: "Tsuki / hemlock-elm (槻)",
       refs: ["MYS III: 324"],
     },
-    x: 12, y: 55,
+    x: 76.8, y: 45.2,
   },
   {
     id: "donated-persimmon",
     name: "Donated Persimmon",
     description:
       "Donated from Hiroshima — a survivor of the atomic bomb dropped on August 6, 1945. Planted at the JACCC in 2013. Persimmon leaves are traditionally used to wrap food.",
-    x: 25, y: 75,
+    x: 45.7, y: 14.2,
   },
   {
     id: "baran",
@@ -316,7 +316,7 @@ export const plants: Plant[] = [
     scientific: "Aspidistra elatior",
     description:
       "A broad-leaf plant used in culinary settings — often seen in table settings and used to wrap food.",
-    x: 15, y: 70,
+    x: 42.6, y: 21,
   },
   {
     id: "leather-fern",
@@ -330,7 +330,7 @@ export const plants: Plant[] = [
     },
     links: [{ label: "All warabi (fern) poems", url: "http://www.wakapoetry.net/tag/warabi/" }],
     substitute: true,
-    x: 72, y: 70,
+    x: 48.1, y: 76.7,
   },
 ];
 
