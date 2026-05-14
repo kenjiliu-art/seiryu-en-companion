@@ -5,9 +5,10 @@ export type Plant = {
   romaji?: string;
   scientific?: string;
   description: string;
+  /** Raw refs like "MYS X: 1869" — auto-linked to wakapoetry.net */
   manyoshu?: string[];
+  /** Extra curated links (collections, etc.) */
   links?: { label: string; url: string }[];
-  /** position on the map as percentages (0-100) */
   x: number;
   y: number;
 };
@@ -22,12 +23,26 @@ export const plants: Plant[] = [
     description:
       "One of the most iconic elements of Japanese gardens. Often trimmed in a bonsai form, these trees are seen as a direct link between the heavens and earth. The needles or 'candles' are trimmed to point upward toward the gods.",
     manyoshu: [
-      "MYS I: 11", "MYS I: 34", "MYS I: 63", "MYS II: 141", "MYS II: 143",
-      "MYS III: 257", "MYS V: 895", "MYS VIII: 1458", "MYS X: 1937",
-      "MYS XV: 3621", "MYS XIX: 4169", "MYS XX: 4501",
-      "(and 70+ more — pine is the most-referenced plant in the Man'yōshū)",
+      "MYS I: 11", "MYS I: 34", "MYS I: 63", "MYS I: 65", "MYS I: 66", "MYS I: 73",
+      "MYS II: 113", "MYS II: 141", "MYS II: 143", "MYS II: 144", "MYS II: 145", "MYS II: 146", "MYS II: 228",
+      "MYS III: 257", "MYS III: 260", "MYS III: 279", "MYS III: 295", "MYS III: 309", "MYS III: 394", "MYS III: 431", "MYS III: 444",
+      "MYS IV: 588", "MYS IV: 593", "MYS IV: 623",
+      "MYS V: 895",
+      "MYS VI: 952", "MYS VI: 990", "MYS VI: 1030", "MYS VI: 1041", "MYS VI: 1042", "MYS VI: 1043",
+      "MYS VII: 1159", "MYS VII: 1185",
+      "MYS VIII: 1458", "MYS VIII: 1650", "MYS VIII: 1654",
+      "MYS IX: 1674", "MYS IX: 1687", "MYS IX: 1716", "MYS IX: 1783", "MYS IX: 1795",
+      "MYS X: 1922", "MYS X: 1937", "MYS X: 2198", "MYS X: 2313", "MYS X: 2314",
+      "MYS XI: 2484", "MYS XI: 2485", "MYS XI: 2486", "MYS XI: 2487", "MYS XI: 2653", "MYS XI: 2751",
+      "MYS XII: 2861", "MYS XII: 3047", "MYS XII: 3130",
+      "MYS XIII: 3258", "MYS XIII: 3324", "MYS XIII: 3346",
+      "MYS XIV: 3433", "MYS XIV: 3495",
+      "MYS XV: 3621", "MYS XV: 3655", "MYS XV: 3721", "MYS XV: 3747",
+      "MYS XVII: 3890", "MYS XVII: 3899", "MYS XVII: 3942", "MYS XVII: 4014",
+      "MYS XIX: 4169", "MYS XIX: 4177", "MYS XIX: 4266", "MYS XIX: 4271",
+      "MYS XX: 4375", "MYS XX: 4439", "MYS XX: 4457", "MYS XX: 4464", "MYS XX: 4498", "MYS XX: 4501",
     ],
-    links: [{ label: "Pine poems on wakapoetry.net", url: "http://www.wakapoetry.net/matsu/" }],
+    links: [{ label: "All pine (matsu) poems", url: "http://www.wakapoetry.net/matsu/" }],
     x: 38, y: 42,
   },
   {
@@ -39,7 +54,6 @@ export const plants: Plant[] = [
     description:
       "A prominent symbol in Japan, often seen on kimono and confectionery. The cherry symbolizes impermanence — its dormancy is seen as just as beautiful as its blossoms. The wood makes a gray-colored charcoal and the leaves are used to wrap mochi.",
     manyoshu: ["MYS VIII: 1440", "MYS X: 1869"],
-    links: [{ label: "MYS X: 1869", url: "http://www.wakapoetry.net/mys-x-1869/" }],
     x: 55, y: 35,
   },
   {
@@ -51,12 +65,17 @@ export const plants: Plant[] = [
     description:
       "Traditionally used in combination with mulberry trees to make high-quality paper. The fragrant root is used in baths.",
     manyoshu: [
-      "MYS III: 330", "MYS III: 413", "MYS VIII: 1471", "MYS X: 1901",
-      "MYS XIX: 4188", "MYS XIX: 4199", "MYS XIX: 4210", "(26 references total)",
-    ],
-    links: [
-      { label: "MYS XIX: 4188", url: "http://www.wakapoetry.net/mys-xix-4188/" },
-      { label: "MYS XIX: 4199", url: "http://www.wakapoetry.net/mys-xix-4199/" },
+      "MYS III: 330", "MYS III: 413",
+      "MYS VIII: 1471", "MYS VIII: 1627",
+      "MYS X: 1901", "MYS X: 1944", "MYS X: 1974", "MYS X: 1991",
+      "MYS XII: 2971", "MYS XII: 3075",
+      "MYS XIII: 3248",
+      "MYS XIV: 3504",
+      "MYS XVII: 3952", "MYS XVII: 3993",
+      "MYS XVIII: 4042", "MYS XVIII: 4043",
+      "MYS XIX: 4178", "MYS XIX: 4188", "MYS XIX: 4192", "MYS XIX: 4193",
+      "MYS XIX: 4199", "MYS XIX: 4200", "MYS XIX: 4201", "MYS XIX: 4202",
+      "MYS XIX: 4207", "MYS XIX: 4210",
     ],
     x: 70, y: 25,
   },
@@ -72,7 +91,6 @@ export const plants: Plant[] = [
       "MYS II: 185", "MYS III: 434", "MYS III: 443", "MYS VI: 971",
       "MYS VII: 1188", "MYS IX: 1694", "MYS X: 1905", "MYS XIII: 3305", "MYS XIII: 3309",
     ],
-    links: [{ label: "MYS II: 185", url: "http://www.wakapoetry.net/mys-ii-185/" }],
     x: 48, y: 60,
   },
   {
@@ -91,10 +109,11 @@ export const plants: Plant[] = [
     scientific: "Camellia sasanqua",
     description: "A close relative of the Japanese camellia, blooming in autumn and early winter.",
     manyoshu: [
-      "MYS I: 54", "MYS I: 56", "MYS I: 73", "MYS VII: 1262",
-      "MYS XIII: 3222", "MYS XIX: 4152", "MYS XX: 4418", "MYS XX: 4481",
+      "MYS I: 54", "MYS I: 56", "MYS I: 73",
+      "MYS VII: 1262", "MYS XIII: 3222",
+      "MYS XIX: 4152", "MYS XIX: 4177",
+      "MYS XX: 4418", "MYS XX: 4481",
     ],
-    links: [{ label: "MYS I: 54", url: "http://www.wakapoetry.net/mys-i-54/" }],
     x: 75, y: 50,
   },
   {
@@ -132,8 +151,19 @@ export const plants: Plant[] = [
     scientific: "Phyllostachys aurea",
     description: "An ornamental bamboo cluster forming an evergreen screen.",
     manyoshu: [
-      "MYS II: 167", "MYS II: 199", "MYS III: 379", "MYS V: 824",
-      "MYS VI: 955", "MYS VII: 1412", "MYS X: 1790", "MYS XIX: 4286", "(20 references total)",
+      "MYS II: 167", "MYS II: 199", "MYS II: 217",
+      "MYS III: 379", "MYS III: 420",
+      "MYS V: 824",
+      "MYS VI: 955", "MYS VI: 1047", "MYS VI: 1050",
+      "MYS VII: 1412",
+      "MYS IX: 1677",
+      "MYS X: 1790",
+      "MYS XI: 2530", "MYS XI: 2773",
+      "MYS XIII: 3284",
+      "MYS XIV: 3474",
+      "MYS XV: 3758",
+      "MYS XVI: 3791",
+      "MYS XIX: 4286", "MYS XIX: 4291",
     ],
     x: 88, y: 55,
   },
@@ -184,8 +214,12 @@ export const plants: Plant[] = [
     description:
       "Used in traditional Japanese gardens as a groundcover, especially in geometric settings.",
     manyoshu: [
-      "MYS IV: 546", "MYS XI: 2456", "MYS XI: 2474", "MYS XI: 2477",
-      "MYS XII: 2862", "MYS XII: 3051", "MYS XIII: 3291", "MYS XX: 4484",
+      "MYS IV: 546",
+      "MYS XI: 2456", "MYS XI: 2474", "MYS XI: 2477",
+      "MYS XII: 2862", "MYS XII: 3051", "MYS XII: 3053", "MYS XII: 3055", "MYS XII: 3066", "MYS XII: 3204",
+      "MYS XIII: 3291",
+      "MYS XIV: 3577",
+      "MYS XX: 4484",
     ],
     x: 42, y: 80,
   },
@@ -254,3 +288,10 @@ export const plants: Plant[] = [
     x: 72, y: 70,
   },
 ];
+
+/** "MYS X: 1869" → "http://www.wakapoetry.net/mys-x-1869/" */
+export function manyoshuUrl(ref: string): string | null {
+  const m = ref.match(/MYS\s+([IVX]+)\s*:\s*(\d+)/i);
+  if (!m) return null;
+  return `http://www.wakapoetry.net/mys-${m[1].toLowerCase()}-${m[2]}/`;
+}

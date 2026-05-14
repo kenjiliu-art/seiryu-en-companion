@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import gardenMap from "@/assets/garden-map.jpg";
-import { plants, type Plant } from "@/data/plants";
+import { plants, manyoshuUrl, type Plant } from "@/data/plants";
 import {
   Dialog,
   DialogContent,
@@ -166,18 +166,38 @@ function Index() {
                   <h3 className="text-xs font-semibold uppercase tracking-wider text-accent">
                     Man&apos;yōshū Connection · 万葉集
                   </h3>
-                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                    {active.manyoshu.join(" · ")}
+                  <p className="mt-1 text-[11px] text-muted-foreground">
+                    {active.manyoshu.length} poem{active.manyoshu.length === 1 ? "" : "s"} · click any reference to read on wakapoetry.net
                   </p>
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {active.manyoshu.map((ref) => {
+                      const url = manyoshuUrl(ref);
+                      return url ? (
+                        <a
+                          key={ref}
+                          href={url}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          className="rounded border border-accent/40 bg-background px-2 py-0.5 text-[11px] text-accent hover:bg-accent hover:text-accent-foreground"
+                        >
+                          {ref.replace("MYS ", "")}
+                        </a>
+                      ) : (
+                        <span key={ref} className="px-2 py-0.5 text-[11px] text-muted-foreground">
+                          {ref}
+                        </span>
+                      );
+                    })}
+                  </div>
                   {active.links && active.links.length > 0 && (
-                    <div className="mt-3 flex flex-wrap gap-2">
+                    <div className="mt-3 flex flex-wrap gap-2 border-t border-border/40 pt-3">
                       {active.links.map((l) => (
                         <a
                           key={l.url}
                           href={l.url}
                           target="_blank"
                           rel="noreferrer noopener"
-                          className="rounded-full border border-accent/40 bg-background px-3 py-1 text-xs text-accent hover:bg-accent hover:text-accent-foreground"
+                          className="text-xs text-accent underline-offset-2 hover:underline"
                         >
                           {l.label} ↗
                         </a>
