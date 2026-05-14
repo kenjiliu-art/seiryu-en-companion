@@ -140,14 +140,6 @@ export function ConstructionPin({
         <DialogContent className="max-w-3xl border-stone-200/60 bg-background p-0 sm:max-w-3xl">
           <DialogHeader className="px-6 pt-6">
             <DialogTitle className="font-serif text-2xl">{pin.title}</DialogTitle>
-
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-3xl border-stone-200/60 bg-background p-0 sm:max-w-3xl">
-          <DialogHeader className="px-6 pt-6">
-            <DialogTitle
-              className="font-serif text-2xl"
-              dangerouslySetInnerHTML={{ __html: pin.title }}
-            />
             <DialogDescription>{pin.description}</DialogDescription>
           </DialogHeader>
           <div className={photos.length > 1 ? "px-12 pb-6 pt-2" : "px-6 pb-6 pt-2"}>
