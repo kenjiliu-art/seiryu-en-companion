@@ -88,6 +88,10 @@ function Index() {
               <span className="block h-3 w-3 rounded-full border-2 border-primary-foreground bg-primary" />
               Garden plant
             </span>
+            <span className="flex items-center gap-2">
+              <span className="rounded-full border border-dashed border-muted-foreground/40 px-1.5 py-0.5 text-[10px] uppercase tracking-wider">LA sub</span>
+              Substituted for SoCal climate
+            </span>
           </div>
         </div>
 
