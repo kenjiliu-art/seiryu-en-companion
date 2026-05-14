@@ -46,6 +46,13 @@ function Index() {
   const [editMode, setEditMode] = useState(false);
   const [plants, setPlants] = useState<Plant[]>(initialPlants);
   const [dragId, setDragId] = useState<string | null>(null);
+  const [visibleCats, setVisibleCats] = useState<Record<PlantCategory, boolean>>({
+    manyoshu: true,
+    substitute: true,
+    none: true,
+  });
+  const toggleCat = (c: PlantCategory) =>
+    setVisibleCats((v) => ({ ...v, [c]: !v[c] }));
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
