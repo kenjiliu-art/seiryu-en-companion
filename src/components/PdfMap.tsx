@@ -11,12 +11,14 @@ type Props = {
 
 export function PdfMap({ src, className }: Props) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [ratio, setRatio] = useState<number | null>(null);
 
   useEffect(() => {
     let cancelled = false;
-    let renderTask: { cancel: () => void } | null = null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let renderTask: any = null;
 
     async function render() {
       const loadingTask = pdfjs.getDocument(src);
