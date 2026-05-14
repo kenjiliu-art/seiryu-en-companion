@@ -53,8 +53,8 @@ export type ConstructionPinSpec = {
 export const defaultConstructionPins: ConstructionPinSpec[] = [
   {
     id: "site-prep",
-    x: 78,
-    y: 12,
+    x: 44.5,
+    y: 31,
     title: "Site preparation",
     description: "Trucks delivering fill and grading the basin beneath the JACCC plaza, 1979.",
     photos: ["03", "04"],
@@ -69,8 +69,8 @@ export const defaultConstructionPins: ConstructionPinSpec[] = [
   },
   {
     id: "boulders",
-    x: 22,
-    y: 72,
+    x: 60.4,
+    y: 32.7,
     title: "Boulder placement",
     description: "Selecting stones at the quarry and setting them along the lower slope.",
     photos: ["06", "05", "07", "08", "09"],
