@@ -137,16 +137,16 @@ function Index() {
               </button>
             )}
             <span className="flex items-center gap-2">
-              <span className="block h-3 w-3 rounded-full border-2 border-primary-foreground bg-primary ring-2 ring-accent/60" />
-              Plant referenced in the Man&apos;yōshū
+              <span className="block h-3 w-3 rounded-full border-2 border-primary-foreground bg-primary shadow-sm" />
+              In the Man&apos;yōshū
             </span>
             <span className="flex items-center gap-2">
-              <span className="block h-3 w-3 rounded-full border-2 border-primary-foreground bg-primary" />
-              Garden plant
+              <span className="block h-3 w-3 rounded-full border-2 border-primary-foreground bg-amber-500 shadow-sm" />
+              SoCal substitute / general match
             </span>
             <span className="flex items-center gap-2">
-              <span className="rounded-full border border-dashed border-muted-foreground/40 px-1.5 py-0.5 text-[10px] uppercase tracking-wider">LA sub</span>
-              Substituted for SoCal climate
+              <span className="block h-3 w-3 rounded-full border-2 border-primary-foreground bg-muted-foreground shadow-sm" />
+              Not in the Man&apos;yōshū
             </span>
           </div>
         </div>
