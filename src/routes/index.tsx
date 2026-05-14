@@ -110,14 +110,42 @@ function Index() {
 
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-10 md:px-16 md:py-14">
         {/* Map */}
-        <div className="relative overflow-hidden rounded-md border border-border bg-card p-6 shadow-sm md:p-10">
-          <div className="relative" ref={mapRef}>
-            <img
-              src={gardenMap}
-              alt="Planting plan of the JACCC James Irvine Japanese Garden"
-              className="block w-full select-none opacity-25 grayscale brightness-110 contrast-75 mix-blend-multiply"
-              draggable={false}
-            />
+        <div
+          className="relative overflow-hidden rounded-md border border-stone-200/60 p-6 shadow-sm md:p-12"
+          style={{ backgroundColor: "#FDFCF8" }}
+        >
+          {/* Washi paper grain */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-[0.05] mix-blend-multiply"
+            style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/paper-fibers.png')" }}
+          />
+          {/* Faint vertical sumi accent line */}
+          <div aria-hidden className="pointer-events-none absolute right-1/4 top-0 h-32 w-px bg-stone-300/60" />
+
+          {/* Asymmetric inner frame — offset right for ma (negative space) */}
+          <div className="relative ml-0 lg:ml-[5%]">
+            <div
+              className="relative border border-stone-200 p-1"
+              style={{ backgroundColor: "#F7F5EF" }}
+            >
+              <div className="relative overflow-hidden bg-white" ref={mapRef}>
+                <img
+                  src={gardenMap}
+                  alt="Planting plan of the JACCC James Irvine Japanese Garden"
+                  className="block w-full select-none opacity-40 grayscale contrast-90 mix-blend-multiply"
+                  draggable={false}
+                />
+                {/* Atmospheric fog wash — light from upper-left */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 opacity-50"
+                  style={{
+                    background:
+                      "linear-gradient(to top right, transparent 40%, #FDFCF8 100%)",
+                  }}
+                />
+
             {plants.map((p) => {
               const category = plantCategory(p);
               if (!visibleCats[category]) return null;
