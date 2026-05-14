@@ -590,23 +590,16 @@ function SpeakButton({ english }: { english: string }) {
     const synth = window.speechSynthesis;
     synth.cancel();
 
-    const segments = buildSegments(english);
-    const utterances = segments.map(({ lang, text }) => {
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = lang;
-      u.rate = lang === "ja-JP" ? 0.95 : 0.9;
-      const voice = pickVoice(lang);
-      if (voice) u.voice = voice;
-      return u;
-    });
-
-    if (utterances.length === 0) return;
-    const last = utterances[utterances.length - 1];
-    last.onend = () => setSpeaking(false);
-    last.onerror = () => setSpeaking(false);
+    const u = new SpeechSynthesisUtterance(english);
+    u.lang = "ja-JP";
+    u.rate = 0.9;
+    const voice = pickVoice("ja-JP");
+    if (voice) u.voice = voice;
+    u.onend = () => setSpeaking(false);
+    u.onerror = () => setSpeaking(false);
 
     setSpeaking(true);
-    utterances.forEach((u) => synth.speak(u));
+    synth.speak(u);
   };
 
   const stop = () => {
