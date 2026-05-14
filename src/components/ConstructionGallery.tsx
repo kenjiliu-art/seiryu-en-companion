@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Camera } from "lucide-react";
 import {
   Dialog,
@@ -44,11 +44,15 @@ export function ConstructionGallery() {
   const [api, setApi] = useState<CarouselApi | null>(null);
   const [current, setCurrent] = useState(0);
 
-  // track current slide
-  if (api) {
-    api.off("select", () => {});
-    api.on("select", () => setCurrent(api.selectedScrollSnap()));
-  }
+  useEffect(() => {
+    if (!api) return;
+    setCurrent(api.selectedScrollSnap());
+    const onSelect = () => setCurrent(api.selectedScrollSnap());
+    api.on("select", onSelect);
+    return () => {
+      api.off("select", onSelect);
+    };
+  }, [api]);
 
   return (
     <Dialog>
