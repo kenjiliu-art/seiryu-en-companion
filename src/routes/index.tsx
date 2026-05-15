@@ -233,10 +233,10 @@ function Index() {
                           alt={p.name}
                           fallbackClass={
                             plantCategory(p) === "manyoshu"
-                              ? "bg-emerald-600"
+                              ? "bg-[#007b43]"
                               : plantCategory(p) === "substitute"
-                                ? "bg-amber-500"
-                                : "bg-muted-foreground"
+                                ? "bg-[#ed6d3d]"
+                                : "bg-[#888e7e]"
                           }
                         />
                         <span className="flex flex-1 flex-col gap-0.5">
