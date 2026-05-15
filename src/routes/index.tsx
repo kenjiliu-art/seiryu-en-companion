@@ -222,6 +222,8 @@ function Index() {
                   })}
                 </div>
 
+                <KouRibbon plants={plants} onPickPlant={(p) => setActive(p)} />
+
                 {seasonMode !== "off" && seasonalActiveMonths && (
                   <>
                     <div className="rounded-md border border-border/60 bg-muted/40 p-3">
