@@ -149,3 +149,37 @@ export function kouAt(index: number): Kou {
   const i = ((index - 1) % 72 + 72) % 72;
   return kou72[i];
 }
+
+// 24 sekki tint palette — one Nippon color per sekki, 3 kō share a tint.
+// Ordered Risshun..Daikan to match kou72 indices 1..72.
+export const sekkiPalette: { name: string; hex: string }[] = [
+  { name: "東雲 Shinonome",       hex: "#f19483" }, // Risshun
+  { name: "桜色 Sakura-iro",      hex: "#fdeff2" }, // Usui
+  { name: "若苗 Wakanae",         hex: "#c3d825" }, // Keichitsu
+  { name: "桃色 Momo-iro",        hex: "#f47983" }, // Shunbun
+  { name: "萌黄 Moegi",           hex: "#aacf53" }, // Seimei
+  { name: "若葉 Wakaba",          hex: "#b9d08b" }, // Kokuu
+  { name: "若竹 Wakatake",        hex: "#7ebeab" }, // Rikka
+  { name: "青磁 Seiji",           hex: "#93b69c" }, // Shōman
+  { name: "緑青 Rokushō",         hex: "#3c7170" }, // Bōshu
+  { name: "瑠璃 Ruri",            hex: "#1e50a2" }, // Geshi
+  { name: "白群 Byakugun",        hex: "#83ccd2" }, // Shōsho
+  { name: "藍鉄 Aitetsu",         hex: "#2a4073" }, // Taisho
+  { name: "桔梗 Kikyō",           hex: "#6a5acd" }, // Risshū
+  { name: "蘇芳 Suō",             hex: "#9e3d3f" }, // Shosho
+  { name: "黄朽葉 Kikuchiba",     hex: "#d3a243" }, // Hakuro
+  { name: "金茶 Kincha",          hex: "#b7702d" }, // Shūbun
+  { name: "柿 Kaki",              hex: "#ed6d3d" }, // Kanro
+  { name: "紅葉 Momiji",          hex: "#bb5535" }, // Sōkō
+  { name: "山吹 Yamabuki",        hex: "#f8b500" }, // Rittō
+  { name: "枯茶 Karecha",         hex: "#674c38" }, // Shōsetsu
+  { name: "鈍色 Nibi-iro",        hex: "#727171" }, // Taisetsu
+  { name: "胡粉 Gofun",           hex: "#fffffc" }, // Tōji
+  { name: "紅梅 Kōbai",           hex: "#d05a6e" }, // Shōkan
+  { name: "藍墨茶 Aisumicha",     hex: "#363c46" }, // Daikan
+];
+
+export function tintForKou(index: number): { name: string; hex: string } {
+  const sekkiIdx = Math.floor((((index - 1) % 72) + 72) % 72 / 3);
+  return sekkiPalette[sekkiIdx];
+}
