@@ -376,9 +376,9 @@ function Index() {
         {/* Floating filter chips */}
         <div className="pointer-events-none absolute bottom-3 left-3 right-3 z-20 flex flex-wrap items-center gap-1.5 md:right-auto md:max-w-md">
           {([
-            ["manyoshu", "bg-emerald-600", "bg-emerald-500/15 border-emerald-500/30", "Man\u2019yōshū"],
-            ["substitute", "bg-amber-500", "bg-amber-500/15 border-amber-500/30", "SoCal sub"],
-            ["none", "bg-muted-foreground", "bg-slate-400/15 border-slate-400/30", "Other"],
+            ["manyoshu", "bg-[#007b43]", "bg-[#007b43]/15 border-[#007b43]/30", "Man\u2019yōshū"],
+            ["substitute", "bg-[#ed6d3d]", "bg-[#ed6d3d]/15 border-[#ed6d3d]/30", "SoCal sub"],
+            ["none", "bg-[#888e7e]", "bg-[#888e7e]/15 border-[#888e7e]/30", "Other"],
           ] as const).map(([cat, dot, halo, label]) => {
             const on = visibleCats[cat];
             return (
