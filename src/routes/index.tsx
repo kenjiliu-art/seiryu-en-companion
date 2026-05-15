@@ -13,7 +13,8 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { PlantThumb } from "@/components/PlantThumb";
 import { ConstructionPin, defaultConstructionPins, type ConstructionPinSpec } from "@/components/ConstructionGallery";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Plus, Minus, Maximize2 } from "lucide-react";
+import { TransformWrapper, TransformComponent, useControls } from "react-zoom-pan-pinch";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -150,71 +151,90 @@ function Index() {
               style={{ backgroundColor: "#F7F5EF" }}
             >
               <div className="relative overflow-hidden bg-white" ref={mapRef}>
-                <img
-                  src={gardenMap}
-                  alt="Planting plan of the JACCC James Irvine Japanese Garden"
-                  className="block w-full select-none opacity-40 grayscale contrast-90 mix-blend-multiply"
-                  draggable={false}
-                />
-                {/* Atmospheric fog wash — light from upper-left */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 opacity-50"
-                  style={{
-                    background:
-                      "linear-gradient(to top right, transparent 40%, #FDFCF8 100%)",
-                  }}
-                />
+                <TransformWrapper
+                  initialScale={1}
+                  minScale={1}
+                  maxScale={6}
+                  doubleClick={{ mode: "zoomIn", step: 0.7 }}
+                  wheel={{ step: 0.15 }}
+                  pinch={{ step: 5 }}
+                  panning={{ disabled: editMode, velocityDisabled: true }}
+                  limitToBounds
+                >
+                  <ZoomControls />
+                  <TransformComponent
+                    wrapperClass="!w-full !h-full"
+                    contentClass="!w-full"
+                  >
+                    <div className="relative w-full">
+                      <img
+                        src={gardenMap}
+                        alt="Planting plan of the JACCC James Irvine Japanese Garden"
+                        className="block w-full select-none opacity-40 grayscale contrast-90 mix-blend-multiply"
+                        draggable={false}
+                      />
+                      {/* Atmospheric fog wash — light from upper-left */}
+                      <div
+                        aria-hidden
+                        className="pointer-events-none absolute inset-0 opacity-50"
+                        style={{
+                          background:
+                            "linear-gradient(to top right, transparent 40%, #FDFCF8 100%)",
+                        }}
+                      />
 
-            {plants.map((p) => {
-              const category = plantCategory(p);
-              if (!visibleCats[category]) return null;
-              return (
-              <button
-                key={p.id}
-                onClick={() => !editMode && setActive(p)}
-                onMouseDown={(e) => {
-                  if (editMode) {
-                    e.preventDefault();
-                    setDragId(p.id);
-                  }
-                }}
-                onMouseEnter={() => setHovered(p.id)}
-                onMouseLeave={() => setHovered(null)}
-                style={{ left: `${p.x}%`, top: `${p.y}%` }}
-                className={`group absolute -translate-x-1/2 -translate-y-1/2 ${editMode ? "cursor-move" : ""}`}
-                aria-label={p.name}
-              >
-                <span className="relative flex h-8 w-8 items-center justify-center">
-                  <span
-                    className={`absolute inset-0 rounded-full border border-white/60 shadow-sm backdrop-blur-[2px] transition-all duration-300 ${categoryHaloClass(category)} ${
-                      hovered === p.id || dragId === p.id ? "scale-125" : "group-hover:scale-125"
-                    }`}
-                  />
-                  <span
-                    className={`relative h-2.5 w-2.5 rounded-full transition-transform duration-300 ${categoryDotClass(category)} ${
-                      hovered === p.id || dragId === p.id ? "scale-125" : ""
-                    }`}
-                    style={{ boxShadow: categoryGlowStyle(category) }}
-                  />
-                </span>
-                {(hovered === p.id || dragId === p.id) && (
-                  <span className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded bg-foreground px-2 py-1 text-xs text-background shadow-lg">
-                    {p.name}{editMode && ` · ${p.x}, ${p.y}`}
-                  </span>
-                )}
-              </button>
-              );
-            })}
-            {pins.map((pin) => (
-              <ConstructionPin
-                key={pin.id}
-                pin={pin}
-                editMode={editMode}
-                isDragging={dragPinId === pin.id}
-                onDragStart={(id) => setDragPinId(id)}
-              />
-            ))}
+                      {plants.map((p) => {
+                        const category = plantCategory(p);
+                        if (!visibleCats[category]) return null;
+                        return (
+                          <button
+                            key={p.id}
+                            onClick={() => !editMode && setActive(p)}
+                            onMouseDown={(e) => {
+                              if (editMode) {
+                                e.preventDefault();
+                                setDragId(p.id);
+                              }
+                            }}
+                            onMouseEnter={() => setHovered(p.id)}
+                            onMouseLeave={() => setHovered(null)}
+                            style={{ left: `${p.x}%`, top: `${p.y}%` }}
+                            className={`group absolute -translate-x-1/2 -translate-y-1/2 ${editMode ? "cursor-move" : ""}`}
+                            aria-label={p.name}
+                          >
+                            <span className="relative flex h-8 w-8 items-center justify-center">
+                              <span
+                                className={`absolute inset-0 rounded-full border border-white/60 shadow-sm backdrop-blur-[2px] transition-all duration-300 ${categoryHaloClass(category)} ${
+                                  hovered === p.id || dragId === p.id ? "scale-125" : "group-hover:scale-125"
+                                }`}
+                              />
+                              <span
+                                className={`relative h-2.5 w-2.5 rounded-full transition-transform duration-300 ${categoryDotClass(category)} ${
+                                  hovered === p.id || dragId === p.id ? "scale-125" : ""
+                                }`}
+                                style={{ boxShadow: categoryGlowStyle(category) }}
+                              />
+                            </span>
+                            {(hovered === p.id || dragId === p.id) && (
+                              <span className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded bg-foreground px-2 py-1 text-xs text-background shadow-lg">
+                                {p.name}{editMode && ` · ${p.x}, ${p.y}`}
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                      {pins.map((pin) => (
+                        <ConstructionPin
+                          key={pin.id}
+                          pin={pin}
+                          editMode={editMode}
+                          isDragging={dragPinId === pin.id}
+                          onDragStart={(id) => setDragPinId(id)}
+                        />
+                      ))}
+                    </div>
+                  </TransformComponent>
+                </TransformWrapper>
               </div>
             </div>
           </div>
