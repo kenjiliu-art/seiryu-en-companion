@@ -1,0 +1,86 @@
+// Approximate "showy season" by plant id, in Los Angeles.
+// Months are 1-12. Includes flower bloom, ornamental fruit/berries, or
+// signature foliage color. Best-guess curated values — easy to refine.
+
+export type Season = "spring" | "summer" | "autumn" | "winter";
+
+export const seasonMonths: Record<Season, number[]> = {
+  spring: [3, 4, 5],
+  summer: [6, 7, 8],
+  autumn: [9, 10, 11],
+  winter: [12, 1, 2],
+};
+
+export const seasonJa: Record<Season, { kanji: string; romaji: string }> = {
+  spring: { kanji: "春", romaji: "Haru" },
+  summer: { kanji: "夏", romaji: "Natsu" },
+  autumn: { kanji: "秋", romaji: "Aki" },
+  winter: { kanji: "冬", romaji: "Fuyu" },
+};
+
+export function currentSeason(d = new Date()): Season {
+  const m = d.getMonth() + 1;
+  if (m >= 3 && m <= 5) return "spring";
+  if (m >= 6 && m <= 8) return "summer";
+  if (m >= 9 && m <= 11) return "autumn";
+  return "winter";
+}
+
+export type InterestKind = "bloom" | "fruit" | "foliage";
+
+export type PlantInterest = {
+  /** Months of peak visual interest (bloom / fruit / foliage). */
+  months: number[];
+  /** Dominant kind of interest, used to choose tint. */
+  kind: InterestKind;
+  /** Optional plain-language note shown in the dialog. */
+  note?: string;
+};
+
+export const plantInterest: Record<string, PlantInterest> = {
+  "black-pine":            { months: [3, 4],                       kind: "foliage", note: "Spring 'candles' (new shoots)." },
+  "flowering-cherry":      { months: [3, 4],                       kind: "bloom",   note: "Pink double blossoms in spring." },
+  "wisteria":              { months: [3, 4],                       kind: "bloom",   note: "Cascading lavender racemes." },
+  "azalea":                { months: [3, 4, 5],                    kind: "bloom",   note: "Mass of pink to magenta flowers." },
+  "japanese-camellia":     { months: [12, 1, 2, 3],                kind: "bloom",   note: "Winter into early spring." },
+  "sasanqua-camellia":     { months: [10, 11, 12],                 kind: "bloom",   note: "Autumn-flowering camellia." },
+  "japanese-magnolia":     { months: [3, 4],                       kind: "bloom",   note: "Purple goblet-shaped flowers." },
+  "japanese-maple":        { months: [10, 11],                     kind: "foliage", note: "Crimson-orange fall color." },
+  "madake-bamboo":         { months: [3, 4],                       kind: "foliage", note: "Edible spring shoots." },
+  "golden-bamboo":         { months: [],                           kind: "foliage", note: "Evergreen year-round." },
+  "broad-leaf-bamboo":     { months: [],                           kind: "foliage", note: "Evergreen groundcover." },
+  "camphor":               { months: [4, 5],                       kind: "bloom",   note: "Tiny cream flowers; aromatic foliage." },
+  "crape-myrtle":          { months: [7, 8, 9],                    kind: "bloom",   note: "Long summer flower panicles." },
+  "fortnight-lily":        { months: [3, 4, 5, 6, 7, 8, 9, 10],    kind: "bloom",   note: "Recurring waves of iris-like flowers." },
+  "dwarf-mondo":           { months: [7, 8],                       kind: "bloom",   note: "Small lavender flower spikes; blue berries in autumn." },
+  "evergreen-pear":        { months: [2, 3],                       kind: "bloom",   note: "Clouds of white blossoms in late winter." },
+  "miniature-juniper":     { months: [],                           kind: "foliage", note: "Evergreen mat." },
+  "japanese-holly":        { months: [11, 12, 1],                  kind: "fruit",   note: "Black berries in late autumn." },
+  "japanese-pittosporum":  { months: [4, 5],                       kind: "bloom",   note: "Fragrant cream flowers." },
+  "japanese-elm":          { months: [10, 11],                     kind: "foliage", note: "Yellow autumn color." },
+  "donated-persimmon":     { months: [10, 11],                     kind: "fruit",   note: "Bright orange fruit in autumn." },
+  "baran":                 { months: [],                           kind: "foliage", note: "Glossy evergreen foliage." },
+  "leather-fern":          { months: [],                           kind: "foliage", note: "Evergreen fronds." },
+  "cedar":                 { months: [],                           kind: "foliage", note: "Year-round evergreen." },
+  "false-heather":         { months: [3, 4, 5, 6, 7, 8, 9, 10],    kind: "bloom",   note: "Tiny lavender flowers nearly year-round." },
+  "sprenger-asparagus":    { months: [5, 6],                       kind: "bloom",   note: "Small white flowers, then red berries." },
+  "pomegranate":           { months: [5, 6, 7, 8],                 kind: "bloom",   note: "Vivid orange flowers; fruit by autumn." },
+  "heavenly-bamboo":       { months: [11, 12, 1, 2],               kind: "fruit",   note: "Crimson winter berries." },
+  "redwood":               { months: [],                           kind: "foliage", note: "Year-round evergreen backdrop." },
+  "indian-hawthorne":      { months: [3, 4],                       kind: "bloom",   note: "Pink-white spring flowers." },
+  "lilyturf":              { months: [7, 8, 9],                    kind: "bloom",   note: "Slender purple flower spikes." },
+  "creeping-periwinkle":   { months: [3, 4, 5],                    kind: "bloom",   note: "Violet-blue spring flowers." },
+  "old-gold-juniper":      { months: [4, 5],                       kind: "foliage", note: "Bright golden new growth in spring." },
+  "golden-rain-tree":      { months: [6, 7, 8],                    kind: "bloom",   note: "Cascades of yellow summer flowers." },
+  "victorian-box":         { months: [3, 4, 5],                    kind: "bloom",   note: "Fragrant cream flowers." },
+  "dwarf-sacred-bamboo":   { months: [11, 12, 1, 2],               kind: "fruit",   note: "Crimson winter foliage and berries." },
+};
+
+export function isActive(id: string, month: number): boolean {
+  return plantInterest[id]?.months.includes(month) ?? false;
+}
+
+export function isActiveInSeason(id: string, season: Season): boolean {
+  const months = seasonMonths[season];
+  return months.some((m) => isActive(id, m));
+}
