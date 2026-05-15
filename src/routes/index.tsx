@@ -533,7 +533,8 @@ function Index() {
                   }
                 }
                 const fade = seasonalActiveMonths && !isSeasonalActive ? "opacity-40" : "";
-                const obs = (confirmTick, getObservation(p.id));
+                void confirmTick;
+                const obs = getObservation(p.id);
                 const confirmed = isFresh(obs) ? obs : null;
                 const confirmColor = confirmed ? STATE_META[confirmed.state].color : null;
                 return (
