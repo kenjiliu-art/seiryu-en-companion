@@ -625,6 +625,10 @@ function Index() {
 
               <p className="text-sm leading-relaxed">{active.description}</p>
 
+              {plantInterest[active.id] && plantInterest[active.id].months.length > 0 && (
+                <PhenologyStrip plantId={active.id} />
+              )}
+
               {(active.manyoshu || active.categoryRefs) && (
                 <div className="rounded-md border border-border/60 bg-muted/40 p-3">
                   <h3 className="text-xs font-semibold uppercase tracking-wider text-accent">
