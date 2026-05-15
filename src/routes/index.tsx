@@ -255,6 +255,7 @@ function Index() {
           panning={{ disabled: editMode, velocityDisabled: true }}
           limitToBounds
           centerOnInit
+          onTransformed={(_, s) => setScale(s.scale)}
         >
           <ZoomControls />
           <TransformComponent
