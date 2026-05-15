@@ -349,6 +349,25 @@ function Index() {
               {plants.map((p) => {
                 const category = plantCategory(p);
                 if (!visibleCats[category]) return null;
+                // Determine effective color: seasonal mode overrides category colors.
+                let dotBg = categoryDotClass(category);
+                let haloBg = categoryHaloClass(category);
+                let glow = categoryGlowStyle(category);
+                let isSeasonalActive = false;
+                if (seasonalActiveMonths) {
+                  isSeasonalActive = isPlantActive(p.id, seasonalActiveMonths);
+                  if (isSeasonalActive) {
+                    const kind = plantInterest[p.id]!.kind;
+                    dotBg = interestColor[kind].bg;
+                    haloBg = interestColor[kind].halo;
+                    glow = interestColor[kind].glow;
+                  } else {
+                    dotBg = dormantColor.bg;
+                    haloBg = dormantColor.halo;
+                    glow = dormantColor.glow;
+                  }
+                }
+                const fade = seasonalActiveMonths && !isSeasonalActive ? "opacity-40" : "";
                 return (
                   <button
                     key={p.id}
@@ -362,7 +381,7 @@ function Index() {
                     onMouseEnter={() => setHovered(p.id)}
                     onMouseLeave={() => setHovered(null)}
                     style={{ left: `${p.x}%`, top: `${p.y}%` }}
-                    className={`group absolute -translate-x-1/2 -translate-y-1/2 ${editMode ? "cursor-move" : ""}`}
+                    className={`group absolute -translate-x-1/2 -translate-y-1/2 ${editMode ? "cursor-move" : ""} ${fade}`}
                     aria-label={p.name}
                   >
                     <span
@@ -370,15 +389,15 @@ function Index() {
                       style={{ transform: `scale(${1 / scale})` }}
                     >
                       <span
-                        className={`absolute inset-0 rounded-full border border-white/60 shadow-sm backdrop-blur-[2px] transition-all duration-300 ${categoryHaloClass(category)} ${
+                        className={`absolute inset-0 rounded-full border border-white/60 shadow-sm backdrop-blur-[2px] transition-all duration-300 ${haloBg} ${
                           hovered === p.id || dragId === p.id ? "scale-125" : "group-hover:scale-125"
-                        }`}
+                        } ${isSeasonalActive ? "animate-pulse" : ""}`}
                       />
                       <span
-                        className={`relative h-2 w-2 rounded-full transition-transform duration-300 ${categoryDotClass(category)} ${
+                        className={`relative h-2 w-2 rounded-full transition-transform duration-300 ${dotBg} ${
                           hovered === p.id || dragId === p.id ? "scale-125" : ""
                         }`}
-                        style={{ boxShadow: categoryGlowStyle(category) }}
+                        style={{ boxShadow: glow }}
                       />
                     </span>
                     {(hovered === p.id || dragId === p.id) && (
