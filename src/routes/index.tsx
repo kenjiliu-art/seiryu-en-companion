@@ -46,19 +46,19 @@ function plantCategory(p: Plant): PlantCategory {
   return "none";
 }
 function categoryDotClass(c: PlantCategory): string {
-  if (c === "manyoshu") return "bg-emerald-600";
-  if (c === "substitute") return "bg-amber-500";
-  return "bg-muted-foreground";
+  if (c === "manyoshu") return "bg-[#007b43]"; // 常磐色 Tokiwa
+  if (c === "substitute") return "bg-[#ed6d3d]"; // 柿色 Kaki
+  return "bg-[#888e7e]"; // 利休鼠 Rikyū-nezumi
 }
 function categoryHaloClass(c: PlantCategory): string {
-  if (c === "manyoshu") return "bg-emerald-500/15 group-hover:bg-emerald-500/30";
-  if (c === "substitute") return "bg-amber-500/15 group-hover:bg-amber-500/30";
-  return "bg-slate-400/15 group-hover:bg-slate-400/30";
+  if (c === "manyoshu") return "bg-[#007b43]/15 group-hover:bg-[#007b43]/30";
+  if (c === "substitute") return "bg-[#ed6d3d]/15 group-hover:bg-[#ed6d3d]/30";
+  return "bg-[#888e7e]/15 group-hover:bg-[#888e7e]/30";
 }
 function categoryGlowStyle(c: PlantCategory): string {
-  if (c === "manyoshu") return "0 0 8px rgba(5,150,105,0.45)";
-  if (c === "substitute") return "0 0 8px rgba(217,119,6,0.45)";
-  return "0 0 8px rgba(71,85,105,0.35)";
+  if (c === "manyoshu") return "0 0 8px rgba(0,123,67,0.45)";
+  if (c === "substitute") return "0 0 8px rgba(237,109,61,0.45)";
+  return "0 0 8px rgba(136,142,126,0.4)";
 }
 
 function Index() {
