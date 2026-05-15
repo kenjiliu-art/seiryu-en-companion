@@ -59,7 +59,10 @@ function Index() {
   const [editMode, setEditMode] = useState(false);
   const [plants, setPlants] = useState<Plant[]>(initialPlants);
   const [pins, setPins] = useState<ConstructionPinSpec[]>(defaultConstructionPins);
-  const [legendOpen, setLegendOpen] = useState(true);
+  const [legendOpen, setLegendOpen] = useState(() => {
+    if (typeof window === "undefined") return true;
+    return window.matchMedia("(min-width: 768px)").matches;
+  });
   const [dragId, setDragId] = useState<string | null>(null);
   const [dragPinId, setDragPinId] = useState<string | null>(null);
   const [visibleCats, setVisibleCats] = useState<Record<PlantCategory, boolean>>({
@@ -111,24 +114,24 @@ function Index() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <header className="border-b border-border/60 px-6 py-6 md:px-10">
-        <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
+      <header className="border-b border-border/60 px-4 py-4 md:px-10 md:py-6">
+        <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground md:text-xs md:tracking-[0.25em]">
           Japanese American Cultural &amp; Community Center
         </p>
-        <h1 className="mt-1 font-serif text-3xl md:text-4xl">
+        <h1 className="mt-1 font-serif text-2xl md:text-4xl">
           James Irvine Japanese Garden
         </h1>
-        <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-          An interactive planting plan after Takeo Uesugi&apos;s 1979 design. Click a
+        <p className="mt-2 max-w-2xl text-xs text-muted-foreground md:text-sm">
+          An interactive planting plan after Takeo Uesugi&apos;s 1979 design. Tap a
           marker on the map — or a plant in the legend — to read its uses,
           symbolism, and Man&apos;yōshū (万葉集) poem references.
         </p>
       </header>
 
-      <div className="mx-auto flex max-w-[1600px] flex-col gap-10 px-4 py-8 md:px-10 md:py-12">
+      <div className="mx-auto flex max-w-[1600px] flex-col gap-6 px-2 py-4 md:gap-10 md:px-10 md:py-12">
         {/* Map */}
         <div
-          className="relative overflow-hidden rounded-md border border-stone-200/60 p-4 shadow-sm md:p-8"
+          className="relative overflow-hidden rounded-md border border-stone-200/60 p-2 shadow-sm md:p-8"
           style={{ backgroundColor: "#FDFCF8" }}
         >
           {/* Washi paper grain */}
@@ -216,7 +219,7 @@ function Index() {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-border/60 px-4 py-3 text-xs text-muted-foreground">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-border/60 px-2 py-3 text-[11px] text-muted-foreground md:gap-x-5 md:px-4 md:text-xs">
             <label className="flex items-center gap-2 cursor-pointer">
               <input
                 type="checkbox"
@@ -342,14 +345,14 @@ function Index() {
         </aside>
       </div>
 
-      <footer className="border-t border-border/60 px-6 py-6 text-xs text-muted-foreground md:px-10">
+      <footer className="border-t border-border/60 px-4 py-5 text-[11px] text-muted-foreground md:px-10 md:py-6 md:text-xs">
         Planting survey by Jon Ngai, landscape architecture intern, August 2021. Garden
         designed 1978–1979 by Takeo Uesugi for the JACCC, inspired by Murin-an in Kyoto.
         <span className="ml-2 opacity-70">Camera icons on the map open construction photos from 1979.</span>
       </footer>
 
       <Dialog open={!!active} onOpenChange={(o) => !o && setActive(null)}>
-        <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-lg">
+        <DialogContent className="max-h-[90vh] overflow-y-auto p-4 sm:max-w-lg sm:p-6">
           {active && (
             <>
               <DialogHeader>
