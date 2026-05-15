@@ -243,7 +243,7 @@ function Index() {
       </header>
 
       {/* Map fills remaining viewport */}
-      <div className="relative flex-1 overflow-hidden bg-white" ref={mapRef}>
+      <div className="relative flex-1 overflow-hidden bg-white">
         <TransformWrapper
           initialScale={1}
           minScale={1}
@@ -261,6 +261,7 @@ function Index() {
             contentClass="!w-full !h-full !flex !items-center !justify-center"
           >
             <div
+              ref={mapRef}
               className="relative"
               style={{
                 aspectRatio: "1696 / 680",
