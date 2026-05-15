@@ -46,19 +46,19 @@ function plantCategory(p: Plant): PlantCategory {
   return "none";
 }
 function categoryDotClass(c: PlantCategory): string {
-  if (c === "manyoshu") return "bg-emerald-600";
-  if (c === "substitute") return "bg-amber-500";
-  return "bg-muted-foreground";
+  if (c === "manyoshu") return "bg-[#007b43]"; // 常磐色 Tokiwa
+  if (c === "substitute") return "bg-[#ed6d3d]"; // 柿色 Kaki
+  return "bg-[#888e7e]"; // 利休鼠 Rikyū-nezumi
 }
 function categoryHaloClass(c: PlantCategory): string {
-  if (c === "manyoshu") return "bg-emerald-500/15 group-hover:bg-emerald-500/30";
-  if (c === "substitute") return "bg-amber-500/15 group-hover:bg-amber-500/30";
-  return "bg-slate-400/15 group-hover:bg-slate-400/30";
+  if (c === "manyoshu") return "bg-[#007b43]/15 group-hover:bg-[#007b43]/30";
+  if (c === "substitute") return "bg-[#ed6d3d]/15 group-hover:bg-[#ed6d3d]/30";
+  return "bg-[#888e7e]/15 group-hover:bg-[#888e7e]/30";
 }
 function categoryGlowStyle(c: PlantCategory): string {
-  if (c === "manyoshu") return "0 0 8px rgba(5,150,105,0.45)";
-  if (c === "substitute") return "0 0 8px rgba(217,119,6,0.45)";
-  return "0 0 8px rgba(71,85,105,0.35)";
+  if (c === "manyoshu") return "0 0 8px rgba(0,123,67,0.45)";
+  if (c === "substitute") return "0 0 8px rgba(237,109,61,0.45)";
+  return "0 0 8px rgba(136,142,126,0.4)";
 }
 
 function Index() {
@@ -233,10 +233,10 @@ function Index() {
                           alt={p.name}
                           fallbackClass={
                             plantCategory(p) === "manyoshu"
-                              ? "bg-emerald-600"
+                              ? "bg-[#007b43]"
                               : plantCategory(p) === "substitute"
-                                ? "bg-amber-500"
-                                : "bg-muted-foreground"
+                                ? "bg-[#ed6d3d]"
+                                : "bg-[#888e7e]"
                           }
                         />
                         <span className="flex flex-1 flex-col gap-0.5">
@@ -376,9 +376,9 @@ function Index() {
         {/* Floating filter chips */}
         <div className="pointer-events-none absolute bottom-3 left-3 right-3 z-20 flex flex-wrap items-center gap-1.5 md:right-auto md:max-w-md">
           {([
-            ["manyoshu", "bg-emerald-600", "bg-emerald-500/15 border-emerald-500/30", "Man\u2019yōshū"],
-            ["substitute", "bg-amber-500", "bg-amber-500/15 border-amber-500/30", "SoCal sub"],
-            ["none", "bg-muted-foreground", "bg-slate-400/15 border-slate-400/30", "Other"],
+            ["manyoshu", "bg-[#007b43]", "bg-[#007b43]/15 border-[#007b43]/30", "Man\u2019yōshū"],
+            ["substitute", "bg-[#ed6d3d]", "bg-[#ed6d3d]/15 border-[#ed6d3d]/30", "SoCal sub"],
+            ["none", "bg-[#888e7e]", "bg-[#888e7e]/15 border-[#888e7e]/30", "Other"],
           ] as const).map(([cat, dot, halo, label]) => {
             const on = visibleCats[cat];
             return (
