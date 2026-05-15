@@ -682,6 +682,11 @@ function Index() {
                 <PhenologyStrip plantId={active.id} />
               )}
 
+              <PlantConfirm plantId={active.id} />
+
+              {active.scientific && <INaturalistTile scientific={active.scientific} />}
+
+
               {(active.manyoshu || active.categoryRefs) && (
                 <div className="rounded-md border border-border/60 bg-muted/40 p-3">
                   <h3 className="text-xs font-semibold uppercase tracking-wider text-accent">
