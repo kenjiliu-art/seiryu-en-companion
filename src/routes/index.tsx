@@ -536,3 +536,35 @@ function RefsSection({
   );
 }
 
+
+function ZoomControls() {
+  const { zoomIn, zoomOut, resetTransform } = useControls();
+  return (
+    <div className="absolute right-2 top-2 z-20 flex flex-col gap-1 rounded-md border border-stone-200/80 bg-background/90 p-1 shadow-sm backdrop-blur-sm">
+      <button
+        type="button"
+        onClick={() => zoomIn()}
+        aria-label="Zoom in"
+        className="flex h-8 w-8 items-center justify-center rounded text-foreground transition-colors hover:bg-muted"
+      >
+        <Plus className="h-4 w-4" />
+      </button>
+      <button
+        type="button"
+        onClick={() => zoomOut()}
+        aria-label="Zoom out"
+        className="flex h-8 w-8 items-center justify-center rounded text-foreground transition-colors hover:bg-muted"
+      >
+        <Minus className="h-4 w-4" />
+      </button>
+      <button
+        type="button"
+        onClick={() => resetTransform()}
+        aria-label="Reset view"
+        className="flex h-8 w-8 items-center justify-center rounded text-foreground transition-colors hover:bg-muted"
+      >
+        <Maximize2 className="h-4 w-4" />
+      </button>
+    </div>
+  );
+}
