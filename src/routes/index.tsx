@@ -119,6 +119,14 @@ function Index() {
     ? plants.filter((p) => isPlantActive(p.id, seasonalActiveMonths)).length
     : 0;
 
+  // Confirmed-by-visitor halos: re-read on storage events.
+  const [confirmTick, setConfirmTick] = useState(0);
+  useEffect(() => {
+    const h = () => setConfirmTick((n) => n + 1);
+    window.addEventListener("jaccc:obs-changed", h);
+    return () => window.removeEventListener("jaccc:obs-changed", h);
+  }, []);
+
   useEffect(() => {
     if (!dragId && !dragPinId) return;
     const onMove = (e: MouseEvent) => {
