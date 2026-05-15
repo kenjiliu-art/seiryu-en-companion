@@ -31,6 +31,9 @@ import {
   type InterestKind,
 } from "@/data/bloom";
 import { kou72, currentKou, kouAt, tintForKou, type Kou } from "@/data/kou72";
+import { PlantConfirm } from "@/components/PlantConfirm";
+import { INaturalistTile } from "@/components/INaturalistTile";
+import { getObservation, isFresh, STATE_META } from "@/lib/observations";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -115,6 +118,14 @@ function Index() {
   const seasonalActiveCount = seasonalActiveMonths
     ? plants.filter((p) => isPlantActive(p.id, seasonalActiveMonths)).length
     : 0;
+
+  // Confirmed-by-visitor halos: re-read on storage events.
+  const [confirmTick, setConfirmTick] = useState(0);
+  useEffect(() => {
+    const h = () => setConfirmTick((n) => n + 1);
+    window.addEventListener("jaccc:obs-changed", h);
+    return () => window.removeEventListener("jaccc:obs-changed", h);
+  }, []);
 
   useEffect(() => {
     if (!dragId && !dragPinId) return;
@@ -522,6 +533,10 @@ function Index() {
                   }
                 }
                 const fade = seasonalActiveMonths && !isSeasonalActive ? "opacity-40" : "";
+                void confirmTick;
+                const obs = getObservation(p.id);
+                const confirmed = isFresh(obs) ? obs : null;
+                const confirmColor = confirmed ? STATE_META[confirmed.state].color : null;
                 return (
                   <button
                     key={p.id}
@@ -542,6 +557,13 @@ function Index() {
                       className="relative flex h-6 w-6 items-center justify-center"
                       style={{ transform: `scale(${1 / scale})` }}
                     >
+                      {confirmColor && (
+                        <span
+                          className="absolute -inset-1 rounded-full"
+                          style={{ boxShadow: `0 0 0 1.5px ${confirmColor}, 0 0 8px ${confirmColor}99` }}
+                          aria-label="You confirmed this plant recently"
+                        />
+                      )}
                       <span
                         className={`absolute inset-0 rounded-full border border-white/60 shadow-sm backdrop-blur-[2px] transition-all duration-300 ${haloBg} ${
                           hovered === p.id || dragId === p.id ? "scale-125" : "group-hover:scale-125"
@@ -659,6 +681,11 @@ function Index() {
               {plantInterest[active.id] && plantInterest[active.id].months.length > 0 && (
                 <PhenologyStrip plantId={active.id} />
               )}
+
+              <PlantConfirm plantId={active.id} />
+
+              {active.scientific && <INaturalistTile scientific={active.scientific} />}
+
 
               {(active.manyoshu || active.categoryRefs) && (
                 <div className="rounded-md border border-border/60 bg-muted/40 p-3">
