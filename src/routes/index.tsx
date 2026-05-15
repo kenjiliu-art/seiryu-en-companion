@@ -20,8 +20,16 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { PlantThumb } from "@/components/PlantThumb";
 import { ConstructionPin, defaultConstructionPins, type ConstructionPinSpec } from "@/components/ConstructionGallery";
-import { Plus, Minus, Maximize2, Leaf, Info } from "lucide-react";
+import { Plus, Minus, Maximize2, Leaf, Info, CalendarDays } from "lucide-react";
 import { TransformWrapper, TransformComponent, useControls } from "react-zoom-pan-pinch";
+import {
+  plantInterest,
+  seasonMonths,
+  seasonJa,
+  currentSeason,
+  type Season,
+  type InterestKind,
+} from "@/data/bloom";
 
 export const Route = createFileRoute("/")({
   component: Index,
