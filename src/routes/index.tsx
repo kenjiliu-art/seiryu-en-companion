@@ -31,6 +31,9 @@ import {
   type InterestKind,
 } from "@/data/bloom";
 import { kou72, currentKou, kouAt, tintForKou, type Kou } from "@/data/kou72";
+import { PlantConfirm } from "@/components/PlantConfirm";
+import { INaturalistTile } from "@/components/INaturalistTile";
+import { getObservation, isFresh, STATE_META } from "@/lib/observations";
 
 export const Route = createFileRoute("/")({
   component: Index,
