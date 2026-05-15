@@ -227,6 +227,28 @@ function Index() {
 
                 <KouRibbon plants={plants} onPickPlant={(p) => setActive(p)} />
 
+                <button
+                  onClick={() => setKouWashOn((v) => !v)}
+                  className={`flex w-full items-center justify-between gap-3 rounded-md border px-3 py-2 text-left text-xs transition-colors ${
+                    kouWashOn ? "border-foreground bg-foreground/5" : "border-border bg-background hover:bg-muted"
+                  }`}
+                  aria-pressed={kouWashOn}
+                >
+                  <span className="flex items-center gap-2">
+                    <span
+                      className="h-3.5 w-3.5 rounded-full border border-border/60"
+                      style={{ backgroundColor: todayTint.hex }}
+                    />
+                    <span>
+                      <span className="font-medium">Kō tint wash</span>
+                      <span className="ml-1.5 text-muted-foreground">{todayTint.name}</span>
+                    </span>
+                  </span>
+                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                    {kouWashOn ? "On" : "Off"}
+                  </span>
+                </button>
+
                 {seasonMode !== "off" && seasonalActiveMonths && (
                   <>
                     <div className="rounded-md border border-border/60 bg-muted/40 p-3">
