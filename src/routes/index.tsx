@@ -330,6 +330,7 @@ function Index() {
                   editMode={editMode}
                   isDragging={dragPinId === pin.id}
                   onDragStart={(id) => setDragPinId(id)}
+                  scale={scale}
                 />
               ))}
             </div>
