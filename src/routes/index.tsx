@@ -30,7 +30,7 @@ import {
   type Season,
   type InterestKind,
 } from "@/data/bloom";
-import { kou72, currentKou, kouAt, type Kou } from "@/data/kou72";
+import { kou72, currentKou, kouAt, tintForKou, type Kou } from "@/data/kou72";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -107,6 +107,9 @@ function Index() {
   const mapRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
   const [seasonMode, setSeasonMode] = useState<SeasonMode>("off");
+  const [kouWashOn, setKouWashOn] = useState(false);
+  const todayKou = currentKou();
+  const todayTint = tintForKou(todayKou.index);
   const seasonalActiveMonths =
     seasonMode === "off" ? null : activeMonthsFor(seasonMode);
   const seasonalActiveCount = seasonalActiveMonths
@@ -223,6 +226,28 @@ function Index() {
                 </div>
 
                 <KouRibbon plants={plants} onPickPlant={(p) => setActive(p)} />
+
+                <button
+                  onClick={() => setKouWashOn((v) => !v)}
+                  className={`flex w-full items-center justify-between gap-3 rounded-md border px-3 py-2 text-left text-xs transition-colors ${
+                    kouWashOn ? "border-foreground bg-foreground/5" : "border-border bg-background hover:bg-muted"
+                  }`}
+                  aria-pressed={kouWashOn}
+                >
+                  <span className="flex items-center gap-2">
+                    <span
+                      className="h-3.5 w-3.5 rounded-full border border-border/60"
+                      style={{ backgroundColor: todayTint.hex }}
+                    />
+                    <span>
+                      <span className="font-medium">Kō tint wash</span>
+                      <span className="ml-1.5 text-muted-foreground">{todayTint.name}</span>
+                    </span>
+                  </span>
+                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                    {kouWashOn ? "On" : "Off"}
+                  </span>
+                </button>
 
                 {seasonMode !== "off" && seasonalActiveMonths && (
                   <>
@@ -439,7 +464,10 @@ function Index() {
       </header>
 
       {/* Map fills remaining viewport */}
-      <div className="relative flex-1 overflow-hidden bg-[#f1ece1]">
+      <div
+        className="relative flex-1 overflow-hidden bg-[#f1ece1] transition-colors duration-700"
+        style={kouWashOn ? { backgroundColor: todayTint.hex + "26" } : undefined}
+      >
         <TransformWrapper
           initialScale={1}
           minScale={1}
