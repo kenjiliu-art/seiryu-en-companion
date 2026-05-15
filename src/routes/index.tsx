@@ -107,6 +107,9 @@ function Index() {
   const mapRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
   const [seasonMode, setSeasonMode] = useState<SeasonMode>("off");
+  const [kouWashOn, setKouWashOn] = useState(false);
+  const todayKou = currentKou();
+  const todayTint = tintForKou(todayKou.index);
   const seasonalActiveMonths =
     seasonMode === "off" ? null : activeMonthsFor(seasonMode);
   const seasonalActiveCount = seasonalActiveMonths
