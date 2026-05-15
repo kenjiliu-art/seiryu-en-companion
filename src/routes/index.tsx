@@ -557,6 +557,13 @@ function Index() {
                       className="relative flex h-6 w-6 items-center justify-center"
                       style={{ transform: `scale(${1 / scale})` }}
                     >
+                      {confirmColor && (
+                        <span
+                          className="absolute -inset-1 rounded-full"
+                          style={{ boxShadow: `0 0 0 1.5px ${confirmColor}, 0 0 8px ${confirmColor}99` }}
+                          aria-label="You confirmed this plant recently"
+                        />
+                      )}
                       <span
                         className={`absolute inset-0 rounded-full border border-white/60 shadow-sm backdrop-blur-[2px] transition-all duration-300 ${haloBg} ${
                           hovered === p.id || dragId === p.id ? "scale-125" : "group-hover:scale-125"
