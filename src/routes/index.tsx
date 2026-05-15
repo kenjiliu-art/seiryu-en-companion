@@ -329,12 +329,12 @@ function Index() {
                     onMouseEnter={() => setHovered(p.id)}
                     onMouseLeave={() => setHovered(null)}
                     style={{ left: `${p.x}%`, top: `${p.y}%` }}
-                    className={`group absolute ${editMode ? "cursor-move" : ""}`}
+                    className={`group absolute -translate-x-1/2 -translate-y-1/2 ${editMode ? "cursor-move" : ""}`}
                     aria-label={p.name}
                   >
                     <span
                       className="relative flex h-6 w-6 items-center justify-center"
-                      style={{ transform: `translate(-50%, -50%) scale(${1 / scale})`, transformOrigin: "center" }}
+                      style={{ transform: `scale(${1 / scale})` }}
                     >
                       <span
                         className={`absolute inset-0 rounded-full border border-white/60 shadow-sm backdrop-blur-[2px] transition-all duration-300 ${categoryHaloClass(category)} ${
@@ -351,7 +351,7 @@ function Index() {
                     {(hovered === p.id || dragId === p.id) && (
                       <span
                         className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded bg-foreground px-2 py-1 text-xs text-background shadow-lg"
-                        style={{ transform: `translate(-50%, 0) scale(${1 / scale})`, transformOrigin: "top center" }}
+                        style={{ transform: `translateX(-50%) scale(${1 / scale})`, transformOrigin: "top center" }}
                       >
                         {p.name}{editMode && ` · ${p.x}, ${p.y}`}
                       </span>
