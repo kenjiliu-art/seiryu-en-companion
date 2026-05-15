@@ -77,6 +77,7 @@ function Index() {
   const toggleCat = (c: PlantCategory) =>
     setVisibleCats((v) => ({ ...v, [c]: !v[c] }));
   const mapRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
 
   useEffect(() => {
     if (!dragId && !dragPinId) return;
