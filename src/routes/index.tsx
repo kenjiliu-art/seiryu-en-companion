@@ -219,7 +219,7 @@ function Index() {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-border/60 px-4 py-3 text-xs text-muted-foreground">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-border/60 px-2 py-3 text-[11px] text-muted-foreground md:gap-x-5 md:px-4 md:text-xs">
             <label className="flex items-center gap-2 cursor-pointer">
               <input
                 type="checkbox"
