@@ -20,7 +20,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { PlantThumb } from "@/components/PlantThumb";
 import { ConstructionPin, defaultConstructionPins, type ConstructionPinSpec } from "@/components/ConstructionGallery";
-import { ChevronDown, Plus, Minus, Maximize2, Leaf, Info } from "lucide-react";
+import { Plus, Minus, Maximize2, Leaf, Info } from "lucide-react";
 import { TransformWrapper, TransformComponent, useControls } from "react-zoom-pan-pinch";
 
 export const Route = createFileRoute("/")({
@@ -67,10 +67,6 @@ function Index() {
   const [editMode, setEditMode] = useState(false);
   const [plants, setPlants] = useState<Plant[]>(initialPlants);
   const [pins, setPins] = useState<ConstructionPinSpec[]>(defaultConstructionPins);
-  const [legendOpen, setLegendOpen] = useState(() => {
-    if (typeof window === "undefined") return true;
-    return window.matchMedia("(min-width: 768px)").matches;
-  });
   const [dragId, setDragId] = useState<string | null>(null);
   const [dragPinId, setDragPinId] = useState<string | null>(null);
   const [visibleCats, setVisibleCats] = useState<Record<PlantCategory, boolean>>({
