@@ -90,11 +90,13 @@ export function ConstructionPin({
   editMode = false,
   isDragging = false,
   onDragStart,
+  scale = 1,
 }: {
   pin: ConstructionPinSpec;
   editMode?: boolean;
   isDragging?: boolean;
   onDragStart?: (id: string) => void;
+  scale?: number;
 }) {
   const [open, setOpen] = useState(false);
   const [api, setApi] = useState<CarouselApi | null>(null);
@@ -123,14 +125,20 @@ export function ConstructionPin({
           }
         }}
         style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
-        className={`group absolute z-20 -translate-x-1/2 -translate-y-1/2 ${editMode ? "cursor-move" : ""}`}
+        className={`group absolute z-20 ${editMode ? "cursor-move" : ""}`}
         aria-label={`Construction photos: ${pin.title}`}
       >
-        <span className="relative flex h-7 w-7 items-center justify-center">
+        <span
+          className="relative flex h-6 w-6 items-center justify-center"
+          style={{ transform: `translate(-50%, -50%) scale(${1 / scale})`, transformOrigin: "center" }}
+        >
           <span className={`absolute inset-0 rounded-full border border-stone-700/40 bg-stone-50/90 shadow-sm transition-transform duration-300 ${isDragging ? "scale-125 ring-2 ring-accent" : "group-hover:scale-125"}`} />
-          <Camera className="relative h-3.5 w-3.5 text-stone-700" aria-hidden />
+          <Camera className="relative h-3 w-3 text-stone-700" aria-hidden />
         </span>
-        <span className={`pointer-events-none absolute left-1/2 top-full z-10 mt-1.5 -translate-x-1/2 whitespace-nowrap rounded bg-foreground px-2 py-0.5 text-[10px] uppercase tracking-wider text-background shadow-lg ${isDragging ? "block" : "hidden group-hover:block"}`}>
+        <span
+          className={`pointer-events-none absolute left-1/2 top-full z-10 mt-1.5 whitespace-nowrap rounded bg-foreground px-2 py-0.5 text-[10px] uppercase tracking-wider text-background shadow-lg ${isDragging ? "block" : "hidden group-hover:block"}`}
+          style={{ transform: `translate(-50%, 0) scale(${1 / scale})`, transformOrigin: "top center" }}
+        >
           {pin.title}
           {isDragging ? ` · ${pin.x}, ${pin.y}` : ` · ${photos.length}`}
         </span>
