@@ -30,7 +30,7 @@ import {
   type Season,
   type InterestKind,
 } from "@/data/bloom";
-import { kou72, currentKou, kouAt, type Kou } from "@/data/kou72";
+import { kou72, currentKou, kouAt, tintForKou, type Kou } from "@/data/kou72";
 
 export const Route = createFileRoute("/")({
   component: Index,
