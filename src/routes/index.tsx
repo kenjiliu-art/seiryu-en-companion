@@ -58,6 +58,25 @@ function categoryDotClass(c: PlantCategory): string {
   if (c === "substitute") return "bg-[#ed6d3d]"; // 柿色 Kaki
   return "bg-[#888e7e]"; // 利休鼠 Rikyū-nezumi
 }
+
+// Seasonal-mode color tokens (when user enables seasonal view)
+type SeasonMode = "off" | "auto" | Season;
+const interestColor: Record<InterestKind, { bg: string; halo: string; glow: string }> = {
+  bloom:   { bg: "bg-[#d05a6e]", halo: "bg-[#d05a6e]/20 group-hover:bg-[#d05a6e]/40", glow: "0 0 10px rgba(208,90,110,0.55)" }, // 紅梅 Kōbai
+  fruit:   { bg: "bg-[#ed6d3d]", halo: "bg-[#ed6d3d]/20 group-hover:bg-[#ed6d3d]/40", glow: "0 0 10px rgba(237,109,61,0.55)" }, // 柿 Kaki
+  foliage: { bg: "bg-[#aacf53]", halo: "bg-[#aacf53]/20 group-hover:bg-[#aacf53]/40", glow: "0 0 10px rgba(170,207,83,0.55)" }, // 萌黄 Moegi
+};
+const dormantColor = { bg: "bg-[#bcb6a8]", halo: "bg-[#bcb6a8]/10 group-hover:bg-[#bcb6a8]/20", glow: "0 0 4px rgba(188,182,168,0.25)" };
+
+function activeMonthsFor(mode: Exclude<SeasonMode, "off">): number[] {
+  if (mode === "auto") return [new Date().getMonth() + 1];
+  return seasonMonths[mode];
+}
+function isPlantActive(id: string, months: number[]): boolean {
+  const interest = plantInterest[id];
+  if (!interest || interest.months.length === 0) return false;
+  return months.some((m) => interest.months.includes(m));
+}
 function categoryHaloClass(c: PlantCategory): string {
   if (c === "manyoshu") return "bg-[#007b43]/15 group-hover:bg-[#007b43]/30";
   if (c === "substitute") return "bg-[#ed6d3d]/15 group-hover:bg-[#ed6d3d]/30";
