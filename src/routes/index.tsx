@@ -244,7 +244,7 @@ function Index() {
       </header>
 
       {/* Map fills remaining viewport */}
-      <div className="relative flex-1 overflow-hidden bg-white">
+      <div className="relative flex-1 overflow-hidden bg-[#f1ece1]">
         <TransformWrapper
           initialScale={1}
           minScale={1}
