@@ -10,10 +10,17 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { PlantThumb } from "@/components/PlantThumb";
 import { ConstructionPin, defaultConstructionPins, type ConstructionPinSpec } from "@/components/ConstructionGallery";
-import { ChevronDown, Plus, Minus, Maximize2 } from "lucide-react";
+import { Plus, Minus, Maximize2, Leaf, Info } from "lucide-react";
 import { TransformWrapper, TransformComponent, useControls } from "react-zoom-pan-pinch";
 
 export const Route = createFileRoute("/")({
@@ -60,10 +67,6 @@ function Index() {
   const [editMode, setEditMode] = useState(false);
   const [plants, setPlants] = useState<Plant[]>(initialPlants);
   const [pins, setPins] = useState<ConstructionPinSpec[]>(defaultConstructionPins);
-  const [legendOpen, setLegendOpen] = useState(() => {
-    if (typeof window === "undefined") return true;
-    return window.matchMedia("(min-width: 768px)").matches;
-  });
   const [dragId, setDragId] = useState<string | null>(null);
   const [dragPinId, setDragPinId] = useState<string | null>(null);
   const [visibleCats, setVisibleCats] = useState<Record<PlantCategory, boolean>>({
@@ -114,262 +117,255 @@ function Index() {
 
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
-      <header className="border-b border-border/60 px-4 py-4 md:px-10 md:py-6">
-        <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground md:text-xs md:tracking-[0.25em]">
-          Japanese American Cultural &amp; Community Center
-        </p>
-        <h1 className="mt-1 font-serif text-2xl md:text-4xl">
-          James Irvine Japanese Garden
-        </h1>
-        <p className="mt-2 max-w-2xl text-xs text-muted-foreground md:text-sm">
-          An interactive planting plan after Takeo Uesugi&apos;s 1979 design. Tap a
-          marker on the map — or a plant in the legend — to read its uses,
-          symbolism, and Man&apos;yōshū (万葉集) poem references.
-        </p>
-      </header>
-
-      <div className="mx-auto flex max-w-[1600px] flex-col gap-6 px-2 py-4 md:gap-10 md:px-10 md:py-12">
-        {/* Map */}
-        <div
-          className="relative overflow-hidden rounded-md border border-stone-200/60 p-2 shadow-sm md:p-8"
-          style={{ backgroundColor: "#FDFCF8" }}
-        >
-          {/* Washi paper grain */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 opacity-[0.05] mix-blend-multiply"
-            style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/paper-fibers.png')" }}
-          />
-          {/* Faint vertical sumi accent line */}
-          <div aria-hidden className="pointer-events-none absolute right-1/4 top-0 h-32 w-px bg-stone-300/60" />
-
-          {/* Asymmetric inner frame — offset right for ma (negative space) */}
-          <div className="relative ml-0 lg:ml-[2%]">
-            <div
-              className="relative border border-stone-200 p-1"
-              style={{ backgroundColor: "#F7F5EF" }}
-            >
-              <div className="relative overflow-hidden bg-white" ref={mapRef}>
-                <TransformWrapper
-                  initialScale={1}
-                  minScale={1}
-                  maxScale={6}
-                  doubleClick={{ mode: "zoomIn", step: 0.7 }}
-                  wheel={{ step: 0.15 }}
-                  pinch={{ step: 5 }}
-                  panning={{ disabled: editMode, velocityDisabled: true }}
-                  limitToBounds
-                >
-                  <ZoomControls />
-                  <TransformComponent
-                    wrapperClass="!w-full !h-full"
-                    contentClass="!w-full"
-                  >
-                    <div className="relative w-full">
-                      <img
-                        src={gardenMap}
-                        alt="Planting plan of the JACCC James Irvine Japanese Garden"
-                        className="block w-full select-none opacity-40 grayscale contrast-90 mix-blend-multiply"
-                        draggable={false}
-                      />
-                      {/* Atmospheric fog wash — light from upper-left */}
-                      <div
-                        aria-hidden
-                        className="pointer-events-none absolute inset-0 opacity-50"
-                        style={{
-                          background:
-                            "linear-gradient(to top right, transparent 40%, #FDFCF8 100%)",
-                        }}
-                      />
-
-                      {plants.map((p) => {
-                        const category = plantCategory(p);
-                        if (!visibleCats[category]) return null;
-                        return (
-                          <button
-                            key={p.id}
-                            onClick={() => !editMode && setActive(p)}
-                            onMouseDown={(e) => {
-                              if (editMode) {
-                                e.preventDefault();
-                                setDragId(p.id);
-                              }
-                            }}
-                            onMouseEnter={() => setHovered(p.id)}
-                            onMouseLeave={() => setHovered(null)}
-                            style={{ left: `${p.x}%`, top: `${p.y}%` }}
-                            className={`group absolute -translate-x-1/2 -translate-y-1/2 ${editMode ? "cursor-move" : ""}`}
-                            aria-label={p.name}
-                          >
-                            <span className="relative flex h-8 w-8 items-center justify-center">
-                              <span
-                                className={`absolute inset-0 rounded-full border border-white/60 shadow-sm backdrop-blur-[2px] transition-all duration-300 ${categoryHaloClass(category)} ${
-                                  hovered === p.id || dragId === p.id ? "scale-125" : "group-hover:scale-125"
-                                }`}
-                              />
-                              <span
-                                className={`relative h-2.5 w-2.5 rounded-full transition-transform duration-300 ${categoryDotClass(category)} ${
-                                  hovered === p.id || dragId === p.id ? "scale-125" : ""
-                                }`}
-                                style={{ boxShadow: categoryGlowStyle(category) }}
-                              />
-                            </span>
-                            {(hovered === p.id || dragId === p.id) && (
-                              <span className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded bg-foreground px-2 py-1 text-xs text-background shadow-lg">
-                                {p.name}{editMode && ` · ${p.x}, ${p.y}`}
+    <main className="flex h-screen flex-col overflow-hidden bg-background text-foreground">
+      {/* Top bar */}
+      <header className="z-20 flex shrink-0 items-center justify-between gap-3 border-b border-border/60 bg-background/95 px-3 py-2 backdrop-blur md:px-5 md:py-3">
+        <div className="min-w-0">
+          <p className="truncate text-[9px] uppercase tracking-[0.2em] text-muted-foreground md:text-[10px]">
+            JACCC
+          </p>
+          <h1 className="truncate font-serif text-base leading-tight md:text-xl">
+            James Irvine Japanese Garden
+          </h1>
+        </div>
+        <div className="flex shrink-0 items-center gap-1.5">
+          <Sheet>
+            <SheetTrigger asChild>
+              <button
+                className="inline-flex h-9 items-center gap-1.5 rounded-md border border-border bg-background px-3 text-xs font-medium text-foreground transition-colors hover:bg-muted"
+                aria-label="Open about panel"
+              >
+                <Info className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">About</span>
+              </button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[88vw] sm:max-w-md">
+              <SheetHeader>
+                <SheetTitle className="font-serif text-xl">About this map</SheetTitle>
+              </SheetHeader>
+              <div className="mt-4 space-y-3 text-sm text-muted-foreground">
+                <p>
+                  An interactive planting plan after Takeo Uesugi&apos;s 1979 design.
+                  Tap a marker on the map — or a plant in the legend — to read its
+                  uses, symbolism, and Man&apos;yōshū (万葉集) poem references.
+                </p>
+                <p>
+                  Planting survey by Jon Ngai, landscape architecture intern, August
+                  2021. Garden designed 1978–1979 by Takeo Uesugi for the JACCC,
+                  inspired by Murin-an in Kyoto.
+                </p>
+                <p className="opacity-70">
+                  Camera icons on the map open construction photos from 1979.
+                </p>
+              </div>
+            </SheetContent>
+          </Sheet>
+          <Sheet>
+            <SheetTrigger asChild>
+              <button
+                className="inline-flex h-9 items-center gap-1.5 rounded-md border border-border bg-background px-3 text-xs font-medium text-foreground transition-colors hover:bg-muted"
+                aria-label="Open plant legend"
+              >
+                <Leaf className="h-3.5 w-3.5" />
+                Plants
+              </button>
+            </SheetTrigger>
+            <SheetContent side="right" className="flex w-[92vw] flex-col p-0 sm:max-w-md">
+              <SheetHeader className="border-b border-border/60 px-4 py-3">
+                <SheetTitle className="font-serif text-lg">Plant Legend</SheetTitle>
+                <p className="text-xs text-muted-foreground">
+                  {plants.length} species ·{" "}
+                  {plants.filter((p) => p.manyoshu || p.categoryRefs).length} with
+                  Man&apos;yōshū poems
+                </p>
+              </SheetHeader>
+              <ScrollArea className="flex-1">
+                <ul className="divide-y divide-border/50">
+                  {plants.map((p) => (
+                    <li key={p.id}>
+                      <button
+                        onClick={() => setActive(p)}
+                        onMouseEnter={() => setHovered(p.id)}
+                        onMouseLeave={() => setHovered(null)}
+                        className={`flex w-full items-start gap-3 px-4 py-2.5 text-left transition-colors hover:bg-muted/60 ${
+                          hovered === p.id ? "bg-muted/60" : ""
+                        }`}
+                      >
+                        <PlantThumb
+                          plantId={p.id}
+                          alt={p.name}
+                          fallbackClass={
+                            plantCategory(p) === "manyoshu"
+                              ? "bg-emerald-600"
+                              : plantCategory(p) === "substitute"
+                                ? "bg-amber-500"
+                                : "bg-muted-foreground"
+                          }
+                        />
+                        <span className="flex flex-1 flex-col gap-0.5">
+                          <span className="flex items-center gap-2 text-sm font-medium">
+                            {p.name}
+                            {p.manyoshu && (
+                              <span className="rounded-full bg-accent/15 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-accent">
+                                poem
                               </span>
                             )}
-                          </button>
-                        );
-                      })}
-                      {pins.map((pin) => (
-                        <ConstructionPin
-                          key={pin.id}
-                          pin={pin}
-                          editMode={editMode}
-                          isDragging={dragPinId === pin.id}
-                          onDragStart={(id) => setDragPinId(id)}
-                        />
-                      ))}
-                    </div>
-                  </TransformComponent>
-                </TransformWrapper>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-border/60 px-2 py-3 text-[11px] text-muted-foreground md:gap-x-5 md:px-4 md:text-xs">
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={editMode}
-                onChange={(e) => setEditMode(e.target.checked)}
-              />
-              Edit positions
-            </label>
-            {editMode && (
-              <button
-                onClick={exportCoords}
-                className="rounded border border-accent/40 px-2 py-0.5 text-accent hover:bg-accent hover:text-accent-foreground"
-              >
-                Copy coords
-              </button>
-            )}
-            {([
-              ["manyoshu", "bg-emerald-600", "bg-emerald-500/15 border-emerald-500/30", "In the Man\u2019yōshū"],
-              ["substitute", "bg-amber-500", "bg-amber-500/15 border-amber-500/30", "SoCal substitute / general match"],
-              ["none", "bg-muted-foreground", "bg-slate-400/15 border-slate-400/30", "Not in the Man\u2019yōshū"],
-            ] as const).map(([cat, dot, halo, label]) => {
-              const on = visibleCats[cat];
-              return (
-                <button
-                  key={cat}
-                  onClick={() => toggleCat(cat)}
-                  aria-pressed={on}
-                  className={`flex items-center gap-2 rounded-full border px-2 py-1 transition-colors ${
-                    on
-                      ? "border-border bg-background text-foreground"
-                      : "border-dashed border-border/60 text-muted-foreground/60 line-through"
-                  }`}
-                >
-                  <span className={`relative flex h-5 w-5 items-center justify-center ${on ? "" : "opacity-40"}`}>
-                    <span className={`absolute inset-0 rounded-full border ${halo}`} />
-                    <span className={`relative h-1.5 w-1.5 rounded-full ${dot}`} />
-                  </span>
-                  {label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Legend */}
-        <aside className="rounded-md border border-border bg-card">
-          <button
-            onClick={() => setLegendOpen((o) => !o)}
-            aria-expanded={legendOpen}
-            className="flex w-full items-center justify-between gap-3 border-b border-border/60 px-4 py-3 text-left transition-colors hover:bg-muted/40"
-          >
-            <span>
-              <h2 className="font-serif text-lg">Plant Legend</h2>
-              <p className="text-xs text-muted-foreground">
-                {plants.length} species · {plants.filter((p) => p.manyoshu || p.categoryRefs).length} with
-                Man&apos;yōshū poems
-              </p>
-            </span>
-            <ChevronDown
-              className={`h-4 w-4 text-muted-foreground transition-transform ${legendOpen ? "rotate-180" : ""}`}
-            />
-          </button>
-          {legendOpen && (
-            <ScrollArea className="max-h-[60vh]">
-              <ul className="divide-y divide-border/50">
-                {plants.map((p) => (
-                  <li key={p.id}>
-                    <button
-                      onClick={() => setActive(p)}
-                      onMouseEnter={() => setHovered(p.id)}
-                      onMouseLeave={() => setHovered(null)}
-                      className={`flex w-full items-start gap-3 px-4 py-2.5 text-left transition-colors hover:bg-muted/60 ${
-                        hovered === p.id ? "bg-muted/60" : ""
-                      }`}
-                    >
-                      <PlantThumb
-                        plantId={p.id}
-                        alt={p.name}
-                        fallbackClass={
-                          plantCategory(p) === "manyoshu"
-                            ? "bg-emerald-600"
-                            : plantCategory(p) === "substitute"
-                              ? "bg-amber-500"
-                              : "bg-muted-foreground"
-                        }
-                      />
-                      <span className="flex flex-1 flex-col gap-0.5">
-                      <span className="flex items-center gap-2 text-sm font-medium">
-                        {p.name}
-                        {p.manyoshu && (
-                          <span className="rounded-full bg-accent/15 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-accent">
-                            poem
+                            {!p.manyoshu && p.categoryRefs && (
+                              <span className="rounded-full bg-accent/10 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-accent/80">
+                                general
+                              </span>
+                            )}
+                            {p.substitute && (
+                              <span
+                                title="Substituted for the original Man'yōshū plant to suit the Los Angeles climate"
+                                className="rounded-full border border-dashed border-muted-foreground/40 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground"
+                              >
+                                LA sub
+                              </span>
+                            )}
                           </span>
-                        )}
-                        {!p.manyoshu && p.categoryRefs && (
-                          <span className="rounded-full bg-accent/10 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-accent/80">
-                            general
-                          </span>
-                        )}
-                        {p.substitute && (
-                          <span
-                            title="Substituted for the original Man'yōshū plant to suit the Los Angeles climate"
-                            className="rounded-full border border-dashed border-muted-foreground/40 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground"
-                          >
-                            LA sub
-                          </span>
-                        )}
-                      </span>
-                      {(p.japanese || p.romaji || p.scientific) && (
-                        <span className="text-xs italic text-muted-foreground">
-                          {p.japanese && <span className="not-italic mr-1">{p.japanese}</span>}
-                          {p.romaji && <span className="mr-1">{p.romaji}</span>}
-                          {p.scientific && <span>· {p.scientific}</span>}
+                          {(p.japanese || p.romaji || p.scientific) && (
+                            <span className="text-xs italic text-muted-foreground">
+                              {p.japanese && <span className="not-italic mr-1">{p.japanese}</span>}
+                              {p.romaji && <span className="mr-1">{p.romaji}</span>}
+                              {p.scientific && <span>· {p.scientific}</span>}
+                            </span>
+                          )}
                         </span>
-                      )}
-                      </span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </ScrollArea>
-          )}
-        </aside>
-      </div>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </ScrollArea>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </header>
 
-      <footer className="border-t border-border/60 px-4 py-5 text-[11px] text-muted-foreground md:px-10 md:py-6 md:text-xs">
-        Planting survey by Jon Ngai, landscape architecture intern, August 2021. Garden
-        designed 1978–1979 by Takeo Uesugi for the JACCC, inspired by Murin-an in Kyoto.
-        <span className="ml-2 opacity-70">Camera icons on the map open construction photos from 1979.</span>
-      </footer>
+      {/* Map fills remaining viewport */}
+      <div className="relative flex-1 overflow-hidden bg-white" ref={mapRef}>
+        <TransformWrapper
+          initialScale={1}
+          minScale={1}
+          maxScale={6}
+          doubleClick={{ mode: "zoomIn", step: 0.7 }}
+          wheel={{ step: 0.15 }}
+          pinch={{ step: 5 }}
+          panning={{ disabled: editMode, velocityDisabled: true }}
+          limitToBounds
+          centerOnInit
+        >
+          <ZoomControls />
+          <TransformComponent
+            wrapperClass="!w-full !h-full"
+            contentClass="!w-full !h-full"
+          >
+            <div className="relative h-full w-full">
+              <img
+                src={gardenMap}
+                alt="Planting plan of the JACCC James Irvine Japanese Garden"
+                className="block h-full w-full select-none object-contain opacity-40 grayscale contrast-90 mix-blend-multiply"
+                draggable={false}
+              />
+              {plants.map((p) => {
+                const category = plantCategory(p);
+                if (!visibleCats[category]) return null;
+                return (
+                  <button
+                    key={p.id}
+                    onClick={() => !editMode && setActive(p)}
+                    onMouseDown={(e) => {
+                      if (editMode) {
+                        e.preventDefault();
+                        setDragId(p.id);
+                      }
+                    }}
+                    onMouseEnter={() => setHovered(p.id)}
+                    onMouseLeave={() => setHovered(null)}
+                    style={{ left: `${p.x}%`, top: `${p.y}%` }}
+                    className={`group absolute -translate-x-1/2 -translate-y-1/2 ${editMode ? "cursor-move" : ""}`}
+                    aria-label={p.name}
+                  >
+                    <span className="relative flex h-8 w-8 items-center justify-center">
+                      <span
+                        className={`absolute inset-0 rounded-full border border-white/60 shadow-sm backdrop-blur-[2px] transition-all duration-300 ${categoryHaloClass(category)} ${
+                          hovered === p.id || dragId === p.id ? "scale-125" : "group-hover:scale-125"
+                        }`}
+                      />
+                      <span
+                        className={`relative h-2.5 w-2.5 rounded-full transition-transform duration-300 ${categoryDotClass(category)} ${
+                          hovered === p.id || dragId === p.id ? "scale-125" : ""
+                        }`}
+                        style={{ boxShadow: categoryGlowStyle(category) }}
+                      />
+                    </span>
+                    {(hovered === p.id || dragId === p.id) && (
+                      <span className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded bg-foreground px-2 py-1 text-xs text-background shadow-lg">
+                        {p.name}{editMode && ` · ${p.x}, ${p.y}`}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+              {pins.map((pin) => (
+                <ConstructionPin
+                  key={pin.id}
+                  pin={pin}
+                  editMode={editMode}
+                  isDragging={dragPinId === pin.id}
+                  onDragStart={(id) => setDragPinId(id)}
+                />
+              ))}
+            </div>
+          </TransformComponent>
+        </TransformWrapper>
+
+        {/* Floating filter chips */}
+        <div className="pointer-events-none absolute bottom-3 left-3 right-3 z-20 flex flex-wrap items-center gap-1.5 md:right-auto md:max-w-md">
+          {([
+            ["manyoshu", "bg-emerald-600", "bg-emerald-500/15 border-emerald-500/30", "Man\u2019yōshū"],
+            ["substitute", "bg-amber-500", "bg-amber-500/15 border-amber-500/30", "SoCal sub"],
+            ["none", "bg-muted-foreground", "bg-slate-400/15 border-slate-400/30", "Other"],
+          ] as const).map(([cat, dot, halo, label]) => {
+            const on = visibleCats[cat];
+            return (
+              <button
+                key={cat}
+                onClick={() => toggleCat(cat)}
+                aria-pressed={on}
+                className={`pointer-events-auto flex items-center gap-1.5 rounded-full border px-2 py-1 text-[11px] shadow-sm backdrop-blur-sm transition-colors ${
+                  on
+                    ? "border-border bg-background/95 text-foreground"
+                    : "border-dashed border-border/60 bg-background/70 text-muted-foreground/60 line-through"
+                }`}
+              >
+                <span className={`relative flex h-4 w-4 items-center justify-center ${on ? "" : "opacity-40"}`}>
+                  <span className={`absolute inset-0 rounded-full border ${halo}`} />
+                  <span className={`relative h-1.5 w-1.5 rounded-full ${dot}`} />
+                </span>
+                {label}
+              </button>
+            );
+          })}
+          {editMode && (
+            <button
+              onClick={exportCoords}
+              className="pointer-events-auto rounded-full border border-accent/40 bg-background/95 px-2 py-1 text-[11px] text-accent shadow-sm hover:bg-accent hover:text-accent-foreground"
+            >
+              Copy coords
+            </button>
+          )}
+          <label className="pointer-events-auto ml-auto flex items-center gap-1.5 rounded-full border border-border bg-background/95 px-2 py-1 text-[11px] text-muted-foreground shadow-sm">
+            <input
+              type="checkbox"
+              checked={editMode}
+              onChange={(e) => setEditMode(e.target.checked)}
+              className="h-3 w-3"
+            />
+            Edit
+          </label>
+        </div>
+      </div>
 
       <Dialog open={!!active} onOpenChange={(o) => !o && setActive(null)}>
         <DialogContent className="max-h-[90vh] overflow-y-auto p-4 sm:max-w-lg sm:p-6">
