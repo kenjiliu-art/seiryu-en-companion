@@ -166,6 +166,129 @@ function Index() {
           <Sheet>
             <SheetTrigger asChild>
               <button
+                className={`inline-flex h-9 items-center gap-1.5 rounded-md border px-3 text-xs font-medium transition-colors ${
+                  seasonMode === "off"
+                    ? "border-border bg-background text-foreground hover:bg-muted"
+                    : "border-[#d05a6e]/40 bg-[#d05a6e]/10 text-[#a93b53] hover:bg-[#d05a6e]/15"
+                }`}
+                aria-label="Open season panel"
+              >
+                <CalendarDays className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">
+                  {seasonMode === "off"
+                    ? "Season"
+                    : seasonMode === "auto"
+                      ? `Now · ${seasonalActiveCount}`
+                      : `${seasonJa[seasonMode].kanji} ${seasonJa[seasonMode].romaji} · ${seasonalActiveCount}`}
+                </span>
+              </button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[88vw] overflow-y-auto sm:max-w-md">
+              <SheetHeader>
+                <SheetTitle className="font-serif text-xl">Seasonal view</SheetTitle>
+                <p className="text-xs text-muted-foreground">
+                  Recolor the map by what each plant is doing in Los Angeles right now.
+                </p>
+              </SheetHeader>
+
+              <div className="mt-4 space-y-4 text-sm">
+                <div className="grid grid-cols-3 gap-1.5">
+                  {([
+                    ["off", "Off", "Show category colors"],
+                    ["auto", "Auto", "Use today's date"],
+                    ["spring", `${seasonJa.spring.kanji} Spring`, "Mar – May"],
+                    ["summer", `${seasonJa.summer.kanji} Summer`, "Jun – Aug"],
+                    ["autumn", `${seasonJa.autumn.kanji} Autumn`, "Sep – Nov"],
+                    ["winter", `${seasonJa.winter.kanji} Winter`, "Dec – Feb"],
+                  ] as const).map(([mode, label, hint]) => {
+                    const on = seasonMode === mode;
+                    return (
+                      <button
+                        key={mode}
+                        onClick={() => setSeasonMode(mode)}
+                        className={`flex flex-col items-start gap-0.5 rounded-md border px-2.5 py-2 text-left transition-colors ${
+                          on
+                            ? "border-foreground bg-foreground text-background"
+                            : "border-border bg-background hover:bg-muted"
+                        }`}
+                      >
+                        <span className="text-xs font-medium">{label}</span>
+                        <span className={`text-[10px] ${on ? "text-background/70" : "text-muted-foreground"}`}>
+                          {hint}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {seasonMode !== "off" && seasonalActiveMonths && (
+                  <>
+                    <div className="rounded-md border border-border/60 bg-muted/40 p-3">
+                      <p className="text-xs uppercase tracking-wider text-muted-foreground">
+                        Color key
+                      </p>
+                      <ul className="mt-2 space-y-1.5 text-xs">
+                        <li className="flex items-center gap-2">
+                          <span className="h-2.5 w-2.5 rounded-full bg-[#d05a6e]" /> In bloom
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <span className="h-2.5 w-2.5 rounded-full bg-[#ed6d3d]" /> Fruit / berries
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <span className="h-2.5 w-2.5 rounded-full bg-[#aacf53]" /> Foliage interest
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <span className="h-2.5 w-2.5 rounded-full bg-[#bcb6a8]" /> Quiet / dormant
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <p className="text-xs uppercase tracking-wider text-muted-foreground">
+                        {seasonalActiveCount} of {plants.length} plants active
+                      </p>
+                      <ul className="mt-2 divide-y divide-border/40 rounded-md border border-border/60 bg-background/60">
+                        {plants
+                          .filter((p) => isPlantActive(p.id, seasonalActiveMonths))
+                          .map((p) => {
+                            const interest = plantInterest[p.id]!;
+                            const c = interestColor[interest.kind];
+                            return (
+                              <li key={p.id}>
+                                <button
+                                  onClick={() => setActive(p)}
+                                  className="flex w-full items-center gap-3 px-3 py-2 text-left hover:bg-muted/60"
+                                >
+                                  <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${c.bg}`} />
+                                  <span className="flex-1 text-sm">
+                                    <span className="font-medium">{p.name}</span>
+                                    {p.japanese && (
+                                      <span className="ml-1.5 text-xs text-muted-foreground">{p.japanese}</span>
+                                    )}
+                                  </span>
+                                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                                    {interest.kind}
+                                  </span>
+                                </button>
+                              </li>
+                            );
+                          })}
+                      </ul>
+                    </div>
+
+                    <p className="text-[11px] italic text-muted-foreground">
+                      Bloom windows are curated estimates for the Los Angeles climate, not
+                      live observations. Persimmon, cherry, and wisteria timing in Little
+                      Tokyo can shift a few weeks year-to-year.
+                    </p>
+                  </>
+                )}
+              </div>
+            </SheetContent>
+          </Sheet>
+          <Sheet>
+            <SheetTrigger asChild>
+              <button
                 className="inline-flex h-9 items-center gap-1.5 rounded-md border border-border bg-background px-3 text-xs font-medium text-foreground transition-colors hover:bg-muted"
                 aria-label="Open about panel"
               >
