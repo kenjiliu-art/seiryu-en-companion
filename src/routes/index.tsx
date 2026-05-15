@@ -264,7 +264,7 @@ function Index() {
               <img
                 src={gardenMap}
                 alt="Planting plan of the JACCC James Irvine Japanese Garden"
-                className="block h-full w-full select-none object-contain opacity-40 grayscale contrast-90 mix-blend-multiply"
+                className="block h-full w-full select-none object-cover opacity-40 grayscale contrast-90 mix-blend-multiply"
                 draggable={false}
               />
               {plants.map((p) => {
