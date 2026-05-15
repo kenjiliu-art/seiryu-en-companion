@@ -442,7 +442,10 @@ function Index() {
       </header>
 
       {/* Map fills remaining viewport */}
-      <div className="relative flex-1 overflow-hidden bg-[#f1ece1]">
+      <div
+        className="relative flex-1 overflow-hidden bg-[#f1ece1] transition-colors duration-700"
+        style={kouWashOn ? { backgroundColor: todayTint.hex + "26" } : undefined}
+      >
         <TransformWrapper
           initialScale={1}
           minScale={1}
