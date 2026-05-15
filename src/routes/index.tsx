@@ -258,13 +258,20 @@ function Index() {
           <ZoomControls />
           <TransformComponent
             wrapperClass="!w-full !h-full"
-            contentClass="!w-full !h-full"
+            contentClass="!w-full !h-full !flex !items-center !justify-center"
           >
-            <div className="relative h-full w-full">
+            <div
+              className="relative"
+              style={{
+                aspectRatio: "1696 / 680",
+                width: "min(100%, calc(100vh * 1696 / 680))",
+                maxHeight: "100%",
+              }}
+            >
               <img
                 src={gardenMap}
                 alt="Planting plan of the JACCC James Irvine Japanese Garden"
-                className="block h-full w-full select-none object-cover opacity-40 grayscale contrast-90 mix-blend-multiply"
+                className="block h-full w-full select-none opacity-40 grayscale contrast-90 mix-blend-multiply"
                 draggable={false}
               />
               {plants.map((p) => {
