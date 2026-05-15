@@ -796,3 +796,50 @@ function ZoomControls() {
     </div>
   );
 }
+
+const MONTH_LABELS = ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"];
+
+function PhenologyStrip({ plantId }: { plantId: string }) {
+  const interest = plantInterest[plantId];
+  if (!interest) return null;
+  const now = new Date().getMonth() + 1;
+  const c = interestColor[interest.kind];
+  const kindLabel =
+    interest.kind === "bloom" ? "Flowering" : interest.kind === "fruit" ? "Fruiting" : "Foliage interest";
+  return (
+    <div className="rounded-md border border-border/60 bg-muted/40 p-3">
+      <div className="flex items-baseline justify-between gap-2">
+        <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+          Seasonal interest · Los Angeles
+        </h3>
+        <span className="text-[10px] uppercase tracking-wider text-muted-foreground">{kindLabel}</span>
+      </div>
+      <div className="mt-2 flex gap-1">
+        {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => {
+          const on = interest.months.includes(m);
+          const isNow = m === now;
+          return (
+            <div key={m} className="flex flex-1 flex-col items-center gap-1">
+              <span
+                className={`h-3 w-full rounded-sm border ${
+                  on ? `${c.bg} border-transparent` : "border-border/60 bg-background/60"
+                } ${isNow ? "ring-1 ring-foreground" : ""}`}
+                aria-label={on ? `Active in month ${m}` : `Not active in month ${m}`}
+              />
+              <span
+                className={`text-[9px] tabular-nums ${
+                  isNow ? "font-semibold text-foreground" : "text-muted-foreground"
+                }`}
+              >
+                {MONTH_LABELS[m - 1]}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+      {interest.note && (
+        <p className="mt-2 text-[11px] italic text-muted-foreground">{interest.note}</p>
+      )}
+    </div>
+  );
+}
