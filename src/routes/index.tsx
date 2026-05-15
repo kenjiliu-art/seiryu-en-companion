@@ -105,6 +105,12 @@ function Index() {
     setVisibleCats((v) => ({ ...v, [c]: !v[c] }));
   const mapRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
+  const [seasonMode, setSeasonMode] = useState<SeasonMode>("off");
+  const seasonalActiveMonths =
+    seasonMode === "off" ? null : activeMonthsFor(seasonMode);
+  const seasonalActiveCount = seasonalActiveMonths
+    ? plants.filter((p) => isPlantActive(p.id, seasonalActiveMonths)).length
+    : 0;
 
   useEffect(() => {
     if (!dragId && !dragPinId) return;
