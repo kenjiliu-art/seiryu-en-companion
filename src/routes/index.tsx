@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { PlantThumb } from "@/components/PlantThumb";
-import { ConstructionPin, defaultConstructionPins, type ConstructionPinSpec } from "@/components/ConstructionGallery";
+import { ConstructionPin, constructionPins, type ConstructionPinSpec } from "@/components/ConstructionGallery";
 import { Plus, Minus, Maximize2, Leaf, Info, CalendarDays } from "lucide-react";
 import { TransformWrapper, TransformComponent, useControls } from "react-zoom-pan-pinch";
 import {
@@ -95,7 +95,7 @@ function Index() {
   const [hovered, setHovered] = useState<string | null>(null);
   const [editMode, setEditMode] = useState(false);
   const [plants, setPlants] = useState<Plant[]>(initialPlants);
-  const [pins, setPins] = useState<ConstructionPinSpec[]>(defaultConstructionPins);
+  const [pins, setPins] = useState<ConstructionPinSpec[]>(constructionPins);
   const [dragId, setDragId] = useState<string | null>(null);
   const [dragPinId, setDragPinId] = useState<string | null>(null);
   const [visibleCats, setVisibleCats] = useState<Record<PlantCategory, boolean>>({
