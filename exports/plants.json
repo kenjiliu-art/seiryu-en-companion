@@ -1,0 +1,628 @@
+[
+  {
+    "id": "black-pine",
+    "name": "Japanese Black Pine",
+    "japanese": "黒松",
+    "romaji": "Kuromatsu",
+    "scientific": "Pinus thunbergii",
+    "description": "One of the most iconic elements of Japanese gardens. Often trimmed in a bonsai form, these trees are seen as a direct link between the heavens and earth. The needles or 'candles' are trimmed to point upward toward the gods.",
+    "manyoshu": [
+      "MYS I: 11",
+      "MYS I: 34",
+      "MYS I: 63",
+      "MYS I: 65",
+      "MYS I: 66",
+      "MYS I: 73",
+      "MYS II: 113",
+      "MYS II: 141",
+      "MYS II: 143",
+      "MYS II: 144",
+      "MYS II: 145",
+      "MYS II: 146",
+      "MYS II: 228",
+      "MYS III: 257",
+      "MYS III: 260",
+      "MYS III: 279",
+      "MYS III: 295",
+      "MYS III: 309",
+      "MYS III: 394",
+      "MYS III: 431",
+      "MYS III: 444",
+      "MYS IV: 588",
+      "MYS IV: 593",
+      "MYS IV: 623",
+      "MYS V: 895",
+      "MYS VI: 952",
+      "MYS VI: 990",
+      "MYS VI: 1030",
+      "MYS VI: 1041",
+      "MYS VI: 1042",
+      "MYS VI: 1043",
+      "MYS VII: 1159",
+      "MYS VII: 1185",
+      "MYS VIII: 1458",
+      "MYS VIII: 1650",
+      "MYS VIII: 1654",
+      "MYS IX: 1674",
+      "MYS IX: 1687",
+      "MYS IX: 1716",
+      "MYS IX: 1783",
+      "MYS IX: 1795",
+      "MYS X: 1922",
+      "MYS X: 1937",
+      "MYS X: 2198",
+      "MYS X: 2313",
+      "MYS X: 2314",
+      "MYS XI: 2484",
+      "MYS XI: 2485",
+      "MYS XI: 2486",
+      "MYS XI: 2487",
+      "MYS XI: 2653",
+      "MYS XI: 2751",
+      "MYS XII: 2861",
+      "MYS XII: 3047",
+      "MYS XII: 3130",
+      "MYS XIII: 3258",
+      "MYS XIII: 3324",
+      "MYS XIII: 3346",
+      "MYS XIV: 3433",
+      "MYS XIV: 3495",
+      "MYS XV: 3621",
+      "MYS XV: 3655",
+      "MYS XV: 3721",
+      "MYS XV: 3747",
+      "MYS XVII: 3890",
+      "MYS XVII: 3899",
+      "MYS XVII: 3942",
+      "MYS XVII: 4014",
+      "MYS XIX: 4169",
+      "MYS XIX: 4177",
+      "MYS XIX: 4266",
+      "MYS XIX: 4271",
+      "MYS XX: 4375",
+      "MYS XX: 4439",
+      "MYS XX: 4457",
+      "MYS XX: 4464",
+      "MYS XX: 4498",
+      "MYS XX: 4501"
+    ],
+    "links": [
+      {
+        "label": "All pine (matsu) poems",
+        "url": "http://www.wakapoetry.net/matsu/"
+      }
+    ],
+    "x": 41.1,
+    "y": 66.9
+  },
+  {
+    "id": "flowering-cherry",
+    "name": "Flowering Cherry",
+    "japanese": "山桜",
+    "romaji": "Sakura / Yamazakura",
+    "scientific": "Prunus serrulata 'Kwanzan'",
+    "description": "A prominent symbol in Japan, often seen on kimono and confectionery. The cherry symbolizes impermanence — its dormancy is seen as just as beautiful as its blossoms. The wood makes a gray-colored charcoal and the leaves are used to wrap mochi.",
+    "manyoshu": [
+      "MYS VIII: 1440",
+      "MYS X: 1869"
+    ],
+    "x": 52.8,
+    "y": 78
+  },
+  {
+    "id": "wisteria",
+    "name": "Wisteria",
+    "japanese": "藤",
+    "romaji": "Fuji / Nodafuji / Yamafuji",
+    "scientific": "Wisteria floribunda",
+    "description": "Traditionally used in combination with mulberry trees to make high-quality paper. The fragrant root is used in baths.",
+    "manyoshu": [
+      "MYS III: 330",
+      "MYS III: 413",
+      "MYS VIII: 1471",
+      "MYS VIII: 1627",
+      "MYS X: 1901",
+      "MYS X: 1944",
+      "MYS X: 1974",
+      "MYS X: 1991",
+      "MYS XII: 2971",
+      "MYS XII: 3075",
+      "MYS XIII: 3248",
+      "MYS XIV: 3504",
+      "MYS XVII: 3952",
+      "MYS XVII: 3993",
+      "MYS XVIII: 4042",
+      "MYS XVIII: 4043",
+      "MYS XIX: 4178",
+      "MYS XIX: 4188",
+      "MYS XIX: 4192",
+      "MYS XIX: 4193",
+      "MYS XIX: 4199",
+      "MYS XIX: 4200",
+      "MYS XIX: 4201",
+      "MYS XIX: 4202",
+      "MYS XIX: 4207",
+      "MYS XIX: 4210"
+    ],
+    "x": 52.2,
+    "y": 15
+  },
+  {
+    "id": "azalea",
+    "name": "Azalea",
+    "japanese": "山躑躅",
+    "romaji": "Yamatsutsuji",
+    "scientific": "Azalea",
+    "description": "Long used as a festival flower. Modern azaleas would not be in such wide production were it not for the work of Japanese gardeners and cultivators.",
+    "manyoshu": [
+      "MYS II: 185",
+      "MYS III: 434",
+      "MYS III: 443",
+      "MYS VI: 971",
+      "MYS VII: 1188",
+      "MYS IX: 1694",
+      "MYS X: 1905",
+      "MYS XIII: 3305",
+      "MYS XIII: 3309"
+    ],
+    "x": 66.3,
+    "y": 79.3
+  },
+  {
+    "id": "japanese-camellia",
+    "name": "Japanese Camellia",
+    "japanese": "藪椿 / 山椿",
+    "romaji": "Yabutsubaki / Yamatsubaki",
+    "scientific": "Camellia japonica",
+    "description": "Oil pressed from the seeds (tsubaki-abura, 椿油) has been traditionally used in Japan for hair care, and the plant is used to prepare anti-inflammatory medicines. Camellias offer splashes of color and impermanence in the landscape.",
+    "categoryRefs": {
+      "label": "Camellia (tsubaki, 椿)",
+      "refs": [
+        "MYS I: 54",
+        "MYS I: 56",
+        "MYS I: 73",
+        "MYS VII: 1262",
+        "MYS XIII: 3222",
+        "MYS XIX: 4152",
+        "MYS XIX: 4177",
+        "MYS XX: 4418",
+        "MYS XX: 4481"
+      ]
+    },
+    "links": [
+      {
+        "label": "All camellia (tsubaki) poems",
+        "url": "http://www.wakapoetry.net/tag/tsubaki/"
+      }
+    ],
+    "x": 72.8,
+    "y": 80.1
+  },
+  {
+    "id": "sasanqua-camellia",
+    "name": "Sasanqua Camellia",
+    "scientific": "Camellia sasanqua",
+    "description": "A close relative of the Japanese camellia, blooming in autumn and early winter.",
+    "manyoshu": [
+      "MYS I: 54",
+      "MYS I: 56",
+      "MYS I: 73",
+      "MYS VII: 1262",
+      "MYS XIII: 3222",
+      "MYS XIX: 4152",
+      "MYS XIX: 4177",
+      "MYS XX: 4418",
+      "MYS XX: 4481"
+    ],
+    "x": 72.6,
+    "y": 63
+  },
+  {
+    "id": "japanese-magnolia",
+    "name": "Japanese Magnolia",
+    "romaji": "Honoki",
+    "scientific": "Magnolia liliiflora",
+    "description": "Bark extract has been used for ~1,000 years in traditional Chinese and Japanese medicine for ailments ranging from asthma to depression to muscle pain.",
+    "manyoshu": [
+      "MYS XIX: 4204"
+    ],
+    "x": 82.1,
+    "y": 78.5
+  },
+  {
+    "id": "japanese-maple",
+    "name": "Japanese Maple",
+    "romaji": "Kaerude / Irohakaerude / Kaede / Yamamomiji",
+    "scientific": "Acer palmatum",
+    "description": "The leaves are packed around apples and root crops to help preserve them. The wood is used to make instruments and flooring; the leaves are also used in bouquets.",
+    "manyoshu": [
+      "MYS VIII: 1623",
+      "MYS XIV: 3494"
+    ],
+    "x": 82,
+    "y": 58.8
+  },
+  {
+    "id": "madake-bamboo",
+    "name": "Madake Bamboo",
+    "romaji": "Take",
+    "scientific": "Phyllostachys bambusoides",
+    "description": "A large bamboo that sprouts March–April, when its shoots are edible. The leaves are used to wrap rice balls; the wood is used for building and crafting. In the JACCC garden, the bamboo forest represents the future of the Japanese American community — its strength and flexibility.",
+    "categoryRefs": {
+      "label": "Bamboo (take, 竹)",
+      "refs": [
+        "MYS III: 379",
+        "MYS III: 420",
+        "MYS VI: 955",
+        "MYS VI: 1047",
+        "MYS VII: 1412",
+        "MYS XIX: 4291"
+      ]
+    },
+    "links": [
+      {
+        "label": "All bamboo (take) poems",
+        "url": "http://www.wakapoetry.net/tag/take/"
+      }
+    ],
+    "x": 24.9,
+    "y": 81.9
+  },
+  {
+    "id": "golden-bamboo",
+    "name": "Golden Bamboo",
+    "scientific": "Phyllostachys aurea",
+    "description": "An ornamental bamboo cluster forming an evergreen screen.",
+    "manyoshu": [
+      "MYS II: 167",
+      "MYS II: 199",
+      "MYS II: 217",
+      "MYS III: 379",
+      "MYS III: 420",
+      "MYS V: 824",
+      "MYS VI: 955",
+      "MYS VI: 1047",
+      "MYS VI: 1050",
+      "MYS VII: 1412",
+      "MYS IX: 1677",
+      "MYS X: 1790",
+      "MYS XI: 2530",
+      "MYS XI: 2773",
+      "MYS XIII: 3284",
+      "MYS XIV: 3474",
+      "MYS XV: 3758",
+      "MYS XVI: 3791",
+      "MYS XIX: 4286",
+      "MYS XIX: 4291"
+    ],
+    "x": 8.7,
+    "y": 88.2
+  },
+  {
+    "id": "broad-leaf-bamboo",
+    "name": "Broad Leaf Bamboo",
+    "romaji": "Sasa",
+    "description": "A short, broad-leafed bamboo used widely as understory and groundcover.",
+    "categoryRefs": {
+      "label": "Sasa / bamboo grass (笹)",
+      "refs": [
+        "MYS II: 133",
+        "MYS VII: 1121",
+        "MYS XX: 4431"
+      ]
+    },
+    "links": [
+      {
+        "label": "All sasa poems",
+        "url": "http://www.wakapoetry.net/tag/sasa/"
+      }
+    ],
+    "x": 37.2,
+    "y": 95.8
+  },
+  {
+    "id": "camphor",
+    "name": "Camphor",
+    "romaji": "Kusunoki",
+    "scientific": "Cinnamomum camphora",
+    "description": "The oil of camphor trees is commonly used in industrial applications.",
+    "x": 64,
+    "y": 33.6
+  },
+  {
+    "id": "crape-myrtle",
+    "name": "Crape Myrtle",
+    "romaji": "Saru Suberi (slippery)",
+    "scientific": "Lagerstroemia",
+    "description": "Known in Japan as Saru Suberi — 'slippery' — from old folklore that the bark is so smooth not even a monkey can climb it.",
+    "x": 59.2,
+    "y": 71.9
+  },
+  {
+    "id": "fortnight-lily",
+    "name": "Fortnight Lily",
+    "japanese": "笹百合 / 山百合",
+    "romaji": "Sasayuri / Yamayuri (substituted)",
+    "scientific": "Dietes iridioides",
+    "description": "Substituted for the lilies of the Man'yōshū to suit the Southern California climate. Traditionally, Japanese lily (Lilium japonicum) and mountain lily (Lilium auratum) would be used.",
+    "manyoshu": [
+      "MYS VII: 1257",
+      "MYS VIII: 1503",
+      "MYS XI: 2467",
+      "MYS XVIII: 4086",
+      "MYS XVIII: 4087",
+      "MYS XVIII: 4088",
+      "MYS XVIII: 4113",
+      "MYS XVIII: 4115",
+      "MYS XX: 4369"
+    ],
+    "substitute": true,
+    "x": 44.4,
+    "y": 85.6
+  },
+  {
+    "id": "dwarf-mondo",
+    "name": "Dwarf Mondo Grass",
+    "romaji": "Janohige / Ryunohige / Yaburan",
+    "scientific": "Ophiopogon japonicus",
+    "description": "Used in traditional Japanese gardens as a groundcover, especially in geometric settings.",
+    "manyoshu": [
+      "MYS IV: 546",
+      "MYS XI: 2456",
+      "MYS XI: 2474",
+      "MYS XI: 2477",
+      "MYS XII: 2862",
+      "MYS XII: 3051",
+      "MYS XII: 3053",
+      "MYS XII: 3055",
+      "MYS XII: 3066",
+      "MYS XII: 3204",
+      "MYS XIII: 3291",
+      "MYS XIV: 3577",
+      "MYS XX: 4484"
+    ],
+    "x": 57.3,
+    "y": 78.5
+  },
+  {
+    "id": "evergreen-pear",
+    "name": "Evergreen Pear",
+    "romaji": "Nashi",
+    "scientific": "Pyrus kawakamii",
+    "description": "A substitute for the edible pears commonly found in Japanese gardens. Nashi is the general word for pear.",
+    "manyoshu": [
+      "MYS X: 2188",
+      "MYS X: 2189",
+      "MYS XVI: 3834",
+      "MYS XIX: 4259"
+    ],
+    "substitute": true,
+    "x": 66.7,
+    "y": 88
+  },
+  {
+    "id": "miniature-juniper",
+    "name": "Miniature Japanese Juniper",
+    "romaji": "Nezu",
+    "scientific": "Juniperus procumbens 'Nana'",
+    "description": "Though not the same juniper found in the Man'yōshū, this dwarf form is widely used as a groundcover in Japanese gardens.",
+    "manyoshu": [
+      "MYS III: 446"
+    ],
+    "substitute": true,
+    "x": 66.4,
+    "y": 58.3
+  },
+  {
+    "id": "japanese-holly",
+    "name": "Japanese Holly",
+    "scientific": "Ilex crenata",
+    "description": "A native plant to Japan. People put a sardine's head with hollies at the entrance of their homes — evils hate the smell of sardines and the jagged leaves of holly. The plant signifies 'defense.'",
+    "x": 35.8,
+    "y": 70.4
+  },
+  {
+    "id": "japanese-pittosporum",
+    "name": "Japanese Pittosporum",
+    "scientific": "Pittosporum tobira",
+    "description": "A native plant to Japan, commonly used in ornamental applications.",
+    "x": 58.7,
+    "y": 61.2
+  },
+  {
+    "id": "japanese-elm",
+    "name": "Japanese Elm",
+    "scientific": "Ulmus davidiana var. japonica",
+    "description": "A native plant to Japan's forests.",
+    "categoryRefs": {
+      "label": "Tsuki / hemlock-elm (槻)",
+      "refs": [
+        "MYS III: 324"
+      ]
+    },
+    "x": 76.8,
+    "y": 45.2
+  },
+  {
+    "id": "donated-persimmon",
+    "name": "Donated Persimmon",
+    "description": "Donated from Hiroshima — a survivor of the atomic bomb dropped on August 6, 1945. Planted at the JACCC in 2013. Persimmon leaves are traditionally used to wrap food.",
+    "x": 45.7,
+    "y": 14.2
+  },
+  {
+    "id": "baran",
+    "name": "Baran",
+    "scientific": "Aspidistra elatior",
+    "description": "A broad-leaf plant used in culinary settings — often seen in table settings and used to wrap food.",
+    "x": 42.6,
+    "y": 21
+  },
+  {
+    "id": "leather-fern",
+    "name": "Leather Fern",
+    "scientific": "Rumohra adiantiformis",
+    "description": "Not native to Japan — substituted to suit the Southern California climate. In Japan, ferns are used to help keep food longer.",
+    "categoryRefs": {
+      "label": "Fern (sawarabi 早蕨 / shida 羊歯)",
+      "refs": [
+        "MYS VIII: 1418",
+        "MYS X: 1872"
+      ]
+    },
+    "links": [
+      {
+        "label": "All warabi (fern) poems",
+        "url": "http://www.wakapoetry.net/tag/warabi/"
+      }
+    ],
+    "substitute": true,
+    "x": 48.1,
+    "y": 76.7
+  },
+  {
+    "id": "cedar",
+    "name": "Cedar",
+    "japanese": "杉",
+    "romaji": "Sugi",
+    "scientific": "Cedrus spp.",
+    "description": "A towering evergreen used widely in Japanese landscapes and temple architecture. The fragrant wood is prized for construction, sake barrels, and incense.",
+    "categoryRefs": {
+      "label": "Cedar (sugi, 杉)",
+      "refs": [
+        "MYS III: 257",
+        "MYS III: 259",
+        "MYS III: 422",
+        "MYS VI: 1042",
+        "MYS VII: 1403",
+        "MYS IX: 1773",
+        "MYS X: 1922",
+        "MYS X: 2192",
+        "MYS XI: 2488",
+        "MYS XI: 2638",
+        "MYS XIII: 3228",
+        "MYS XIII: 3229"
+      ]
+    },
+    "links": [
+      {
+        "label": "All sugi (cedar) poems",
+        "url": "http://www.wakapoetry.net/tag/sugi/"
+      }
+    ],
+    "x": 56.3,
+    "y": 41
+  },
+  {
+    "id": "false-heather",
+    "name": "False Heather",
+    "scientific": "Cuphea hyssopifolia",
+    "description": "A low-growing Mexican shrub with tiny lavender flowers, used here as a tidy evergreen groundcover well suited to the Los Angeles climate.",
+    "substitute": true,
+    "x": 68.3,
+    "y": 66.8
+  },
+  {
+    "id": "sprenger-asparagus",
+    "name": "Sprenger Asparagus",
+    "scientific": "Asparagus densiflorus 'Sprengeri'",
+    "description": "A South African ornamental with arching, feathery foliage. Used as a soft textural groundcover; not native to Japan.",
+    "substitute": true,
+    "x": 47.5,
+    "y": 24.3
+  },
+  {
+    "id": "pomegranate",
+    "name": "Pomegranate",
+    "romaji": "Zakuro",
+    "scientific": "Punica granatum",
+    "description": "Introduced to Japan from the Asian mainland after the Man'yōshū era. Valued for its brilliant orange blossoms, ornamental fruit, and use in bonsai.",
+    "x": 34.6,
+    "y": 91
+  },
+  {
+    "id": "heavenly-bamboo",
+    "name": "Heavenly Bamboo",
+    "romaji": "Nanten",
+    "scientific": "Nandina domestica",
+    "description": "Despite its name, not a true bamboo. Long planted near Japanese entryways for its red winter berries and the auspicious sound of its name (nan-ten, 'turning misfortune').",
+    "x": 71.4,
+    "y": 39.9
+  },
+  {
+    "id": "redwood",
+    "name": "Coast Redwood",
+    "scientific": "Sequoia sempervirens",
+    "description": "A California native used here as a tall evergreen backdrop, echoing the role cedar (sugi) plays in Japanese gardens.",
+    "substitute": true,
+    "x": 80.3,
+    "y": 47.1
+  },
+  {
+    "id": "indian-hawthorne",
+    "name": "Indian Hawthorn",
+    "scientific": "Rhaphiolepis indica",
+    "description": "A compact evergreen shrub with pink-white spring blossoms. A reliable Southern California stand-in for Japanese flowering shrubs.",
+    "substitute": true,
+    "x": 43.1,
+    "y": 56.9
+  },
+  {
+    "id": "lilyturf",
+    "name": "Lilyturf",
+    "scientific": "Liriope spicata",
+    "description": "A grass-like groundcover with slender purple flower spikes. Often used in Japanese gardens to soften path edges and stones.",
+    "x": 55.5,
+    "y": 63.6
+  },
+  {
+    "id": "creeping-periwinkle",
+    "name": "Creeping Periwinkle",
+    "scientific": "Vinca minor",
+    "description": "A trailing evergreen groundcover with violet-blue flowers, used here in place of native Japanese groundcovers for its drought tolerance.",
+    "substitute": true,
+    "x": 42.8,
+    "y": 41
+  },
+  {
+    "id": "old-gold-juniper",
+    "name": "Juniper 'Old Gold'",
+    "scientific": "Juniperus × pfitzeriana 'Old Gold'",
+    "description": "A spreading juniper with golden-yellow new growth, used as ornamental low cover. A cultivated variety of the broader juniper family found in the Man'yōshū.",
+    "categoryRefs": {
+      "label": "Juniper (muro, 室)",
+      "refs": [
+        "MYS III: 446"
+      ]
+    },
+    "substitute": true,
+    "x": 45.1,
+    "y": 80.1
+  },
+  {
+    "id": "golden-rain-tree",
+    "name": "Golden Rain Tree",
+    "scientific": "Koelreuteria paniculata",
+    "description": "A small deciduous tree with cascading yellow summer flowers followed by papery lantern-shaped seed pods.",
+    "x": 58.9,
+    "y": 22.5
+  },
+  {
+    "id": "victorian-box",
+    "name": "Victorian Box",
+    "scientific": "Pittosporum undulatum",
+    "description": "An Australian evergreen tree with fragrant cream flowers, used as a screening tree in this Los Angeles adaptation of a Japanese garden.",
+    "substitute": true,
+    "x": 65.4,
+    "y": 44.5
+  },
+  {
+    "id": "dwarf-sacred-bamboo",
+    "name": "Dwarf Sacred Bamboo",
+    "romaji": "Otafuku Nanten",
+    "scientific": "Nandina domestica 'Nana'",
+    "description": "A compact cultivar of heavenly bamboo, prized for its dense mounding habit and crimson winter foliage. Planted as a low accent at path edges.",
+    "x": 51.2,
+    "y": 56.4
+  }
+]
