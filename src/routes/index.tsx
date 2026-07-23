@@ -159,19 +159,22 @@ function Index() {
   return (
     <main className="flex h-screen flex-col overflow-hidden bg-background text-foreground">
       {/* Top bar */}
-      <header className="z-20 flex shrink-0 items-center justify-between gap-3 border-b border-border/60 bg-background/95 px-3 py-2 backdrop-blur md:px-5 md:py-3">
+      <header className="z-20 flex shrink-0 items-center justify-between gap-4 border-b border-border/60 bg-background/95 px-4 py-3 backdrop-blur md:px-6 md:py-4">
         <div className="min-w-0">
-          <p className="truncate text-[9px] uppercase tracking-[0.2em] text-muted-foreground md:text-[10px]">
-            JACCC
-          </p>
-          <h1 className="site-title truncate">
-  {site.title}
-</h1>
+  <p className="truncate text-[9px] font-medium uppercase tracking-[0.18em] text-muted-foreground md:text-[10px]">
+    {site.organization}
+  </p>
 
-<p className="text-sm text-muted-foreground">
-  {site.tagline}
-</p>
-        </div>
+  <div className="mt-0.5 flex min-w-0 items-baseline gap-3">
+    <h1 className="site-title truncate">
+      {site.title}
+    </h1>
+
+    <p className="hidden shrink-0 text-xs italic text-muted-foreground md:block">
+      {site.tagline}
+    </p>
+  </div>
+</div>
         <div className="flex shrink-0 items-center gap-1.5">
           <Sheet>
             <SheetTrigger asChild>
