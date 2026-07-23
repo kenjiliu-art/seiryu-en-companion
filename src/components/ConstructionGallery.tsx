@@ -76,13 +76,14 @@ export const constructionPins: ConstructionPinSpec[] = [
     photos: ["06", "05", "07", "08", "09"],
   },
   {
-    id: "crew",
-    x: 54.1,
-    y: 54.8,
-    title: "The volunteer crew",
-    description: "On-site portrait of the Southern California Gardeners Federation volunteers who built the garden.",
-    photos: ["10"],
-  },
+  id: "crew",
+  x: 54.1,
+  y: 54.8,
+  title: "Southern California Gardeners Federation",
+  description:
+    "Members of the Southern California Gardeners Federation volunteered their expertise and labor to help build Seiryū-en in 1979.",
+  photos: ["10"],
+},
 ];
 
 export function ConstructionPin({
