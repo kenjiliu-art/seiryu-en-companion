@@ -31,12 +31,13 @@ import {
   type InterestKind,
 } from "@/data/bloom";
 import { kou72, currentKou, kouAt, tintForKou, type Kou } from "@/data/kou72";
+import { site } from "../content/site";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "James Irvine Japanese Garden — Interactive Planting Map" },
+      { title: "Seiryū-en Companion — Interactive Planting Map" },
       {
         name: "description",
         content:
@@ -163,8 +164,12 @@ function Index() {
             JACCC
           </p>
           <h1 className="site-title truncate">
-  Seiryū-en Companion
+  {site.title}
 </h1>
+
+<p className="text-sm text-muted-foreground">
+  {site.tagline}
+</p>
         </div>
         <div className="flex shrink-0 items-center gap-1.5">
           <Sheet>
