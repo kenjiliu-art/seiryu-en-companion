@@ -162,9 +162,9 @@ function Index() {
           <p className="truncate text-[9px] uppercase tracking-[0.2em] text-muted-foreground md:text-[10px]">
             JACCC
           </p>
-          <h1 className="truncate font-serif text-base leading-tight md:text-xl">
-            James Irvine Japanese Garden
-          </h1>
+          <h1 className="site-title truncate">
+  Seiryū-en Companion
+</h1>
         </div>
         <div className="flex shrink-0 items-center gap-1.5">
           <Sheet>
