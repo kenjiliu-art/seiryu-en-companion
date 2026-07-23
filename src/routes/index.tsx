@@ -433,9 +433,9 @@ function Index() {
 
       {/* Map fills remaining viewport */}
       <div
-        className="relative flex-1 overflow-hidden bg-[#f1ece1] transition-colors duration-700"
-        style={kouWashOn ? { backgroundColor: todayTint.hex + "26" } : undefined}
-      >
+  className="relative flex-1 overflow-hidden bg-secondary/45 transition-colors duration-700"
+  style={kouWashOn ? { backgroundColor: todayTint.hex + "20" } : undefined}
+>
         <TransformWrapper
           initialScale={1}
           minScale={1}
@@ -464,8 +464,8 @@ function Index() {
             >
               <img
                 src={gardenMap}
-                alt="Planting plan of the JACCC James Irvine Japanese Garden"
-                className="block h-full w-full select-none opacity-40 grayscale contrast-90 mix-blend-multiply"
+                alt="Illustrated planting plan of Seiryū-en, the James Irvine Japanese Garden"
+                className="block h-full w-full select-none opacity-75 saturate-[0.8] contrast-[0.96] mix-blend-multiply"
                 draggable={false}
               />
               {plants.map((p) => {
