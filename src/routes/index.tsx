@@ -328,10 +328,10 @@ function Index() {
             <SheetTrigger asChild>
               <button
                 className="inline-flex h-9 items-center gap-1.5 rounded-md border border-border bg-background px-3 text-xs font-medium text-foreground transition-colors hover:bg-muted"
-                aria-label="Open about panel"
+                aria-label="Open garden information"
               >
                 <Info className="h-3.5 w-3.5" />
-                <span className="hidden sm:inline">About</span>
+                <span className="hidden sm:inline">Garden</span>
               </button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[88vw] overflow-y-auto sm:max-w-md">
