@@ -32,7 +32,6 @@ import {
 } from "@/data/bloom";
 import { kou72, currentKou, kouAt, tintForKou, type Kou } from "@/data/kou72";
 import { site } from "../content/site";
-import { SiteHeader } from "@/components/SiteHeader";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -159,22 +158,19 @@ function Index() {
   return (
     <main className="flex h-screen flex-col overflow-hidden bg-background text-foreground">
       {/* Top bar */}
-      <header className="z-20 flex shrink-0 items-center justify-between gap-4 border-b border-border/60 bg-background/95 px-4 py-3 backdrop-blur md:px-6 md:py-4">
+      <header className="z-20 flex shrink-0 items-center justify-between gap-3 border-b border-border/60 bg-background/95 px-3 py-2 backdrop-blur md:px-5 md:py-3">
         <div className="min-w-0">
-  <p className="truncate text-[9px] font-medium uppercase tracking-[0.18em] text-muted-foreground md:text-[10px]">
-    {site.organization}
-  </p>
+          <p className="truncate text-[9px] uppercase tracking-[0.2em] text-muted-foreground md:text-[10px]">
+            JACCC
+          </p>
+          <h1 className="site-title truncate">
+  {site.title}
+</h1>
 
-  <div className="mt-0.5 flex min-w-0 items-baseline gap-3">
-    <h1 className="site-title truncate">
-      {site.title}
-    </h1>
-
-    <p className="hidden shrink-0 text-xs italic text-muted-foreground md:block">
-      {site.tagline}
-    </p>
-  </div>
-</div>
+<p className="text-sm text-muted-foreground">
+  {site.tagline}
+</p>
+        </div>
         <div className="flex shrink-0 items-center gap-1.5">
           <Sheet>
             <SheetTrigger asChild>
@@ -196,91 +192,132 @@ function Index() {
                 </span>
               </button>
             </SheetTrigger>
-            <SheetContent
-  side="right"
-  className="w-[88vw] overflow-y-auto sm:max-w-md"
->
-  <SheetHeader>
-    <SheetTitle className="font-serif text-2xl">
-      Welcome to Seiryū-en
-    </SheetTitle>
-    <p className="text-sm text-muted-foreground">
-      Walk with the garden.
-    </p>
-  </SheetHeader>
+            <SheetContent side="right" className="w-[88vw] overflow-y-auto sm:max-w-md">
+              <SheetHeader>
+                <SheetTitle className="font-serif text-xl">Seasonal view</SheetTitle>
+                <p className="text-xs text-muted-foreground">
+                  Recolor the map by what each plant is doing in Los Angeles right now.
+                </p>
+              </SheetHeader>
 
-  <div className="mt-6 space-y-6 text-sm leading-relaxed text-muted-foreground">
-    <p className="text-base text-foreground">
-      Seiryū-en is the James Irvine Japanese Garden at the Japanese
-      American Cultural & Community Center in Little Tokyo, Los Angeles.
-      Designed by Takeo Uesugi and completed in 1979, it is a place for
-      reflection, cultural memory, and community care.
-    </p>
+              <div className="mt-4 space-y-4 text-sm">
+                <div className="grid grid-cols-3 gap-1.5">
+                  {([
+                    ["off", "Off", "Show category colors"],
+                    ["auto", "Auto", "Use today's date"],
+                    ["spring", `${seasonJa.spring.kanji} Spring`, "Mar – May"],
+                    ["summer", `${seasonJa.summer.kanji} Summer`, "Jun – Aug"],
+                    ["autumn", `${seasonJa.autumn.kanji} Autumn`, "Sep – Nov"],
+                    ["winter", `${seasonJa.winter.kanji} Winter`, "Dec – Feb"],
+                  ] as const).map(([mode, label, hint]) => {
+                    const on = seasonMode === mode;
+                    return (
+                      <button
+                        key={mode}
+                        onClick={() => setSeasonMode(mode)}
+                        className={`flex flex-col items-start gap-0.5 rounded-md border px-2.5 py-2 text-left transition-colors ${
+                          on
+                            ? "border-foreground bg-foreground text-background"
+                            : "border-border bg-background hover:bg-muted"
+                        }`}
+                      >
+                        <span className="text-xs font-medium">{label}</span>
+                        <span className={`text-[10px] ${on ? "text-background/70" : "text-muted-foreground"}`}>
+                          {hint}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
 
-    <section className="space-y-2">
-      <h2 className="font-serif text-lg text-foreground">
-        A companion to the living garden
-      </h2>
-      <p>
-        This site can help you notice the garden’s plants, poetry,
-        seasonal changes, construction history, and the people who built
-        and continue to care for it.
-      </p>
-      <p>
-        Use the map for context, then look back at the physical garden.
-        The garden itself should remain the center of the experience.
-      </p>
-    </section>
+                <KouRibbon plants={plants} onPickPlant={(p) => setActive(p)} />
 
-    <section className="space-y-2 border-t border-border/60 pt-5">
-      <h2 className="font-serif text-lg text-foreground">
-        Plants and poetry
-      </h2>
-      <p>
-        Many plants in Seiryū-en are connected to the{" "}
-        <em>Man’yōshū</em>, Japan’s oldest surviving anthology of poetry.
-        The collection records close attention to plants, birds, weather,
-        and the changing seasons.
-      </p>
-      <p>
-        Where a traditional Japanese species cannot thrive in Southern
-        California, the garden may use a locally suitable plant as a
-        thoughtful substitute.
-      </p>
-    </section>
+                <button
+                  onClick={() => setKouWashOn((v) => !v)}
+                  className={`flex w-full items-center justify-between gap-3 rounded-md border px-3 py-2 text-left text-xs transition-colors ${
+                    kouWashOn ? "border-foreground bg-foreground/5" : "border-border bg-background hover:bg-muted"
+                  }`}
+                  aria-pressed={kouWashOn}
+                >
+                  <span className="flex items-center gap-2">
+                    <span
+                      className="h-3.5 w-3.5 rounded-full border border-border/60"
+                      style={{ backgroundColor: todayTint.hex }}
+                    />
+                    <span>
+                      <span className="font-medium">Kō tint wash</span>
+                      <span className="ml-1.5 text-muted-foreground">{todayTint.name}</span>
+                    </span>
+                  </span>
+                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                    {kouWashOn ? "On" : "Off"}
+                  </span>
+                </button>
 
-    <section className="space-y-2 border-t border-border/60 pt-5">
-      <h2 className="font-serif text-lg text-foreground">
-        Built through community stewardship
-      </h2>
-      <p>
-        Seiryū-en was built with the labor, knowledge, and generosity of
-        gardeners and volunteers, including members of the Southern
-        California Gardeners Federation.
-      </p>
-      <p>
-        Their work is part of the garden’s history and its future. This
-        project will also help preserve the knowledge of gardeners who
-        have cared for Japanese gardens across generations.
-      </p>
-    </section>
+                {seasonMode !== "off" && seasonalActiveMonths && (
+                  <>
+                    <div className="rounded-md border border-border/60 bg-muted/40 p-3">
+                      <p className="text-xs uppercase tracking-wider text-muted-foreground">
+                        Color key
+                      </p>
+                      <ul className="mt-2 space-y-1.5 text-xs">
+                        <li className="flex items-center gap-2">
+                          <span className="h-2.5 w-2.5 rounded-full bg-[#d05a6e]" /> In bloom
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <span className="h-2.5 w-2.5 rounded-full bg-[#ed6d3d]" /> Fruit / berries
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <span className="h-2.5 w-2.5 rounded-full bg-[#aacf53]" /> Foliage interest
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <span className="h-2.5 w-2.5 rounded-full bg-[#bcb6a8]" /> Quiet / dormant
+                        </li>
+                      </ul>
+                    </div>
 
-    <section className="space-y-2 border-t border-border/60 pt-5">
-      <h2 className="font-serif text-lg text-foreground">
-        About the map
-      </h2>
-      <p>
-        Tap a plant marker to learn more about it. Camera markers open
-        photographs from the garden’s original construction.
-      </p>
-      <p className="text-xs">
-        Planting survey by Jon Ngai, landscape architecture intern,
-        August 2021. Garden designed in 1978–1979 by Takeo Uesugi and
-        inspired by Murin-an in Kyoto.
-      </p>
-    </section>
-  </div>
-</SheetContent>
+                    <div>
+                      <p className="text-xs uppercase tracking-wider text-muted-foreground">
+                        {seasonalActiveCount} of {plants.length} plants active
+                      </p>
+                      <ul className="mt-2 divide-y divide-border/40 rounded-md border border-border/60 bg-background/60">
+                        {plants
+                          .filter((p) => isPlantActive(p.id, seasonalActiveMonths))
+                          .map((p) => {
+                            const interest = plantInterest[p.id]!;
+                            const c = interestColor[interest.kind];
+                            return (
+                              <li key={p.id}>
+                                <button
+                                  onClick={() => setActive(p)}
+                                  className="flex w-full items-center gap-3 px-3 py-2 text-left hover:bg-muted/60"
+                                >
+                                  <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${c.bg}`} />
+                                  <span className="flex-1 text-sm">
+                                    <span className="font-medium">{p.name}</span>
+                                    {p.japanese && (
+                                      <span className="ml-1.5 text-xs text-muted-foreground">{p.japanese}</span>
+                                    )}
+                                  </span>
+                                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                                    {interest.kind}
+                                  </span>
+                                </button>
+                              </li>
+                            );
+                          })}
+                      </ul>
+                    </div>
+
+                    <p className="text-[11px] italic text-muted-foreground">
+                      Bloom windows are curated estimates for the Los Angeles climate, not
+                      live observations. Persimmon, cherry, and wisteria timing in Little
+                      Tokyo can shift a few weeks year-to-year.
+                    </p>
+                  </>
+                )}
+              </div>
+            </SheetContent>
           </Sheet>
           <Sheet>
             <SheetTrigger asChild>
@@ -433,9 +470,9 @@ function Index() {
 
       {/* Map fills remaining viewport */}
       <div
-  className="relative flex-1 overflow-hidden bg-secondary/45 transition-colors duration-700"
-  style={kouWashOn ? { backgroundColor: todayTint.hex + "20" } : undefined}
->
+        className="relative flex-1 overflow-hidden bg-[#f1ece1] transition-colors duration-700"
+        style={kouWashOn ? { backgroundColor: todayTint.hex + "26" } : undefined}
+      >
         <TransformWrapper
           initialScale={1}
           minScale={1}
@@ -464,8 +501,8 @@ function Index() {
             >
               <img
                 src={gardenMap}
-                alt="Illustrated planting plan of Seiryū-en, the James Irvine Japanese Garden"
-                className="block h-full w-full select-none opacity-75 saturate-[0.8] contrast-[0.96] mix-blend-multiply"
+                alt="Planting plan of the JACCC James Irvine Japanese Garden"
+                className="block h-full w-full select-none opacity-40 grayscale contrast-90 mix-blend-multiply"
                 draggable={false}
               />
               {plants.map((p) => {
