@@ -63,10 +63,27 @@ function categoryDotClass(c: PlantCategory): string {
 
 // Seasonal-mode color tokens (when user enables seasonal view)
 type SeasonMode = "off" | "auto" | Season;
-const interestColor: Record<InterestKind, { bg: string; halo: string; glow: string }> = {
-  bloom:   { bg: "bg-[#d05a6e]", halo: "bg-[#d05a6e]/20 group-hover:bg-[#d05a6e]/40", glow: "0 0 10px rgba(208,90,110,0.55)" }, // 紅梅 Kōbai
-  fruit:   { bg: "bg-[#ed6d3d]", halo: "bg-[#ed6d3d]/20 group-hover:bg-[#ed6d3d]/40", glow: "0 0 10px rgba(237,109,61,0.55)" }, // 柿 Kaki
-  foliage: { bg: "bg-[#aacf53]", halo: "bg-[#aacf53]/20 group-hover:bg-[#aacf53]/40", glow: "0 0 10px rgba(170,207,83,0.55)" }, // 萌黄 Moegi
+const interestColor: Record<
+  InterestKind,
+  { bg: string; halo: string; glow: string }
+> = {
+  bloom: {
+    bg: "bg-[#A56B79]",
+    halo: "bg-[#A56B79]/20 group-hover:bg-[#A56B79]/35",
+    glow: "0 0 8px rgba(165,107,121,0.35)",
+  },
+
+  fruit: {
+    bg: "bg-[#B97848]",
+    halo: "bg-[#B97848]/20 group-hover:bg-[#B97848]/35",
+    glow: "0 0 8px rgba(185,120,72,0.35)",
+  },
+
+  foliage: {
+    bg: "bg-[#72845F]",
+    halo: "bg-[#72845F]/20 group-hover:bg-[#72845F]/35",
+    glow: "0 0 8px rgba(114,132,95,0.35)",
+  },
 };
 const dormantColor = { bg: "bg-[#bcb6a8]", halo: "bg-[#bcb6a8]/10 group-hover:bg-[#bcb6a8]/20", glow: "0 0 4px rgba(188,182,168,0.25)" };
 
@@ -264,14 +281,16 @@ function Index() {
                       </p>
                       <ul className="mt-2 space-y-1.5 text-xs">
                         <li className="flex items-center gap-2">
-                          <span className="h-2.5 w-2.5 rounded-full bg-[#d05a6e]" /> In bloom
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <span className="h-2.5 w-2.5 rounded-full bg-[#ed6d3d]" /> Fruit / berries
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <span className="h-2.5 w-2.5 rounded-full bg-[#aacf53]" /> Foliage interest
-                        </li>
+  <span className="h-2.5 w-2.5 rounded-full bg-[#A56B79]" /> In bloom
+</li>
+
+<li className="flex items-center gap-2">
+  <span className="h-2.5 w-2.5 rounded-full bg-[#B97848]" /> Fruit / berries
+</li>
+
+<li className="flex items-center gap-2">
+  <span className="h-2.5 w-2.5 rounded-full bg-[#72845F]" /> Foliage interest
+</li>
                         <li className="flex items-center gap-2">
                           <span className="h-2.5 w-2.5 rounded-full bg-[#bcb6a8]" /> Quiet / dormant
                         </li>
@@ -546,21 +565,29 @@ function Index() {
                     aria-label={p.name}
                   >
                     <span
-                      className="relative flex h-6 w-6 items-center justify-center"
-                      style={{ transform: `scale(${1 / scale})` }}
-                    >
-                      <span
-                        className={`absolute inset-0 rounded-full border border-white/60 shadow-sm backdrop-blur-[2px] transition-all duration-300 ${haloBg} ${
-                          hovered === p.id || dragId === p.id ? "scale-125" : "group-hover:scale-125"
-                        } ${isSeasonalActive ? "animate-pulse" : ""}`}
-                      />
-                      <span
-                        className={`relative h-2 w-2 rounded-full transition-transform duration-300 ${dotBg} ${
-                          hovered === p.id || dragId === p.id ? "scale-125" : ""
-                        }`}
-                        style={{ boxShadow: glow }}
-                      />
-                    </span>
+  className="relative flex h-7 w-7 items-center justify-center"
+  style={{ transform: `scale(${1 / scale})` }}
+>
+  <span
+    className={`absolute inset-[2px] rounded-full border-2 border-[#f7f2e8] bg-background/35 shadow-[0_1px_4px_rgba(45,40,34,0.22)] backdrop-blur-[1px] transition-transform duration-200 ${haloBg} ${
+      hovered === p.id || dragId === p.id
+        ? "scale-110"
+        : "group-hover:scale-110"
+    }`}
+  />
+
+  <span
+    className={`relative h-2.5 w-2.5 rounded-full border border-[#f7f2e8]/90 transition-transform duration-200 ${dotBg} ${
+      hovered === p.id || dragId === p.id ? "scale-110" : ""
+    }`}
+    style={{
+      boxShadow:
+        hovered === p.id || dragId === p.id
+          ? glow
+          : "0 0 0 1px rgba(58,55,50,0.18)",
+    }}
+  />
+</span>
                     {(hovered === p.id || dragId === p.id) && (
                       <span
                         className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded bg-foreground px-2 py-1 text-xs text-background shadow-lg"
