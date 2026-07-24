@@ -1,6 +1,7 @@
+import gardenMapSvg from "@/assets/maps/manyoshu-garden-interactive.svg";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import gardenMap from "@/assets/garden-map.jpg";
+import gardenMap from "@/assets/maps/garden-map.jpg";
 import { plants as initialPlants, manyoshuUrl, type Plant } from "@/data/plants";
 import { poems } from "@/data/poems";
 import {
@@ -68,24 +69,22 @@ const interestColor: Record<
   { bg: string; halo: string; glow: string }
 > = {
   bloom: {
-    bg: "bg-[#A56B79]",
-    halo: "bg-[#A56B79]/20 group-hover:bg-[#A56B79]/35",
-    glow: "0 0 8px rgba(165,107,121,0.35)",
+    bg: "bg-[#A45F76]",
+    halo: "",
+    glow: "0 0 9px rgba(164,95,118,0.5)",
   },
-
   fruit: {
-    bg: "bg-[#B97848]",
-    halo: "bg-[#B97848]/20 group-hover:bg-[#B97848]/35",
-    glow: "0 0 8px rgba(185,120,72,0.35)",
+    bg: "bg-[#B96332]",
+    halo: "",
+    glow: "0 0 9px rgba(185,99,50,0.5)",
   },
-
   foliage: {
-    bg: "bg-[#72845F]",
-    halo: "bg-[#72845F]/20 group-hover:bg-[#72845F]/35",
-    glow: "0 0 8px rgba(114,132,95,0.35)",
+    bg: "bg-[#496B50]",
+    halo: "",
+    glow: "0 0 9px rgba(73,107,80,0.5)",
   },
 };
-const dormantColor = { bg: "bg-[#bcb6a8]", halo: "bg-[#bcb6a8]/10 group-hover:bg-[#bcb6a8]/20", glow: "0 0 4px rgba(188,182,168,0.25)" };
+const dormantColor = { bg: "bg-[#949a96]", halo: "bg-[#949a96]/10 group-hover:bg-[#949a96]/20", glow: "0 0 4px rgba(188,182,168,0.25)" };
 
 function activeMonthsFor(mode: Exclude<SeasonMode, "off">): number[] {
   if (mode === "auto") return [new Date().getMonth() + 1];
@@ -115,21 +114,31 @@ function Index() {
   const [pins, setPins] = useState<ConstructionPinSpec[]>(constructionPins);
   const [dragId, setDragId] = useState<string | null>(null);
   const [dragPinId, setDragPinId] = useState<string | null>(null);
-  const [visibleCats, setVisibleCats] = useState<Record<PlantCategory, boolean>>({
+
+  const [visibleCats, setVisibleCats] = useState<
+    Record<PlantCategory, boolean>
+  >({
     manyoshu: true,
     substitute: true,
     none: true,
   });
-  const toggleCat = (c: PlantCategory) =>
-    setVisibleCats((v) => ({ ...v, [c]: !v[c] }));
-  const mapRef = useRef<HTMLDivElement>(null);
+
   const [scale, setScale] = useState(1);
   const [seasonMode, setSeasonMode] = useState<SeasonMode>("off");
   const [kouWashOn, setKouWashOn] = useState(false);
+  const [useSvgMap, setUseSvgMap] = useState(true);
+
+  const toggleCat = (c: PlantCategory) =>
+    setVisibleCats((v) => ({ ...v, [c]: !v[c] }));
+
+  const mapRef = useRef<HTMLDivElement>(null);
+
   const todayKou = currentKou();
   const todayTint = tintForKou(todayKou.index);
+
   const seasonalActiveMonths =
     seasonMode === "off" ? null : activeMonthsFor(seasonMode);
+
   const seasonalActiveCount = seasonalActiveMonths
     ? plants.filter((p) => isPlantActive(p.id, seasonalActiveMonths)).length
     : 0;
@@ -281,18 +290,10 @@ function Index() {
                       </p>
                       <ul className="mt-2 space-y-1.5 text-xs">
                         <li className="flex items-center gap-2">
-  <span className="h-2.5 w-2.5 rounded-full bg-[#A56B79]" /> In bloom
-</li>
-
-<li className="flex items-center gap-2">
-  <span className="h-2.5 w-2.5 rounded-full bg-[#B97848]" /> Fruit / berries
-</li>
-
-<li className="flex items-center gap-2">
-  <span className="h-2.5 w-2.5 rounded-full bg-[#72845F]" /> Foliage interest
-</li>
-                        <li className="flex items-center gap-2">
-                          <span className="h-2.5 w-2.5 rounded-full bg-[#bcb6a8]" /> Quiet / dormant
+  <span className="h-2.5 w-2.5 rounded-full bg-[#A45F76]" />
+<span className="h-2.5 w-2.5 rounded-full bg-[#B96332]" />
+<span className="h-2.5 w-2.5 rounded-full bg-[#496B50]" />
+<span className="h-2.5 w-2.5 rounded-full bg-[#7E8782]" />
                         </li>
                       </ul>
                     </div>
@@ -491,9 +492,13 @@ function Index() {
 
       {/* Map fills remaining viewport */}
       <div
-        className="relative flex-1 overflow-hidden bg-[#f1ece1] transition-colors duration-700"
-        style={kouWashOn ? { backgroundColor: todayTint.hex + "26" } : undefined}
-      >
+  className="relative flex-1 overflow-hidden transition-colors duration-700"
+  style={{
+    backgroundColor: kouWashOn
+      ? todayTint.hex + "20"
+      : "var(--map-background)",
+  }}
+>
         <TransformWrapper
           initialScale={1}
           minScale={1}
@@ -521,11 +526,11 @@ function Index() {
               }}
             >
               <img
-                src={gardenMap}
-                alt="Planting plan of the JACCC James Irvine Japanese Garden"
-                className="block h-full w-full select-none opacity-40 grayscale contrast-90 mix-blend-multiply"
-                draggable={false}
-              />
+  src={useSvgMap ? gardenMapSvg : gardenMap}
+  alt="Illustrated planting plan of Seiryū-en"
+  className="block h-full w-full select-none object-contain"
+  draggable={false}
+/>
               {plants.map((p) => {
                 const category = plantCategory(p);
                 if (!visibleCats[category]) return null;
@@ -565,11 +570,11 @@ function Index() {
                     aria-label={p.name}
                   >
                     <span
-  className="relative flex h-7 w-7 items-center justify-center"
+  className="relative flex h-8 w-8 items-center justify-center"
   style={{ transform: `scale(${1 / scale})` }}
 >
   <span
-    className={`absolute inset-[2px] rounded-full border-2 border-[#f7f2e8] bg-background/35 shadow-[0_1px_4px_rgba(45,40,34,0.22)] backdrop-blur-[1px] transition-transform duration-200 ${haloBg} ${
+    className={`absolute inset-[2px] rounded-full border-2 border-white bg-white/75 shadow-[0_2px_6px_rgba(20,30,25,0.35)] transition-transform duration-200 ${
       hovered === p.id || dragId === p.id
         ? "scale-110"
         : "group-hover:scale-110"
@@ -577,14 +582,12 @@ function Index() {
   />
 
   <span
-    className={`relative h-2.5 w-2.5 rounded-full border border-[#f7f2e8]/90 transition-transform duration-200 ${dotBg} ${
-      hovered === p.id || dragId === p.id ? "scale-110" : ""
-    }`}
+    className={`relative h-3.5 w-3.5 rounded-full border-2 border-white ${dotBg}`}
     style={{
       boxShadow:
         hovered === p.id || dragId === p.id
           ? glow
-          : "0 0 0 1px rgba(58,55,50,0.18)",
+          : "0 1px 3px rgba(20,30,25,0.45)",
     }}
   />
 </span>

@@ -144,6 +144,19 @@
   --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+  /* Seiryū-en map palette */
+--map-background: #edf0ed;
+--map-surface: #f7f8f6;
+--map-ink: #3f4745;
+--map-stone: #aeb5b1;
+--map-pine: #405f4c;
+--map-moss: #6f8460;
+--map-water: #7897a4;
+--map-cedar: #896b59;
+--map-blossom: #a56b79;
+--map-fruit: #b97848;
+--map-highlight: #b49a5b;
+--map-dormant: #949a96;
 }
 
 @layer base {
