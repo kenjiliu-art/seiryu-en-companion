@@ -48,6 +48,8 @@ export type ConstructionPinSpec = {
   title: string;
   description: string;
   photos: string[]; // keys into ALL
+  source?: string;
+  rights?: string;
 };
 
 export const constructionPins: ConstructionPinSpec[] = [
@@ -58,6 +60,8 @@ export const constructionPins: ConstructionPinSpec[] = [
     title: "Site preparation",
     description: "Trucks delivering fill and grading the basin beneath the JACCC plaza, 1979.",
     photos: ["03", "04"],
+    source: "JACCC Archives",
+rights: "© Japanese American Cultural & Community Center",
   },
   {
     id: "stream",
@@ -66,6 +70,8 @@ export const constructionPins: ConstructionPinSpec[] = [
     title: "Stream & basin",
     description: "Hand-shaping the dry stream channel and the central basin.",
     photos: ["01", "02"],
+    source: "JACCC Archives",
+rights: "© Japanese American Cultural & Community Center",
   },
   {
     id: "boulders",
@@ -74,6 +80,8 @@ export const constructionPins: ConstructionPinSpec[] = [
     title: "Boulder placement",
     description: "Selecting stones at the quarry and setting them along the lower slope.",
     photos: ["06", "05", "07", "08", "09"],
+    source: "JACCC Archives",
+rights: "© Japanese American Cultural & Community Center",
   },
   {
   id: "crew",
@@ -83,6 +91,8 @@ export const constructionPins: ConstructionPinSpec[] = [
   description:
     "Members of the Southern California Gardeners Federation volunteered their expertise and labor to help build Seiryū-en in 1979.",
   photos: ["10"],
+  source: "JACCC Archives",
+rights: "© Japanese American Cultural & Community Center",
 },
 ];
 
@@ -150,6 +160,12 @@ export function ConstructionPin({
           <DialogHeader className="px-6 pt-6">
             <DialogTitle className="font-serif text-2xl">{pin.title}</DialogTitle>
             <DialogDescription>{pin.description}</DialogDescription>
+            {(pin.source || pin.rights) && (
+  <div className="mt-3 border-t border-border/60 pt-3 text-xs text-muted-foreground">
+    {pin.source && <p>Source: {pin.source}</p>}
+    {pin.rights && <p>{pin.rights}</p>}
+  </div>
+)}
           </DialogHeader>
           <div className={photos.length > 1 ? "px-12 pb-6 pt-2" : "px-6 pb-6 pt-2"}>
             <Carousel setApi={setApi} opts={{ loop: true }}>
