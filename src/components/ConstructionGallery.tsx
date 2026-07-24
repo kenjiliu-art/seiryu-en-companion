@@ -161,7 +161,7 @@ export function ConstructionPin({
       </button>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-3xl border-stone-200/60 bg-background p-0 sm:max-w-3xl">
+        <DialogContent className="h-[94vh] w-[94vw] max-w-[94vw] overflow-y-auto border-stone-200/60 bg-background p-0 sm:max-w-6xl">
           <DialogHeader className="px-6 pt-6">
             <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
   Construction Photograph
@@ -192,14 +192,14 @@ export function ConstructionPin({
     {photos.map((photo, i) => (
       <CarouselItem key={i}>
         <figure className="flex flex-col gap-3">
-          <div className="flex min-h-[60vh] w-full items-center justify-center overflow-hidden bg-stone-100 sm:min-h-[68vh]">
-            <img
-              src={photo.src}
-              alt={photo.caption}
-              className="h-auto max-h-[68vh] w-auto max-w-full object-contain"
-              loading="lazy"
-            />
-          </div>
+          <div className="flex h-[58vh] w-full items-center justify-center bg-stone-100 sm:h-[65vh]">
+  <img
+    src={photo.src}
+    alt={photo.caption}
+    className="max-h-full max-w-full object-contain"
+    loading="lazy"
+  />
+</div>
 
           <figcaption className="flex items-start justify-between gap-4 px-1 text-xs leading-relaxed text-muted-foreground">
             <span>{photo.caption}</span>

@@ -168,13 +168,10 @@ function Index() {
   {site.title}
 </h1>
 
-<p className="truncate text-xs italic text-muted-foreground">
+<p className="mt-1 text-sm italic text-muted-foreground">
   {site.tagline}
 </p>
 
-<p className="text-sm text-muted-foreground">
-  {site.tagline}
-</p>
         </div>
         <div className="flex shrink-0 items-center gap-1.5">
           <Sheet>
