@@ -43,11 +43,12 @@ const ALL: Record<string, Photo> = {
 
 export type ConstructionPinSpec = {
   id: string;
-  x: number; // % of map width
-  y: number; // % of map height
+  x: number;
+  y: number;
   title: string;
   description: string;
-  photos: string[]; // keys into ALL
+  photos: string[];
+  date?: string;
   source?: string;
   rights?: string;
 };
@@ -60,6 +61,7 @@ export const constructionPins: ConstructionPinSpec[] = [
     title: "Site preparation",
     description: "Trucks delivering fill and grading the basin beneath the JACCC plaza, 1979.",
     photos: ["03", "04"],
+    date: "1979",
     source: "JACCC Archives",
 rights: "© Japanese American Cultural & Community Center",
   },
@@ -70,6 +72,7 @@ rights: "© Japanese American Cultural & Community Center",
     title: "Stream & basin",
     description: "Hand-shaping the dry stream channel and the central basin.",
     photos: ["01", "02"],
+    date: "1979",
     source: "JACCC Archives",
 rights: "© Japanese American Cultural & Community Center",
   },
@@ -80,6 +83,7 @@ rights: "© Japanese American Cultural & Community Center",
     title: "Boulder placement",
     description: "Selecting stones at the quarry and setting them along the lower slope.",
     photos: ["06", "05", "07", "08", "09"],
+    date: "1979",
     source: "JACCC Archives",
 rights: "© Japanese American Cultural & Community Center",
   },
@@ -91,6 +95,7 @@ rights: "© Japanese American Cultural & Community Center",
   description:
     "Members of the Southern California Gardeners Federation volunteered their expertise and labor to help build Seiryū-en in 1979.",
   photos: ["10"],
+  date: "1979",
   source: "JACCC Archives",
 rights: "© Japanese American Cultural & Community Center",
 },
@@ -158,48 +163,65 @@ export function ConstructionPin({
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-w-3xl border-stone-200/60 bg-background p-0 sm:max-w-3xl">
           <DialogHeader className="px-6 pt-6">
+            <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
+  Construction Photograph
+            </p>
             <DialogTitle className="font-serif text-2xl">{pin.title}</DialogTitle>
             <DialogDescription>{pin.description}</DialogDescription>
-            {(pin.source || pin.rights) && (
-  <div className="mt-3 border-t border-border/60 pt-3 text-xs text-muted-foreground">
-    {pin.source && <p>Source: {pin.source}</p>}
+            {(pin.date || pin.source || pin.rights) && (
+  <div className="mt-3 space-y-1 border-t border-border/60 pt-3 text-xs text-muted-foreground">
+    {pin.date && (
+      <p>
+        <strong>Date:</strong> {pin.date}
+      </p>
+    )}
+
+    {pin.source && (
+      <p>
+        <strong>Source:</strong> {pin.source}
+      </p>
+    )}
+
     {pin.rights && <p>{pin.rights}</p>}
   </div>
 )}
           </DialogHeader>
           <div className={photos.length > 1 ? "px-12 pb-6 pt-2" : "px-6 pb-6 pt-2"}>
             <Carousel setApi={setApi} opts={{ loop: true }}>
-              <CarouselContent>
-                {photos.map((photo, i) => (
-                  <CarouselItem key={i}>
-                    <figure className="flex flex-col items-center gap-3">
-                      <div className="flex h-[55vh] w-full items-center justify-center overflow-hidden rounded-sm bg-stone-100">
-                        <img
-                          src={photo.src}
-                          alt={photo.caption}
-                          className="max-h-full max-w-full object-contain"
-                          loading="lazy"
-                        />
-                      </div>
-                      <figcaption className="text-center text-xs text-muted-foreground">
-                        {photo.caption}
-                        {photos.length > 1 && (
-                          <span className="ml-2 tabular-nums opacity-60">
-                            {i + 1} / {photos.length}
-                          </span>
-                        )}
-                      </figcaption>
-                    </figure>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              {photos.length > 1 && (
-                <>
-                  <CarouselPrevious className="-left-10" />
-                  <CarouselNext className="-right-10" />
-                </>
-              )}
-            </Carousel>
+  <CarouselContent>
+    {photos.map((photo, i) => (
+      <CarouselItem key={i}>
+        <figure className="flex flex-col gap-3">
+          <div className="flex min-h-[60vh] w-full items-center justify-center overflow-hidden bg-stone-100 sm:min-h-[68vh]">
+            <img
+              src={photo.src}
+              alt={photo.caption}
+              className="h-auto max-h-[68vh] w-auto max-w-full object-contain"
+              loading="lazy"
+            />
+          </div>
+
+          <figcaption className="flex items-start justify-between gap-4 px-1 text-xs leading-relaxed text-muted-foreground">
+            <span>{photo.caption}</span>
+
+            {photos.length > 1 && (
+              <span className="shrink-0 tabular-nums opacity-60">
+                {i + 1} / {photos.length}
+              </span>
+            )}
+          </figcaption>
+        </figure>
+      </CarouselItem>
+    ))}
+  </CarouselContent>
+
+  {photos.length > 1 && (
+    <>
+      <CarouselPrevious className="left-3 top-1/2 -translate-y-1/2 bg-background/90" />
+      <CarouselNext className="right-3 top-1/2 -translate-y-1/2 bg-background/90" />
+    </>
+  )}
+</Carousel>
             <span className="sr-only">Slide {current + 1}</span>
           </div>
         </DialogContent>
