@@ -226,3 +226,53 @@ h4,
     }
   }
 }
+
+/* Interactive Seiryū-en SVG map */
+
+.garden-map-svg {
+  overflow: hidden;
+}
+
+.garden-map-svg > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Quiet background hierarchy */
+/* Interactive Seiryū-en SVG map */
+
+.garden-map-svg #plants {
+  opacity: 0.50;
+}
+
+.garden-map-svg #paths {
+  opacity: 0.95;
+}
+
+.garden-map-svg #stones {
+  opacity: 0.50;
+}
+
+.garden-map-svg #stone_patio {
+  opacity: 0.60;
+}
+
+.garden-map-svg #water_background {
+  opacity: 0.25;
+}
+
+.garden-map-svg #upper_stream_and_waterfall,
+.garden-map-svg #middle_stream,
+.garden-map-svg #middle_stream1,
+.garden-map-svg #pool {
+  opacity: 0.82;
+  transition:
+    opacity 200ms ease,
+    filter 200ms ease;
+}
+
+.garden-map-svg #labels,
+.garden-map-svg #legend {
+  display: none;
+}

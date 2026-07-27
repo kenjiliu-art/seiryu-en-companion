@@ -1,4 +1,4 @@
-import gardenMapSvg from "@/assets/maps/manyoshu-garden-layered.svg";
+import GardenMapSvg from "@/assets/maps/manyoshu-garden-layered.svg?react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import gardenMap from "@/assets/maps/garden-map.jpg";
@@ -560,12 +560,21 @@ function Index() {
                 maxHeight: "100%",
               }}
             >
-              <img
-  src={useSvgMap ? gardenMapSvg : gardenMap}
-  alt="Illustrated planting plan of Seiryū-en"
-  className="block h-full w-full select-none object-contain"
-  draggable={false}
-/>
+              {useSvgMap ? (
+  <GardenMapSvg
+    className="garden-map-svg block h-full w-full select-none"
+    role="img"
+    aria-label="Illustrated planting plan of Seiryū-en"
+    preserveAspectRatio="xMidYMid meet"
+  />
+) : (
+  <img
+    src={gardenMap}
+    alt="Illustrated planting plan of Seiryū-en"
+    className="block h-full w-full select-none object-contain"
+    draggable={false}
+  />
+)}
               {plants.map((p) => {
                 const category = plantCategory(p);
                 if (!visibleCats[category]) return null;
@@ -602,7 +611,7 @@ function Index() {
                     onMouseEnter={() => setHovered(p.id)}
                     onMouseLeave={() => setHovered(null)}
                     style={{ left: `${p.x}%`, top: `${p.y}%` }}
-                    className={`group absolute z-20 flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full ${
+                    className={`group absolute z-10 flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full ${
   editMode ? "cursor-move" : ""
 } ${fade}`}
                     aria-label={p.name}
