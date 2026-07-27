@@ -1,4 +1,4 @@
-import gardenMapSvg from "@/assets/maps/manyoshu-garden-interactive.svg";
+import gardenMapSvg from "@/assets/maps/manyoshu-garden-layered.svg";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import gardenMap from "@/assets/maps/garden-map.jpg";
@@ -566,15 +566,15 @@ function Index() {
                     onMouseEnter={() => setHovered(p.id)}
                     onMouseLeave={() => setHovered(null)}
                     style={{ left: `${p.x}%`, top: `${p.y}%` }}
-                    className={`group absolute -translate-x-1/2 -translate-y-1/2 ${editMode ? "cursor-move" : ""} ${fade}`}
+                    className={`group absolute z-10 -translate-x-1/2 -translate-y-1/2 ${editMode ? "cursor-move" : ""} ${fade}`}
                     aria-label={p.name}
                   >
                     <span
-  className="relative flex h-8 w-8 items-center justify-center"
+  className="relative flex h-6 w-6 items-center justify-center"
   style={{ transform: `scale(${1 / scale})` }}
 >
   <span
-    className={`absolute inset-[2px] rounded-full border-2 border-white bg-white/75 shadow-[0_2px_6px_rgba(20,30,25,0.35)] transition-transform duration-200 ${
+    className={`absolute inset-0 rounded-full border-2 border-white bg-white/80 shadow-[0_1px_4px_rgba(20,30,25,0.35)] transition-transform duration-200 ${
       hovered === p.id || dragId === p.id
         ? "scale-110"
         : "group-hover:scale-110"
@@ -582,12 +582,12 @@ function Index() {
   />
 
   <span
-    className={`relative h-3.5 w-3.5 rounded-full border-2 border-white ${dotBg}`}
+    className={`relative h-3 w-3 rounded-full border border-white ${dotBg}`}
     style={{
       boxShadow:
         hovered === p.id || dragId === p.id
           ? glow
-          : "0 1px 3px rgba(20,30,25,0.45)",
+          : "0 1px 3px rgba(20,30,25,0.4)",
     }}
   />
 </span>
