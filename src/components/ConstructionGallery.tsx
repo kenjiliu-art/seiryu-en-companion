@@ -67,8 +67,8 @@ rights: "© Japanese American Cultural & Community Center",
   },
   {
     id: "stream",
-    x: 46.2,
-    y: 70.8,
+    x: 46.4,
+    y: 65,
     title: "Stream & basin",
     description: "Hand-shaping the dry stream channel and the central basin.",
     photos: ["01", "02"],
@@ -89,8 +89,8 @@ rights: "© Japanese American Cultural & Community Center",
   },
   {
   id: "crew",
-  x: 54.1,
-  y: 54.8,
+  x: 54.8,
+  y: 54.1,
   title: "Southern California Gardeners Federation",
   description:
     "Members of the Southern California Gardeners Federation volunteered their expertise and labor to help build Seiryū-en in 1979.",
@@ -141,7 +141,7 @@ export function ConstructionPin({
           }
         }}
         style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
-        className={`group absolute z-10 -translate-x-1/2 -translate-y-1/2 ${editMode ? "cursor-move" : ""}`}
+        className={`group absolute z-20 -translate-x-1/2 -translate-y-1/2 ${editMode ? "cursor-move" : ""}`}
         aria-label={`Construction photos: ${pin.title}`}
       >
         <span
