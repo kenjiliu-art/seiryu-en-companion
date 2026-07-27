@@ -131,6 +131,41 @@ function Index() {
   const toggleCat = (c: PlantCategory) =>
     setVisibleCats((v) => ({ ...v, [c]: !v[c] }));
 
+  const openNearestPlant = (
+  event: React.MouseEvent<HTMLButtonElement>,
+) => {
+  if (editMode) return;
+
+  const markerButtons = Array.from(
+    document.querySelectorAll<HTMLButtonElement>("[data-plant-id]"),
+  );
+
+  let nearestId: string | undefined;
+  let nearestDistance = Number.POSITIVE_INFINITY;
+
+  for (const button of markerButtons) {
+    const rect = button.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const distance = Math.hypot(
+      event.clientX - centerX,
+      event.clientY - centerY,
+    );
+
+    if (distance < nearestDistance) {
+      nearestDistance = distance;
+      nearestId = button.dataset.plantId;
+    }
+  }
+
+  const nearestPlant = plants.find((plant) => plant.id === nearestId);
+
+  if (nearestPlant) {
+    setActive(nearestPlant);
+  }
+};
+
   const mapRef = useRef<HTMLDivElement>(null);
 
   const todayKou = currentKou();
@@ -557,7 +592,8 @@ function Index() {
                   <button
                     type="button"
                     key={p.id}
-                    onClick={() => !editMode && setActive(p)}
+                    data-plant-id={p.id}
+                    onClick={openNearestPlant}
                     onMouseDown={(e) => {
                       if (editMode) {
                         e.preventDefault();
