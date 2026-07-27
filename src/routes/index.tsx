@@ -555,6 +555,7 @@ function Index() {
                 const fade = seasonalActiveMonths && !isSeasonalActive ? "opacity-40" : "";
                 return (
                   <button
+                    type="button"
                     key={p.id}
                     onClick={() => !editMode && setActive(p)}
                     onMouseDown={(e) => {
@@ -566,7 +567,9 @@ function Index() {
                     onMouseEnter={() => setHovered(p.id)}
                     onMouseLeave={() => setHovered(null)}
                     style={{ left: `${p.x}%`, top: `${p.y}%` }}
-                    className={`group absolute z-10 -translate-x-1/2 -translate-y-1/2 ${editMode ? "cursor-move" : ""} ${fade}`}
+                    className={`group absolute z-10 flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full ${
+  editMode ? "cursor-move" : ""
+} ${fade}`}
                     aria-label={p.name}
                   >
                     <span
