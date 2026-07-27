@@ -86,6 +86,12 @@ const interestColor: Record<
 };
 const dormantColor = { bg: "bg-[#949a96]", halo: "bg-[#949a96]/10 group-hover:bg-[#949a96]/20", glow: "0 0 4px rgba(188,182,168,0.25)" };
 
+type InterpretiveZone =
+  | "all"
+  | "upper-stream-and-waterfall"
+  | "middle-stream"
+  | "lower-pool";
+
 function activeMonthsFor(mode: Exclude<SeasonMode, "off">): number[] {
   if (mode === "auto") return [new Date().getMonth() + 1];
   return seasonMonths[mode];
@@ -114,6 +120,8 @@ function Index() {
   const [pins, setPins] = useState<ConstructionPinSpec[]>(constructionPins);
   const [dragId, setDragId] = useState<string | null>(null);
   const [dragPinId, setDragPinId] = useState<string | null>(null);
+  const [interpretiveZone, setInterpretiveZone] =
+  useState<InterpretiveZone>("all");
 
   const [visibleCats, setVisibleCats] = useState<
     Record<PlantCategory, boolean>
@@ -317,6 +325,64 @@ function Index() {
                   </span>
                 </button>
 
+                <div className="rounded-md border border-border/60 bg-muted/40 p-3">
+  <p className="text-xs uppercase tracking-wider text-muted-foreground">
+    Garden story
+  </p>
+
+  <div className="mt-2 grid grid-cols-2 gap-2">
+    {[
+  {
+    value: "all",
+    place: "Whole garden",
+    generation: "All three areas",
+  },
+  {
+    value: "upper-stream-and-waterfall",
+    place: "Upper Waterfall",
+    generation: "Issei",
+  },
+  {
+    value: "middle-stream",
+    place: "Middle Stream",
+    generation: "Nisei",
+  },
+  {
+    value: "lower-pool",
+    place: "Lower Pools",
+    generation: "Sansei",
+  },
+].map((zone) => (
+      <button
+        key={zone.value}
+        type="button"
+        onClick={() =>
+          setInterpretiveZone(zone.value as InterpretiveZone)
+        }
+        className={`rounded-md border px-3 py-2 text-left text-xs transition-colors ${
+          interpretiveZone === zone.value
+            ? "border-primary bg-primary text-primary-foreground"
+            : "border-border bg-background text-foreground hover:bg-muted"
+        }`}
+      >
+        <span className="flex flex-col items-start">
+  <span className="font-medium">{zone.place}</span>
+  <span
+    className={`mt-0.5 text-[10px] uppercase tracking-wider ${
+      interpretiveZone === zone.value
+        ? "text-primary-foreground/75"
+        : "text-muted-foreground"
+    }`}
+  >
+    {zone.generation}
+  </span>
+</span>
+      </button>
+    ))}
+  </div>
+
+</div>
+
                 {seasonMode !== "off" && seasonalActiveMonths && (
                   <>
                     <div className="rounded-md border border-border/60 bg-muted/40 p-3">
@@ -324,13 +390,26 @@ function Index() {
                         Color key
                       </p>
                       <ul className="mt-2 space-y-1.5 text-xs">
-                        <li className="flex items-center gap-2">
-  <span className="h-2.5 w-2.5 rounded-full bg-[#A45F76]" />
-<span className="h-2.5 w-2.5 rounded-full bg-[#B96332]" />
-<span className="h-2.5 w-2.5 rounded-full bg-[#496B50]" />
-<span className="h-2.5 w-2.5 rounded-full bg-[#7E8782]" />
-                        </li>
-                      </ul>
+  <li className="flex items-center gap-2">
+    <span className="h-2.5 w-2.5 rounded-full bg-[#A45F76]" />
+    In bloom
+  </li>
+
+  <li className="flex items-center gap-2">
+    <span className="h-2.5 w-2.5 rounded-full bg-[#B96332]" />
+    Fruit / berries
+  </li>
+
+  <li className="flex items-center gap-2">
+    <span className="h-2.5 w-2.5 rounded-full bg-[#496B50]" />
+    Foliage interest
+  </li>
+
+  <li className="flex items-center gap-2">
+    <span className="h-2.5 w-2.5 rounded-full bg-[#7E8782]" />
+    Quiet / dormant
+  </li>
+</ul>
                     </div>
 
                     <div>
@@ -562,11 +641,11 @@ function Index() {
             >
               {useSvgMap ? (
   <GardenMapSvg
-    className="garden-map-svg block h-full w-full select-none"
-    role="img"
-    aria-label="Illustrated planting plan of Seiryū-en"
-    preserveAspectRatio="xMidYMid meet"
-  />
+  className={`garden-map-svg zone-${interpretiveZone} block h-full w-full select-none`}
+  role="img"
+  aria-label="Illustrated planting plan of Seiryū-en"
+  preserveAspectRatio="xMidYMid meet"
+/>
 ) : (
   <img
     src={gardenMap}
