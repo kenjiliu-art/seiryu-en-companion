@@ -592,8 +592,7 @@ function Index() {
                   <button
                     type="button"
                     key={p.id}
-                    data-plant-id={p.id}
-                    onClick={openNearestPlant}
+                    onClick={() => !editMode && setActive(p)}
                     onMouseDown={(e) => {
                       if (editMode) {
                         e.preventDefault();
@@ -603,7 +602,7 @@ function Index() {
                     onMouseEnter={() => setHovered(p.id)}
                     onMouseLeave={() => setHovered(null)}
                     style={{ left: `${p.x}%`, top: `${p.y}%` }}
-                    className={`group absolute z-10 flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full ${
+                    className={`group absolute z-20 flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full ${
   editMode ? "cursor-move" : ""
 } ${fade}`}
                     aria-label={p.name}

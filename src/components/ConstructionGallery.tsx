@@ -141,7 +141,7 @@ export function ConstructionPin({
           }
         }}
         style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
-        className={`group absolute z-20 -translate-x-1/2 -translate-y-1/2 ${editMode ? "cursor-move" : ""}`}
+        className={`group absolute z-10 -translate-x-1/2 -translate-y-1/2 ${editMode ? "cursor-move" : ""}`}
         aria-label={`Construction photos: ${pin.title}`}
       >
         <span
