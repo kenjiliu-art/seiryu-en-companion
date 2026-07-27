@@ -242,37 +242,56 @@ h4,
 /* Quiet background hierarchy */
 /* Interactive Seiryū-en SVG map */
 
+.garden-map-svg {
+  overflow: hidden;
+}
+
+.garden-map-svg #legend,
+.garden-map-svg #labels {
+  display: none;
+}
+
+/* Background planting masses */
 .garden-map-svg #plants {
-  opacity: 0.50;
+  opacity: 0.4;
 }
 
-.garden-map-svg #paths {
-  opacity: 0.95;
+/* Paths and circulation */
+.garden-map-svg #path,
+.garden-map-svg #paths,
+.garden-map-svg #stepping_stones {
+  opacity: 0.75;
 }
 
+/* Stonework */
 .garden-map-svg #stones {
-  opacity: 0.50;
+  opacity: 0.5;
 }
 
-.garden-map-svg #stone_patio {
-  opacity: 0.60;
+.garden-map-svg #major_stones {
+  opacity: 0.52;
 }
 
+/* Patios and built surfaces */
+.garden-map-svg #patios {
+  opacity: 0.46;
+}
+
+/* Water */
 .garden-map-svg #water_background {
-  opacity: 0.25;
+  opacity: 0.7;
+}
+
+.garden-map-svg #water {
+  opacity: 0.50;
 }
 
 .garden-map-svg #upper_stream_and_waterfall,
 .garden-map-svg #middle_stream,
 .garden-map-svg #middle_stream1,
 .garden-map-svg #pool {
-  opacity: 0.82;
+  opacity: 0.88;
   transition:
     opacity 200ms ease,
     filter 200ms ease;
-}
-
-.garden-map-svg #labels,
-.garden-map-svg #legend {
-  display: none;
 }
