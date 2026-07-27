@@ -325,63 +325,7 @@ function Index() {
                   </span>
                 </button>
 
-                <div className="rounded-md border border-border/60 bg-muted/40 p-3">
-  <p className="text-xs uppercase tracking-wider text-muted-foreground">
-    Garden story
-  </p>
-
-  <div className="mt-2 grid grid-cols-2 gap-2">
-    {[
-  {
-    value: "all",
-    place: "Whole garden",
-    generation: "All three areas",
-  },
-  {
-    value: "upper-stream-and-waterfall",
-    place: "Upper Waterfall",
-    generation: "Issei",
-  },
-  {
-    value: "middle-stream",
-    place: "Middle Stream",
-    generation: "Nisei",
-  },
-  {
-    value: "lower-pool",
-    place: "Lower Pools",
-    generation: "Sansei",
-  },
-].map((zone) => (
-      <button
-        key={zone.value}
-        type="button"
-        onClick={() =>
-          setInterpretiveZone(zone.value as InterpretiveZone)
-        }
-        className={`rounded-md border px-3 py-2 text-left text-xs transition-colors ${
-          interpretiveZone === zone.value
-            ? "border-primary bg-primary text-primary-foreground"
-            : "border-border bg-background text-foreground hover:bg-muted"
-        }`}
-      >
-        <span className="flex flex-col items-start">
-  <span className="font-medium">{zone.place}</span>
-  <span
-    className={`mt-0.5 text-[10px] uppercase tracking-wider ${
-      interpretiveZone === zone.value
-        ? "text-primary-foreground/75"
-        : "text-muted-foreground"
-    }`}
-  >
-    {zone.generation}
-  </span>
-</span>
-      </button>
-    ))}
-  </div>
-
-</div>
+                
 
                 {seasonMode !== "off" && seasonalActiveMonths && (
                   <>
@@ -475,6 +419,63 @@ function Index() {
                   Tap a marker on the map — or a plant in the legend — to read its
                   uses, symbolism, and Man&apos;yōshū (万葉集) poem references.
                 </p>
+
+                <div className="rounded-md border border-border/60 bg-muted/40 p-3">
+  <p className="text-xs uppercase tracking-wider text-muted-foreground">
+    Garden story
+  </p>
+
+  <div className="mt-2 grid grid-cols-2 gap-2">
+    {[
+      {
+        value: "all",
+        place: "Whole garden",
+        generation: "All three areas",
+      },
+      {
+        value: "upper-stream-and-waterfall",
+        place: "Upper Waterfall",
+        generation: "Issei",
+      },
+      {
+        value: "middle-stream",
+        place: "Middle Stream",
+        generation: "Nisei",
+      },
+      {
+        value: "lower-pool",
+        place: "Lower Pools",
+        generation: "Sansei",
+      },
+    ].map((zone) => (
+      <button
+        key={zone.value}
+        type="button"
+        onClick={() =>
+          setInterpretiveZone(zone.value as InterpretiveZone)
+        }
+        className={`rounded-md border px-3 py-2 text-left text-xs transition-colors ${
+          interpretiveZone === zone.value
+            ? "border-primary bg-primary text-primary-foreground"
+            : "border-border bg-background text-foreground hover:bg-muted"
+        }`}
+      >
+        <span className="flex flex-col items-start">
+          <span className="font-medium">{zone.place}</span>
+          <span
+            className={`mt-0.5 text-[10px] uppercase tracking-wider ${
+              interpretiveZone === zone.value
+                ? "text-primary-foreground/75"
+                : "text-muted-foreground"
+            }`}
+          >
+            {zone.generation}
+          </span>
+        </span>
+      </button>
+    ))}
+  </div>
+</div>
 
                 <div className="space-y-2 rounded-md border border-border/60 bg-muted/40 p-3">
                   <h2 className="font-serif text-base text-foreground">
