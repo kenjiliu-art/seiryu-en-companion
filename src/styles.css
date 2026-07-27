@@ -295,3 +295,31 @@ h4,
     opacity 200ms ease,
     filter 200ms ease;
 }
+
+/* Interpretive-zone overlays */
+
+.garden-map-svg #interpretive_zones {
+  pointer-events: none;
+}
+
+.garden-map-svg #issei_zone,
+.garden-map-svg #nisei_zone,
+.garden-map-svg #sansei_zone {
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+
+/* Upper Stream and Waterfall — Issei */
+.garden-map-svg.zone-upper-stream-and-waterfall #issei_zone {
+  opacity: 1;
+}
+
+/* Middle Stream — Nisei */
+.garden-map-svg.zone-middle-stream #nisei_zone {
+  opacity: 1;
+}
+
+/* Lower Pool — Sansei */
+.garden-map-svg.zone-lower-pool #sansei_zone {
+  opacity: 1;
+}
