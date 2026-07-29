@@ -21,20 +21,22 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { PlantThumb } from "@/components/PlantThumb";
 import { ConstructionPin, constructionPins, type ConstructionPinSpec } from "@/components/ConstructionGallery";
-import { Plus, Minus, Maximize2, Leaf, CalendarDays } from "lucide-react";
+import { Plus, Minus, Maximize2, Leaf, } from "lucide-react";
 import { TransformWrapper, TransformComponent, useControls } from "react-zoom-pan-pinch";
 import {
   plantInterest,
   seasonMonths,
-  seasonJa,
   currentSeason,
-  type Season,
   type InterestKind,
 } from "@/data/bloom";
-import { kou72, currentKou, kouAt, tintForKou, type Kou } from "@/data/kou72";
+import { kou72, currentKou, tintForKou, } from "@/data/kou72";
 import { site } from "../content/site";
 import { ZoneSelector } from "@/components/ZoneSelector";
 import { GardenSheet } from "@/components/GardenSheet";
+import {
+  SeasonSheet,
+  type SeasonMode,
+} from "@/components/SeasonSheet";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -65,7 +67,6 @@ function categoryDotClass(c: PlantCategory): string {
 }
 
 // Seasonal-mode color tokens (when user enables seasonal view)
-type SeasonMode = "off" | "auto" | Season;
 const interestColor: Record<
   InterestKind,
   { bg: string; halo: string; glow: string }
@@ -240,162 +241,17 @@ function Index() {
 
         </div>
         <div className="flex shrink-0 items-center gap-1.5">
-          <Sheet>
-            <SheetTrigger asChild>
-              <button
-                className={`inline-flex h-9 items-center gap-1.5 rounded-md border px-3 text-xs font-medium transition-colors ${
-                  seasonMode === "off"
-                    ? "border-border bg-background text-foreground hover:bg-muted"
-                    : "border-[#d05a6e]/40 bg-[#d05a6e]/10 text-[#a93b53] hover:bg-[#d05a6e]/15"
-                }`}
-                aria-label="Open season panel"
-              >
-                <CalendarDays className="h-3.5 w-3.5" />
-                <span className="hidden sm:inline">
-                  {seasonMode === "off"
-                    ? "Season"
-                    : seasonMode === "auto"
-                      ? `Now · ${seasonalActiveCount}`
-                      : `${seasonJa[seasonMode].kanji} ${seasonJa[seasonMode].romaji} · ${seasonalActiveCount}`}
-                </span>
-              </button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-[88vw] overflow-y-auto sm:max-w-md">
-              <SheetHeader>
-                <SheetTitle className="font-serif text-xl">Seasonal view</SheetTitle>
-                <p className="text-xs text-muted-foreground">
-                  Recolor the map by what each plant is doing in Los Angeles right now.
-                </p>
-              </SheetHeader>
-
-              <div className="mt-4 space-y-4 text-sm">
-                <div className="grid grid-cols-3 gap-1.5">
-                  {([
-                    ["off", "Off", "Show category colors"],
-                    ["auto", "Auto", "Use today's date"],
-                    ["spring", `${seasonJa.spring.kanji} Spring`, "Mar – May"],
-                    ["summer", `${seasonJa.summer.kanji} Summer`, "Jun – Aug"],
-                    ["autumn", `${seasonJa.autumn.kanji} Autumn`, "Sep – Nov"],
-                    ["winter", `${seasonJa.winter.kanji} Winter`, "Dec – Feb"],
-                  ] as const).map(([mode, label, hint]) => {
-                    const on = seasonMode === mode;
-                    return (
-                      <button
-                        key={mode}
-                        onClick={() => setSeasonMode(mode)}
-                        className={`flex flex-col items-start gap-0.5 rounded-md border px-2.5 py-2 text-left transition-colors ${
-                          on
-                            ? "border-foreground bg-foreground text-background"
-                            : "border-border bg-background hover:bg-muted"
-                        }`}
-                      >
-                        <span className="text-xs font-medium">{label}</span>
-                        <span className={`text-[10px] ${on ? "text-background/70" : "text-muted-foreground"}`}>
-                          {hint}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                <KouRibbon plants={plants} onPickPlant={(p) => setActive(p)} />
-
-                <button
-                  onClick={() => setKouWashOn((v) => !v)}
-                  className={`flex w-full items-center justify-between gap-3 rounded-md border px-3 py-2 text-left text-xs transition-colors ${
-                    kouWashOn ? "border-foreground bg-foreground/5" : "border-border bg-background hover:bg-muted"
-                  }`}
-                  aria-pressed={kouWashOn}
-                >
-                  <span className="flex items-center gap-2">
-                    <span
-                      className="h-3.5 w-3.5 rounded-full border border-border/60"
-                      style={{ backgroundColor: todayTint.hex }}
-                    />
-                    <span>
-                      <span className="font-medium">Kō tint wash</span>
-                      <span className="ml-1.5 text-muted-foreground">{todayTint.name}</span>
-                    </span>
-                  </span>
-                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                    {kouWashOn ? "On" : "Off"}
-                  </span>
-                </button>
-
-                
-
-                {seasonMode !== "off" && seasonalActiveMonths && (
-                  <>
-                    <div className="rounded-md border border-border/60 bg-muted/40 p-3">
-                      <p className="text-xs uppercase tracking-wider text-muted-foreground">
-                        Color key
-                      </p>
-                      <ul className="mt-2 space-y-1.5 text-xs">
-  <li className="flex items-center gap-2">
-    <span className="h-2.5 w-2.5 rounded-full bg-[#A45F76]" />
-    In bloom
-  </li>
-
-  <li className="flex items-center gap-2">
-    <span className="h-2.5 w-2.5 rounded-full bg-[#B96332]" />
-    Fruit / berries
-  </li>
-
-  <li className="flex items-center gap-2">
-    <span className="h-2.5 w-2.5 rounded-full bg-[#496B50]" />
-    Foliage interest
-  </li>
-
-  <li className="flex items-center gap-2">
-    <span className="h-2.5 w-2.5 rounded-full bg-[#7E8782]" />
-    Quiet / dormant
-  </li>
-</ul>
-                    </div>
-
-                    <div>
-                      <p className="text-xs uppercase tracking-wider text-muted-foreground">
-                        {seasonalActiveCount} of {plants.length} plants active
-                      </p>
-                      <ul className="mt-2 divide-y divide-border/40 rounded-md border border-border/60 bg-background/60">
-                        {plants
-                          .filter((p) => isPlantActive(p.id, seasonalActiveMonths))
-                          .map((p) => {
-                            const interest = plantInterest[p.id]!;
-                            const c = interestColor[interest.kind];
-                            return (
-                              <li key={p.id}>
-                                <button
-                                  onClick={() => setActive(p)}
-                                  className="flex w-full items-center gap-3 px-3 py-2 text-left hover:bg-muted/60"
-                                >
-                                  <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${c.bg}`} />
-                                  <span className="flex-1 text-sm">
-                                    <span className="font-medium">{p.name}</span>
-                                    {p.japanese && (
-                                      <span className="ml-1.5 text-xs text-muted-foreground">{p.japanese}</span>
-                                    )}
-                                  </span>
-                                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                                    {interest.kind}
-                                  </span>
-                                </button>
-                              </li>
-                            );
-                          })}
-                      </ul>
-                    </div>
-
-                    <p className="text-[11px] italic text-muted-foreground">
-                      Bloom windows are curated estimates for the Los Angeles climate, not
-                      live observations. Persimmon, cherry, and wisteria timing in Little
-                      Tokyo can shift a few weeks year-to-year.
-                    </p>
-                  </>
-                )}
-              </div>
-            </SheetContent>
-          </Sheet>
+          <SeasonSheet
+            seasonMode={seasonMode}
+            onSeasonModeChange={setSeasonMode}
+            plants={plants}
+            seasonalActiveMonths={seasonalActiveMonths}
+            seasonalActiveCount={seasonalActiveCount}
+            onPickPlant={setActive}
+            kouWashOn={kouWashOn}
+            onKouWashChange={setKouWashOn}
+            todayTint={todayTint}
+          />
           <GardenSheet
             open={gardenOpen}
             onOpenChange={setGardenOpen}
