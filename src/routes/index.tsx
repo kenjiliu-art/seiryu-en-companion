@@ -122,6 +122,7 @@ function Index() {
   const [dragPinId, setDragPinId] = useState<string | null>(null);
   const [interpretiveZone, setInterpretiveZone] =
   useState<InterpretiveZone>("all");
+  const [gardenOpen, setGardenOpen] = useState(false);
 
   const [visibleCats, setVisibleCats] = useState<
     Record<PlantCategory, boolean>
@@ -399,8 +400,8 @@ function Index() {
               </div>
             </SheetContent>
           </Sheet>
-          <Sheet>
-            <SheetTrigger asChild>
+          <Sheet open={gardenOpen} onOpenChange={setGardenOpen}>
+  <SheetTrigger asChild>
               <button
                 className="inline-flex h-9 items-center gap-1.5 rounded-md border border-border bg-background px-3 text-xs font-medium text-foreground transition-colors hover:bg-muted"
                 aria-label="Open garden information"
@@ -451,9 +452,10 @@ function Index() {
       <button
         key={zone.value}
         type="button"
-        onClick={() =>
-          setInterpretiveZone(zone.value as InterpretiveZone)
-        }
+        onClick={() => {
+  setInterpretiveZone(zone.value as InterpretiveZone);
+  setGardenOpen(false);
+}}
         className={`rounded-md border px-3 py-2 text-left text-xs transition-colors ${
           interpretiveZone === zone.value
             ? "border-primary bg-primary text-primary-foreground"
