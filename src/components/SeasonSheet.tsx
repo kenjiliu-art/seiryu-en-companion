@@ -1,17 +1,9 @@
-import { useState } from "react";
 import { CalendarDays } from "lucide-react";
 import type { Plant } from "@/data/plants";
 import {
-  plantInterest,
   seasonJa,
   type Season,
-  type InterestKind,
 } from "@/data/bloom";
-import {
-  currentKou,
-  kouAt,
-  type Kou,
-} from "@/data/kou72";
 import {
   Sheet,
   SheetContent,
@@ -20,6 +12,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { KouRibbon } from "@/components/KouRibbon";
+import { ColorKey } from "@/components/ColorKey";
+import { SeasonSummary } from "@/components/SeasonSummary";
 
 export type SeasonMode = "off" | "auto" | Season;
 
@@ -36,20 +30,6 @@ interface SeasonSheetProps {
     name: string;
     hex: string;
   };
-}
-
-function isPlantActive(id: string, months: number[]): boolean {
-  const interest = plantInterest[id];
-
-  if (!interest) return false;
-
-  return interest.months.some((month) => months.includes(month));
-}
-
-function interestDotClass(kind: InterestKind): string {
-  if (kind === "bloom") return "bg-[#A45F76]";
-  if (kind === "fruit") return "bg-[#B96332]";
-  return "bg-[#496B50]";
 }
 
 export function SeasonSheet({
@@ -183,83 +163,14 @@ export function SeasonSheet({
 
           {seasonMode !== "off" && seasonalActiveMonths && (
             <>
-              <div className="rounded-md border border-border/60 bg-muted/40 p-3">
-                <p className="text-xs uppercase tracking-wider text-muted-foreground">
-                  Color key
-                </p>
+              <ColorKey />
 
-                <ul className="mt-2 space-y-1.5 text-xs">
-                  <li className="flex items-center gap-2">
-                    <span className="h-2.5 w-2.5 rounded-full bg-[#A45F76]" />
-                    In bloom
-                  </li>
-
-                  <li className="flex items-center gap-2">
-                    <span className="h-2.5 w-2.5 rounded-full bg-[#B96332]" />
-                    Fruit / berries
-                  </li>
-
-                  <li className="flex items-center gap-2">
-                    <span className="h-2.5 w-2.5 rounded-full bg-[#496B50]" />
-                    Foliage interest
-                  </li>
-
-                  <li className="flex items-center gap-2">
-                    <span className="h-2.5 w-2.5 rounded-full bg-[#7E8782]" />
-                    Quiet / dormant
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <p className="text-xs uppercase tracking-wider text-muted-foreground">
-                  {seasonalActiveCount} of {plants.length} plants active
-                </p>
-
-                <ul className="mt-2 divide-y divide-border/40 rounded-md border border-border/60 bg-background/60">
-                  {plants
-                    .filter((plant) =>
-                      isPlantActive(plant.id, seasonalActiveMonths),
-                    )
-                    .map((plant) => {
-                      const interest = plantInterest[plant.id];
-
-                      if (!interest) return null;
-
-                      return (
-                        <li key={plant.id}>
-                          <button
-                            type="button"
-                            onClick={() => onPickPlant(plant)}
-                            className="flex w-full items-center gap-3 px-3 py-2 text-left hover:bg-muted/60"
-                          >
-                            <span
-                              className={`h-2.5 w-2.5 shrink-0 rounded-full ${interestDotClass(
-                                interest.kind,
-                              )}`}
-                            />
-
-                            <span className="flex-1 text-sm">
-                              <span className="font-medium">
-                                {plant.name}
-                              </span>
-
-                              {plant.japanese && (
-                                <span className="ml-1.5 text-xs text-muted-foreground">
-                                  {plant.japanese}
-                                </span>
-                              )}
-                            </span>
-
-                            <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                              {interest.kind}
-                            </span>
-                          </button>
-                        </li>
-                      );
-                    })}
-                </ul>
-              </div>
+              <SeasonSummary
+                plants={plants}
+                seasonalActiveMonths={seasonalActiveMonths}
+                seasonalActiveCount={seasonalActiveCount}
+                onPickPlant={onPickPlant}
+                />
 
               <p className="text-[11px] italic text-muted-foreground">
                 Bloom windows are curated estimates for the Los Angeles

@@ -33,6 +33,7 @@ import { kou72, currentKou, tintForKou, } from "@/data/kou72";
 import { site } from "../content/site";
 import { ZoneSelector } from "@/components/ZoneSelector";
 import { GardenSheet } from "@/components/GardenSheet";
+import { PlantSearchSheet } from "@/components/PlantSearchSheet";
 import {
   SeasonSheet,
   type SeasonMode,
@@ -257,6 +258,10 @@ function Index() {
             onOpenChange={setGardenOpen}
             interpretiveZone={interpretiveZone}
             onInterpretiveZoneChange={setInterpretiveZone}
+          />
+          <PlantSearchSheet
+            plants={plants}
+            onPickPlant={setActive}
           />
           <Sheet>
             <SheetTrigger asChild>
