@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { PlantThumb } from "@/components/PlantThumb";
+import { useSearchListNavigation } from "@/hooks/useSearchListNavigation";
 
 interface PlantSearchSheetProps {
   plants: Plant[];
@@ -92,6 +93,17 @@ export function PlantSearchSheet({
     setQuery("");
   };
 
+  const {
+  activeIndex,
+  setActiveIndex,
+  handleKeyDown,
+  getItemRef,
+} = useSearchListNavigation({
+  items: results,
+  onSelect: selectPlant,
+  onEscape: () => setOpen(false),
+});
+
   const handleOpenChange = (nextOpen: boolean) => {
     setOpen(nextOpen);
 
@@ -107,6 +119,10 @@ export function PlantSearchSheet({
     });
   }
 }, [open]);
+
+useEffect(() => {
+  setActiveIndex(-1);
+}, [normalizedQuery, setActiveIndex]);
 
   return (
     <Sheet open={open} onOpenChange={handleOpenChange}>
@@ -148,6 +164,7 @@ export function PlantSearchSheet({
                 value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search plants"
+              onKeyDown={handleKeyDown}
               className="h-10 min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
               aria-label="Search plants"
             />
@@ -179,12 +196,19 @@ export function PlantSearchSheet({
         <ScrollArea className="flex-1">
           {results.length > 0 ? (
             <ul className="divide-y divide-border/50">
-              {results.map((plant) => (
+              {results.map((plant, index) => (
                 <li key={plant.id}>
                   <button
+                    ref={getItemRef(index)}
                     type="button"
                     onClick={() => selectPlant(plant)}
-                    className="flex w-full items-start gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+                    onMouseEnter={() => setActiveIndex(index)}
+                    aria-selected={activeIndex === index}
+                    className={`flex w-full items-start gap-3 px-4 py-3 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring ${
+  activeIndex === index
+    ? "bg-muted"
+    : "hover:bg-muted/60"
+}`}
                   >
                     <PlantThumb
                       plantId={plant.id}
