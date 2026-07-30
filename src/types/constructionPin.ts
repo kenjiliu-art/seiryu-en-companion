@@ -25,7 +25,6 @@ import img07 from "@/assets/construction/07.jpg";
 import img08 from "@/assets/construction/08.jpg";
 import img09 from "@/assets/construction/09.jpg";
 import img10 from "@/assets/construction/10.jpg";
-import type { ConstructionPinSpec } from "@/types/constructionPin";
 
 type Photo = { src: string; caption: string };
 
@@ -40,6 +39,18 @@ const ALL: Record<string, Photo> = {
   "08": { src: img08, caption: "Stone arrangement nearing completion" },
   "09": { src: img09, caption: "Mid-construction view of the boulder work" },
   "10": { src: img10, caption: "The Southern California Gardeners Federation volunteer crew" },
+};
+
+export type ConstructionPinSpec = {
+  id: string;
+  x: number;
+  y: number;
+  title: string;
+  description: string;
+  photos: string[];
+  date?: string;
+  source?: string;
+  rights?: string;
 };
 
 export const constructionPins: ConstructionPinSpec[] = [

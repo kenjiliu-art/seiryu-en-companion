@@ -2,7 +2,9 @@ import GardenMapSvg from "@/assets/maps/manyoshu-garden-layered.svg?react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import gardenMap from "@/assets/maps/garden-map.jpg";
-import { plants as initialPlants, manyoshuUrl, type Plant } from "@/data/plants";
+import { manyoshuUrl } from "@/data/plants";
+import type { Plant } from "@/types/plant";
+import { gardenRepository } from "@/data/gardenRepository";
 import { poems } from "@/data/poems";
 import {
   Dialog,
@@ -20,8 +22,24 @@ import {
 } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { PlantThumb } from "@/components/PlantThumb";
-import { ConstructionPin, constructionPins, type ConstructionPinSpec } from "@/components/ConstructionGallery";
-import { Plus, Minus, Maximize2, Leaf, } from "lucide-react";
+import {
+  ConstructionPin,
+} from "@/components/ConstructionGallery";
+
+import {
+  constructionPins,
+} from "@/data/constructionPins";
+
+import type {
+  ConstructionPinSpec,
+} from "@/types/constructionPin";
+import {
+  Plus,
+  Minus,
+  Maximize2,
+  Leaf,
+  Pencil,
+} from "lucide-react";
 import { TransformWrapper, TransformComponent, useControls } from "react-zoom-pan-pinch";
 import {
   plantInterest,
@@ -114,6 +132,7 @@ function Index() {
   const [active, setActive] = useState<Plant | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
   const [editMode, setEditMode] = useState(false);
+  const initialPlants = gardenRepository.getAllPlants();
   const [plants, setPlants] = useState<Plant[]>(initialPlants);
   const [pins, setPins] = useState<ConstructionPinSpec[]>(constructionPins);
   const [dragId, setDragId] = useState<string | null>(null);
@@ -194,7 +213,13 @@ function Index() {
       const x = +Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100)).toFixed(1);
       const y = +Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100)).toFixed(1);
       if (dragId) {
-        setPlants((prev) => prev.map((p) => (p.id === dragId ? { ...p, x, y } : p)));
+        setPlants(
+  gardenRepository.updatePlantPosition(
+    dragId,
+    x,
+    y,
+  ),
+);
       }
       if (dragPinId) {
         setPins((prev) => prev.map((p) => (p.id === dragPinId ? { ...p, x, y } : p)));
@@ -242,6 +267,19 @@ function Index() {
 
         </div>
         <div className="flex shrink-0 items-center gap-1.5">
+          <button
+          type="button"
+          onClick={() => setEditMode((current) => !current)}
+          aria-pressed={editMode}
+          className={`inline-flex h-9 items-center gap-1.5 rounded-md border px-3 text-xs font-medium transition-colors ${
+          editMode
+          ? "border-accent bg-accent text-accent-foreground"
+          : "border-border bg-background text-foreground hover:bg-muted"
+          }`}
+          >
+  <Pencil className="h-3.5 w-3.5" />
+  {editMode ? "Finish editing" : "Edit map"}
+</button>
           <SeasonSheet
             seasonMode={seasonMode}
             onSeasonModeChange={setSeasonMode}
@@ -518,15 +556,6 @@ function Index() {
               Copy coords
             </button>
           )}
-          <label className="pointer-events-auto ml-auto flex items-center gap-1.5 rounded-full border border-border bg-background/95 px-2 py-1 text-[11px] text-muted-foreground shadow-sm">
-            <input
-              type="checkbox"
-              checked={editMode}
-              onChange={(e) => setEditMode(e.target.checked)}
-              className="h-3 w-3"
-            />
-            Edit
-          </label>
         </div>
       </div>
 

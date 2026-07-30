@@ -1,5 +1,5 @@
 import { CalendarDays } from "lucide-react";
-import type { Plant } from "@/data/plants";
+import type { Plant } from "@/types/plant";
 import {
   seasonJa,
   type Season,

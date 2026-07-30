@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Search, X } from "lucide-react";
-import type { Plant } from "@/data/plants";
+import type { Plant } from "@/types/plant";
 import {
   Sheet,
   SheetContent,

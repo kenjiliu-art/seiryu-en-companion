@@ -1,4 +1,4 @@
-import type { Plant } from "@/data/plants";
+import type { Plant } from "@/types/plant";
 import {
   plantInterest,
   type InterestKind,

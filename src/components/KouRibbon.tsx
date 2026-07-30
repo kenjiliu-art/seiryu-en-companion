@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Plant } from "@/data/plants";
+import type { Plant } from "@/types/plant";
 import { currentKou, kouAt, type Kou } from "@/data/kou72";
 
 interface KouRibbonProps {
